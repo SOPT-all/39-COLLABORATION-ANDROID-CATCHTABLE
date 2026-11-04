@@ -1,4 +1,4 @@
-package com.android.catchtable.ui.theme
+package com.android.catchtable.presentation.common.theme
 
 import androidx.compose.ui.graphics.Color
 
