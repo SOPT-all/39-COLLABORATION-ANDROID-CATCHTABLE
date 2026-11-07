@@ -19,31 +19,36 @@ val Pretendard = FontFamily(
 
 @Immutable
 data class CatchTableTypography(
+
     val displayB20: TextStyle,
     val displayB18: TextStyle,
     val displaySB18: TextStyle,
     val displayRG18: TextStyle,
+
     val h1B16: TextStyle,
     val h1SB16: TextStyle,
     val h1MD16: TextStyle,
+
     val h3B14: TextStyle,
     val h3SB14: TextStyle,
     val h3MD14: TextStyle,
     val h3RG14: TextStyle,
+
     val bodyB12: TextStyle,
     val bodySB12: TextStyle,
     val bodyMD12: TextStyle,
     val bodyRG12: TextStyle,
+
     val captionB10: TextStyle,
     val captionSB10: TextStyle,
     val captionMD10: TextStyle,
     val captionB8: TextStyle,
 )
 
-val catchTableTypography: CatchTableTypography
+val defaultCatchTableTypography: CatchTableTypography
     @Composable
     get() {
-        val baseStyle = TextStyle(fontFamily = Pretendard, color = Black)
+        val baseStyle = TextStyle(fontFamily = Pretendard, color = defaultCatchTableColors.black)
 
         return CatchTableTypography(
             displayB20 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 20.sp, lineHeight = 1.5.em),
