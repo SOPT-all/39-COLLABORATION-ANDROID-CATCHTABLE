@@ -16,10 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
-import com.android.catchtable.R.font.pretendard_bold
-import com.android.catchtable.R.font.pretendard_medium
-import com.android.catchtable.R.font.pretendard_regular
-import com.android.catchtable.R.font.pretendard_semibold
+import com.android.catchtable.R.font.*
 
 val Pretendard = FontFamily(
     Font(pretendard_bold, FontWeight.Bold),
@@ -39,6 +36,7 @@ data class CatchTableTypography(
     val h1B16: TextStyle,
     val h1SB16: TextStyle,
     val h1MD16: TextStyle,
+    val h1RG16: TextStyle,
 
     val h3B14: TextStyle,
     val h3SB14: TextStyle,
@@ -67,7 +65,8 @@ data class CatchTableTypography(
             "H1" to listOf(
                 "h1B16" to h1B16,
                 "h1SB16" to h1SB16,
-                "h1MD16" to h1MD16
+                "h1MD16" to h1MD16,
+                "h1RG16" to h1RG16
             ),
             "H3" to listOf(
                 "h3B14" to h3B14,
@@ -103,6 +102,7 @@ val defaultCatchTableTypography: CatchTableTypography
             h1B16 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 16.sp, lineHeight = 1.5.em),
             h1SB16 = baseStyle.copy(fontWeight = FontWeight.SemiBold, fontSize = 16.sp, lineHeight = 1.5.em),
             h1MD16 = baseStyle.copy(fontWeight = FontWeight.Medium, fontSize = 16.sp, lineHeight = 1.5.em),
+            h1RG16 = baseStyle.copy(fontWeight = FontWeight.Normal, fontSize = 16.sp, lineHeight = 1.5.em),
             h3B14 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 14.sp, lineHeight = 20.sp),
             h3SB14 = baseStyle.copy(fontWeight = FontWeight.SemiBold, fontSize = 14.sp, lineHeight = 20.sp),
             h3MD14 = baseStyle.copy(fontWeight = FontWeight.Medium, fontSize = 14.sp, lineHeight = 20.sp),
