@@ -30,7 +30,7 @@ private val Gray600 = Color(0xFF575757)
 private val Gray500 = Color(0xFF757575)
 private val Gray400 = Color(0xFFA5A5A5)
 private val Gray300 = Color(0xFFD6D6D6)
-private val Gray200 = Color(0xFF38E8E8)
+private val Gray200 = Color(0xFFE8E8E8)
 private val Gray100 = Color(0xFFF5F5F5)
 private val Gray050 = Color(0xFFFAFAFA)
 private val CoolGray600 = Color(0xFF5B7282)
@@ -44,7 +44,7 @@ private val Yellow = Color(0xFFFEC300)
 private val Pink = Color(0xFFFADCD9)
 private val PinkGradient = Brush.verticalGradient(
     colors = listOf(
-        Color(0xFFFF538D),
+        Color(0xFFFF537D),
         Color(0xFFF9604F)
     )
 )
