@@ -15,7 +15,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.presentation.common.theme.BlackAlpha70
+import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 inline fun Modifier.noRippleClickable(
@@ -28,7 +28,8 @@ inline fun Modifier.noRippleClickable(
             interactionSource = remember { MutableInteractionSource() },
             onClick = { onClick() },
             enabled = enabled,
-        ) }
+        )
+    }
 
 //elevation level 1
 fun Modifier.elevation1(
@@ -54,9 +55,10 @@ fun Modifier.elevation2(
     .offset(y = 4.dp)
 
 // glassMorphism 1
+@Composable
 fun Modifier.glassMorphism1(
     shape: Shape = RectangleShape,
     blurRadius: Dp = 8.dp
 ): Modifier = this
-    .background(BlackAlpha70, shape = shape)
+    .background(CatchTableTheme.colors.blackAlpha70, shape = shape)
     .blur(blurRadius)
