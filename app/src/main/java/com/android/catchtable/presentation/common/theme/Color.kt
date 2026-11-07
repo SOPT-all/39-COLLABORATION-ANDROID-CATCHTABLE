@@ -1,8 +1,17 @@
 package com.android.catchtable.presentation.common.theme
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 
 //Primary
 private val OrangeBase = Color(0xFFFF3D00)
@@ -87,8 +96,17 @@ data class CatchTableColors(
     val bannerGradient: Brush,
     val line9: Color,
     val lineSBD: Color
-)
+){
+    val allColors: List<Color>
+        get() = listOf(
+            orangeBase, orangeBaseAlpha05, orangeBaseClicked, black, blackAlpha70, blackAlpha40, blackAlpha04,
+            gray900, gray800, gray700, gray600, gray500, gray400, gray300, gray200, gray100, gray050,
+            coolGray600, coolGray200, white, red, blue, yellow, pink, line9, lineSBD
+        )
 
+    val allGradients: List<Brush>
+        get() = listOf(pinkGradient, pinkGradientLight, bannerGradient)
+}
 val defaultCatchTableColors = CatchTableColors(
     orangeBase = OrangeBase,
     orangeBaseAlpha05 = OrangeBaseAlpha05,
@@ -120,3 +138,32 @@ val defaultCatchTableColors = CatchTableColors(
     line9 = Line9,
     lineSBD = LineSBD
 )
+
+@Preview(showBackground = true)
+@Composable
+fun CatchTableColorPreview() {
+    CatchTableTheme {
+        val colors = CatchTableTheme.colors.allColors
+        val gradients = CatchTableTheme.colors.allGradients
+
+        FlowRow(
+            modifier = Modifier.padding(16.dp),
+            maxItemsInEachRow = 6,
+        ) {
+            colors.forEach { c ->
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .background(c)
+                )
+            }
+            gradients.forEach { b ->
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .background(b)
+                )
+            }
+        }
+    }
+}

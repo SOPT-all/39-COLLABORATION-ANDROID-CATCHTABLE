@@ -1,11 +1,22 @@
 package com.android.catchtable.presentation.common.theme
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.android.catchtable.R.font.*
@@ -42,8 +53,42 @@ data class CatchTableTypography(
     val captionB10: TextStyle,
     val captionSB10: TextStyle,
     val captionMD10: TextStyle,
-    val captionB8: TextStyle,
-)
+    val captionB8: TextStyle
+
+){
+    val groupedTypography: List<Pair<String, List<Pair<String, TextStyle>>>>
+        get() = listOf(
+            "Display" to listOf(
+                "displayB20" to displayB20,
+                "displayB18" to displayB18,
+                "displaySB18" to displaySB18,
+                "displayRG18" to displayRG18
+            ),
+            "H1" to listOf(
+                "h1B16" to h1B16,
+                "h1SB16" to h1SB16,
+                "h1MD16" to h1MD16
+            ),
+            "H3" to listOf(
+                "h3B14" to h3B14,
+                "h3SB14" to h3SB14,
+                "h3MD14" to h3MD14,
+                "h3RG14" to h3RG14
+            ),
+            "Body" to listOf(
+                "bodyB12" to bodyB12,
+                "bodySB12" to bodySB12,
+                "bodyMD12" to bodyMD12,
+                "bodyRG12" to bodyRG12
+            ),
+            "Caption" to listOf(
+                "captionB10" to captionB10,
+                "captionSB10" to captionSB10,
+                "captionMD10" to captionMD10,
+                "captionB8" to captionB8
+            )
+        )
+}
 
 val defaultCatchTableTypography: CatchTableTypography
     @Composable
@@ -72,3 +117,26 @@ val defaultCatchTableTypography: CatchTableTypography
             captionB8 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 8.sp, lineHeight = 10.sp),
         )
     }
+
+@Preview(showBackground = true)
+@Composable
+fun CatchTableTypographyPreview(){
+    CatchTableTheme{
+        val typographyGroups = CatchTableTheme.typography.groupedTypography
+
+        Column(
+            modifier = Modifier.padding(16.dp)
+        ) {
+            typographyGroups.forEach { (_, styles) ->
+                styles.forEach { (styleName, style) ->
+                    Text(
+                        text = styleName,
+                        style = style,
+                        modifier = Modifier.padding(bottom = 8.dp)
+                    )
+                }
+                Spacer(modifier = Modifier.height(24.dp))
+            }
+        }
+    }
+}
