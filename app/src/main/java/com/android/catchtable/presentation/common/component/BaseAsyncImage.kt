@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.common.component.asyncimage
+package com.android.catchtable.presentation.common.component
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

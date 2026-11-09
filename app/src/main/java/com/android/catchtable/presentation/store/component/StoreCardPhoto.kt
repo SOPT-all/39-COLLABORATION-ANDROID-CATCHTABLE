@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.restaurant.component
+package com.android.catchtable.presentation.store.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,11 +21,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.asyncimage.BaseAsyncImage
+import com.android.catchtable.presentation.common.component.BaseAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun RestaurantCardPhoto(
+fun StoreCardPhoto(
     imgUrl: String?,
     userCount: Int,
     modifier: Modifier = Modifier,
@@ -54,7 +54,7 @@ fun RestaurantCardPhoto(
             horizontalArrangement = Arrangement.spacedBy(2.dp),
         ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_restaurant_fire),
+                painter = painterResource(id = R.drawable.ic_store_fire),
                 contentDescription = null,
                 tint = Color.Unspecified,
                 modifier = Modifier
@@ -73,9 +73,9 @@ fun RestaurantCardPhoto(
 
 @Preview(showBackground = true)
 @Composable
-private fun RestaurantCardPhotoPreview() {
+private fun StoreCardPhotoPreview() {
     CatchTableTheme {
-        RestaurantCardPhoto(
+        StoreCardPhoto(
             imgUrl = null,
             userCount = 72,
             modifier = Modifier.padding(10.dp)
