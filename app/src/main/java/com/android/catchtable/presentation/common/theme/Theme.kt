@@ -15,9 +15,6 @@ fun CatchTableTheme(
     typography: CatchTableTypography = defaultCatchTableTypography,
     content: @Composable () -> Unit
 ) {
-    val view = LocalView.current
-    val activity = view.context as? Activity
-
     CompositionLocalProvider(
         LocalCatchTableColors provides color,
         LocalCatchTableTypography provides typography

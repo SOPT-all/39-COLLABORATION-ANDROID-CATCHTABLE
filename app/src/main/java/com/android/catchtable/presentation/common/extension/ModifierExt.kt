@@ -9,11 +9,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
@@ -35,30 +38,26 @@ inline fun Modifier.noRippleClickable(
 fun Modifier.elevation1(
     shape: Shape = RectangleShape
 ): Modifier =
-    this.shadow(
-    elevation = 8.dp,
-    shape = shape,
-    spotColor = Color.Black.copy(alpha = 0.06f),
-    ambientColor = Color.Black.copy(alpha = 0.06f)
-)
+    this.dropShadow(
+        shape = shape,
+        shadow = Shadow(
+            radius = 8.dp,
+            spread = 0.dp,
+            color = Color.Black.copy(alpha = 0.06f),
+            offset = DpOffset.Zero
+        )
+    )
 
 //elevation level 2
 fun Modifier.elevation2(
     shape: Shape = RectangleShape
 ): Modifier =
-    this.shadow(
-        elevation = 8.dp,
+    this.dropShadow(
         shape = shape,
-        spotColor = Color.Black.copy(alpha = 0.3f),
-        ambientColor = Color.Black.copy(alpha = 0.3f)
+        shadow = Shadow(
+            radius = 8.dp,
+            spread = 0.dp,
+            color = Color.Black.copy(alpha = 0.3f),
+            offset = DpOffset(0.dp, 4.dp)
+        )
     )
-    .offset(y = 4.dp)
-
-// glassMorphism 1
-@Composable
-fun Modifier.glassMorphism1(
-    shape: Shape = RectangleShape,
-    blurRadius: Dp = 8.dp
-): Modifier = this
-    .background(CatchTableTheme.colors.blackAlpha70, shape = shape)
-    .blur(blurRadius)
