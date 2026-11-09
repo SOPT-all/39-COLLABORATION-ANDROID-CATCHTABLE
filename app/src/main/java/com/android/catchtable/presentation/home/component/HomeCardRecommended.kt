@@ -26,7 +26,7 @@ import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.BaseAsyncImage
 import com.android.catchtable.presentation.common.component.Dot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.store.model.RecommendStoreUiModel
+import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
 
 @Composable
 fun HomeCardRecommended(
@@ -66,7 +66,7 @@ fun HomeCardRecommended(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Icon(
-                        painter = painterResource(id = R.drawable.ic_star_20),
+                        painter = painterResource(id = R.drawable.ic_star),
                         contentDescription = null,
                         tint = CatchTableTheme.colors.yellow,
                         modifier = Modifier
