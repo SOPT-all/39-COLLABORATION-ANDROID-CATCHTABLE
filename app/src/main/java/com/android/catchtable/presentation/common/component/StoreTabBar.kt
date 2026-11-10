@@ -4,14 +4,14 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,12 +60,15 @@ fun StoreTabBar(
             color = CatchTableTheme.colors.gray100,
         )
 
-        LazyRow(
-            modifier = Modifier.fillMaxHeight(),
-            contentPadding = PaddingValues(horizontal = 20.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        // 탭 6개가 화면에 다 들어감 -> 스크롤 대신 Row + SpaceBetween (양 끝 20에 딱 맞춰서 쫙 벌림)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight()
+                .padding(horizontal = 20.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            items(tabList) { tab ->
+            tabList.forEach { tab ->
                 StoreTabItem(
                     tab = tab,
                     isSelected = tab.label == selectedTab,
@@ -90,6 +93,7 @@ private fun StoreTabItem(
     Column(
         modifier = modifier
             .fillMaxHeight()
+            .width(IntrinsicSize.Max) // 밑줄 폭 = 글자(+숫자) 폭 -> 없으면 밑줄이 옆으로 끝까지 늘어남
             .noRippleClickable(onClick = onClick),
     ) {
         Spacer(modifier = Modifier.height(10.dp))
