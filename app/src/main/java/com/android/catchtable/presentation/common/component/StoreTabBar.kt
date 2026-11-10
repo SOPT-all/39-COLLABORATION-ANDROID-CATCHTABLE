@@ -39,7 +39,6 @@ val storeTabList = listOf(
     StoreTab("사진", "9,999+"),
     StoreTab("리뷰", "4,122"),
     StoreTab("방송"),
-    StoreTab("매장정보"),
 )
 
 @Composable
@@ -61,7 +60,6 @@ fun StoreTabBar(
             color = CatchTableTheme.colors.gray100,
         )
 
-        // 탭 7개가 화면보다 길어서 옆으로 스크롤 -> LazyRow
         LazyRow(
             modifier = Modifier.fillMaxHeight(),
             contentPadding = PaddingValues(horizontal = 20.dp),
