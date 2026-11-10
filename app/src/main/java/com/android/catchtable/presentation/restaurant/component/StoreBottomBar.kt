@@ -19,8 +19,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableButton
-import com.android.catchtable.presentation.common.component.CatchTableButtonType
 import com.android.catchtable.presentation.common.extension.noRippleClickable
+import com.android.catchtable.presentation.common.model.CatchTableButtonType
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
