@@ -9,7 +9,7 @@ import coil3.compose.AsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun BaseAsyncImage(
+fun CatchTableAsyncImage(
     imgUrl: String?,
     modifier: Modifier = Modifier,
     contentDescription: String? = null,

@@ -23,8 +23,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.BaseAsyncImage
-import com.android.catchtable.presentation.common.component.Dot
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
+import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
 
@@ -37,7 +37,7 @@ fun HomeCardRecommended(
         modifier = modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        BaseAsyncImage(
+        CatchTableAsyncImage(
             imgUrl = store.thumbnailUrl,
             modifier = Modifier
                 .fillMaxWidth()
@@ -92,7 +92,7 @@ fun HomeCardRecommended(
                         overflow = TextOverflow.Ellipsis,
                     )
 
-                    Dot(
+                    CatchTableDot(
                         modifier = Modifier.padding(horizontal = 2.dp)
                     )
 

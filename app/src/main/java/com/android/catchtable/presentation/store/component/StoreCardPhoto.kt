@@ -21,7 +21,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.BaseAsyncImage
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
@@ -33,7 +33,7 @@ fun StoreCardPhoto(
     Box(
         modifier = modifier.fillMaxWidth(),
     ) {
-        BaseAsyncImage(
+        CatchTableAsyncImage(
             imgUrl = imgUrl,
             modifier = Modifier
                 .fillMaxWidth()

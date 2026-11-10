@@ -25,7 +25,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.BaseAsyncImage
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.model.VoteStoreUiModel
 
@@ -42,7 +42,7 @@ fun VoteCardStore(
         Box(
             modifier = Modifier.fillMaxWidth()
         ) {
-            BaseAsyncImage(
+            CatchTableAsyncImage(
                 imgUrl = store.thumbnailUrl,
                 modifier = Modifier
                     .fillMaxWidth()

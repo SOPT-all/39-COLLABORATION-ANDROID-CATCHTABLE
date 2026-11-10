@@ -21,8 +21,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.BaseAsyncImage
-import com.android.catchtable.presentation.common.component.Dot
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
+import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
 
@@ -34,7 +34,7 @@ fun HomeCardSimilar(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        BaseAsyncImage(
+        CatchTableAsyncImage(
             imgUrl = store.thumbnailUrl,
             modifier = Modifier
                 .fillMaxWidth()
@@ -67,7 +67,7 @@ fun HomeCardSimilar(
                 overflow = TextOverflow.Ellipsis,
             )
 
-            Dot(
+            CatchTableDot(
                 modifier = Modifier.padding(horizontal = 3.dp)
             )
 

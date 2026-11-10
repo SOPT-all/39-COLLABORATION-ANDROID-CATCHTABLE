@@ -1,6 +1,5 @@
 package com.android.catchtable.presentation.vote.component
 
-import android.R.attr.text
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,7 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.presentation.common.component.BaseAsyncImage
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.model.VoteMenuUiModel
 
@@ -29,7 +28,7 @@ fun VoteCardMenu(
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        BaseAsyncImage(
+        CatchTableAsyncImage(
             imgUrl = menu.imgUrl,
             modifier = Modifier
                 .fillMaxWidth()
