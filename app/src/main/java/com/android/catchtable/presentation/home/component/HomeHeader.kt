@@ -1,6 +1,5 @@
 package com.android.catchtable.presentation.home.component
 
-import android.R.attr.contentDescription
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
