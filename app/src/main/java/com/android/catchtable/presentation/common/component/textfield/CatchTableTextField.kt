@@ -2,8 +2,8 @@ package com.android.catchtable.presentation.common.component.textfield
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -39,6 +39,7 @@ fun CatchTableSearchTextField(
             .border(width = 1.dp, color = colors.gray200, shape = shape)
             .padding(horizontal = 14.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Icon(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_search),
@@ -47,7 +48,6 @@ fun CatchTableSearchTextField(
             tint = Color.Unspecified,
         )
 
-        Spacer(modifier = Modifier.width(10.dp))
 
         Text(
             text = placeholder,
