@@ -94,7 +94,7 @@ fun VoteTag(
 
 @Preview(showBackground = true)
 @Composable
-fun VoteTagPreview(){
+private fun VoteTagPreview(){
     CatchTableTheme {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)

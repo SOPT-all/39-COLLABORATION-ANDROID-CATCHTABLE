@@ -104,7 +104,7 @@ private fun StoreBottomBarButton(
 
 @Preview(showBackground = true)
 @Composable
-fun StoreBottomBarPreview(){
+private fun StoreBottomBarPreview(){
     CatchTableTheme{
         Column(
             modifier = Modifier.fillMaxWidth(),

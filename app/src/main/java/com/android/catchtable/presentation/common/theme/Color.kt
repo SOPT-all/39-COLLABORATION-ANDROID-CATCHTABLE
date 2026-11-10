@@ -136,7 +136,7 @@ val defaultCatchTableColors = CatchTableColors(
 
 @Preview(showBackground = true)
 @Composable
-fun CatchTableColorPreview() {
+private fun CatchTableColorPreview() {
     CatchTableTheme {
         val colors = CatchTableTheme.colors.allColors
 

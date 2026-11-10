@@ -79,7 +79,7 @@ fun VoteHeader(
 
 @Preview(showBackground = true)
 @Composable
-fun VoteHeaderPreview() {
+private fun VoteHeaderPreview() {
     CatchTableTheme {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)

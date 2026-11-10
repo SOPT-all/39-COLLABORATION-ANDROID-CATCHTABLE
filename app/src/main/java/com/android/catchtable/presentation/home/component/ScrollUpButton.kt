@@ -44,7 +44,7 @@ fun ScrollUpButton(
 
 @Preview(showBackground = true)
 @Composable
-fun ScrollUpButtonPreview(){
+private fun ScrollUpButtonPreview(){
     CatchTableTheme {
         ScrollUpButton(
             modifier = Modifier.padding(20.dp),

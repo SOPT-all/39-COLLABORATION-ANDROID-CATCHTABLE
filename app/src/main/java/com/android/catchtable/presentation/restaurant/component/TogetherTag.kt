@@ -55,7 +55,7 @@ fun TogetherTag(
 
 @Preview(showBackground = true)
 @Composable
-fun TogetherTagPreview(){
+private fun TogetherTagPreview(){
     CatchTableTheme {
         TogetherTag(
             onClick = {}

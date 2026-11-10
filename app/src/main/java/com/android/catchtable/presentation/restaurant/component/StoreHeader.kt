@@ -81,7 +81,7 @@ fun StoreHeader(
 
 @Preview(showBackground = true)
 @Composable
-fun StoreHeaderPreview() {
+private fun StoreHeaderPreview() {
     CatchTableTheme {
         StoreHeader(modifier = Modifier.fillMaxWidth(), onBackClick = {})
     }

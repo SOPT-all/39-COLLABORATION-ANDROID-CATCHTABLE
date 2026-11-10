@@ -44,7 +44,7 @@ fun VoteRadioButton(
 
 @Preview(showBackground = true)
 @Composable
-fun VoteRadioButtonPreview(){
+private fun VoteRadioButtonPreview(){
     CatchTableTheme {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)

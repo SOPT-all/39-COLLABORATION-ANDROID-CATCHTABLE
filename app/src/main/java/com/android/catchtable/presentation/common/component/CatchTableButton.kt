@@ -107,7 +107,7 @@ fun CatchTableButton(
 
 @Preview(showBackground = true)
 @Composable
-fun CatchTableButtonPreview(){
+private fun CatchTableButtonPreview(){
     CatchTableTheme {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)

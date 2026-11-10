@@ -78,7 +78,7 @@ fun VoteStatusButton(
 
 @Preview(showBackground = true)
 @Composable
-fun VoteStatusButtonPreview(){
+private fun VoteStatusButtonPreview(){
     CatchTableTheme{
         VoteStatusButton(
             modifier = Modifier.fillMaxWidth(),
