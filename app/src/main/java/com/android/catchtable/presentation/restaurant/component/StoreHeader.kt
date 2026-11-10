@@ -19,19 +19,20 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 @Composable
 fun StoreHeader(
     modifier: Modifier = Modifier,
-    onBackClick: () -> Unit,
     onSearchClick: () -> Unit = {},
     onBookmarkClick: () -> Unit = {},
-    onShareClick: () -> Unit = {}
+    onShareClick: () -> Unit = {},
+    onBackClick: () -> Unit
 ){
     Row(
         modifier = modifier
-            .padding(vertical = 8.dp, horizontal = 20.dp),
+            .padding(vertical = 9.dp, horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ){
         Row(
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ){
             Icon(
                 modifier = Modifier
@@ -42,7 +43,7 @@ fun StoreHeader(
                 tint = CatchTableTheme.colors.gray900
             )
             Icon(
-                modifier = Modifier.size(22.dp),
+                modifier = Modifier.size(20.dp),
                 painter = painterResource(id = R.drawable.ic_home),
                 contentDescription = "Home",
                 tint = CatchTableTheme.colors.gray900
