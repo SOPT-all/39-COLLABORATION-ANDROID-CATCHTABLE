@@ -88,13 +88,13 @@ fun CatchTableButton(
             .clip(RoundedCornerShape(12.dp))
             .background(style.backgroundColor)
             .border(1.dp, style.borderColor, RoundedCornerShape(12.dp))
-            .padding(vertical = 12.dp, horizontal = 20.dp)
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
                 enabled = isEnabled,
                 onClick = onClick
-            ),
+            )
+            .padding(vertical = 12.dp, horizontal = 20.dp),
         contentAlignment = Alignment.Center
     ) {
         Text(
