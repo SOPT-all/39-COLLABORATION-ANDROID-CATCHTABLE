@@ -59,7 +59,7 @@ fun StoreBottomBar(
             }
             CatchTableButton(
                 type = if(enabled) CatchTableButtonType.PRIMARY_ENABLED else CatchTableButtonType.PRIMARY_DISABLED_SECONDARY,
-                text = if(enabled) "에약하기" else "바로 입장 가능",
+                text = if(enabled) "예약하기" else "바로 입장 가능",
                 onClick = { if (enabled) onClick() }
             )
         }
