@@ -53,5 +53,7 @@ fun HomeHeader(
 @Preview(showBackground = true)
 @Composable
 fun HomeHeaderPreview(){
-    HomeHeader()
+    CatchTableTheme{
+        HomeHeader()
+    }
 }
