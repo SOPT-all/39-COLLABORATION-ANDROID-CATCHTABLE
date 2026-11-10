@@ -18,6 +18,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 data class VoteTagStyle(
@@ -71,6 +72,7 @@ fun VoteTag(
             .clip(RoundedCornerShape(16.dp))
             .background(style.backgroundColor)
             .border(1.dp, style.borderColor, RoundedCornerShape(16.dp))
+            .noRippleClickable(onClick = onClick)
             .padding(vertical = 6.dp, horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp)
