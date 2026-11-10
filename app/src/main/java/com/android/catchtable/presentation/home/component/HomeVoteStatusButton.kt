@@ -22,7 +22,7 @@ import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun VoteStatusButton(
+fun HomeVoteStatusButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ){
@@ -31,7 +31,7 @@ fun VoteStatusButton(
             .clip(CircleShape)
             .background(CatchTableTheme.colors.gray800)
             .noRippleClickable(onClick = onClick)
-            .padding(start = 12.dp, end = 20.dp, top = 4.dp, bottom = 4.dp),
+            .padding(vertical = 4.dp, horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ){
@@ -78,9 +78,9 @@ fun VoteStatusButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun VoteStatusButtonPreview(){
+private fun HomeVoteStatusButtonPreview(){
     CatchTableTheme{
-        VoteStatusButton(
+        HomeVoteStatusButton(
             modifier = Modifier.fillMaxWidth(),
             onClick = {}
         )

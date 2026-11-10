@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -21,7 +19,7 @@ import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun ScrollUpButton(
+fun HomeScrollUpButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ){
@@ -44,9 +42,9 @@ fun ScrollUpButton(
 
 @Preview(showBackground = true)
 @Composable
-private fun ScrollUpButtonPreview(){
+private fun HomeScrollUpButtonPreview(){
     CatchTableTheme {
-        ScrollUpButton(
+        HomeScrollUpButton(
             modifier = Modifier.padding(20.dp),
             onClick = {}
         )
