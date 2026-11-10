@@ -87,12 +87,10 @@ private fun StoreBottomBarButton(
         verticalArrangement = Arrangement.spacedBy(3.dp)
     ) {
         Icon(
-            painter = painterResource(id = icon),
             modifier = Modifier
                 .size(24.dp)
-                .noRippleClickable(
-                    onClick = onClick
-                ),
+                .noRippleClickable(onClick = onClick),
+            painter = painterResource(id = icon),
             contentDescription = type.toString(),
             tint = CatchTableTheme.colors.gray900
         )

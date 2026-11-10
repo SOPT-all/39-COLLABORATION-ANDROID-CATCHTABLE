@@ -13,11 +13,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun StoreHeader(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onBackClick: () -> Unit,
+    onSearchClick: () -> Unit = {},
+    onBookmarkClick: () -> Unit = {},
+    onShareClick: () -> Unit = {}
 ){
     Row(
         modifier = modifier
@@ -29,7 +34,9 @@ fun StoreHeader(
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ){
             Icon(
-                modifier = Modifier.size(22.dp),
+                modifier = Modifier
+                    .size(22.dp)
+                    .noRippleClickable(onClick = onBackClick),
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
                 tint = CatchTableTheme.colors.gray900
@@ -45,19 +52,25 @@ fun StoreHeader(
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ){
             Icon(
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier
+                    .size(20.dp)
+                    .noRippleClickable(onClick = onSearchClick),
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = "Search",
                 tint = CatchTableTheme.colors.gray900
             )
             Icon(
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier
+                    .size(20.dp)
+                    .noRippleClickable(onClick = onBookmarkClick),
                 painter = painterResource(id = R.drawable.ic_bookmark),
                 contentDescription = "Bookmark",
                 tint = CatchTableTheme.colors.gray900
             )
             Icon(
-                modifier = Modifier.size(20.dp),
+                modifier = Modifier
+                    .size(20.dp)
+                    .noRippleClickable(onClick = onShareClick),
                 painter = painterResource(id = R.drawable.ic_share20),
                 contentDescription = "Share",
                 tint = CatchTableTheme.colors.gray900
@@ -70,6 +83,6 @@ fun StoreHeader(
 @Composable
 fun StoreHeaderPreview() {
     CatchTableTheme {
-        StoreHeader(modifier = Modifier.fillMaxWidth())
+        StoreHeader(modifier = Modifier.fillMaxWidth(), onBackClick = {})
     }
 }

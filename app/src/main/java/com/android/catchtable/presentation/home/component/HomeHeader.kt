@@ -14,11 +14,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun HomeHeader(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onHistoryClick: () -> Unit = {},
+    onNotificationClick: () -> Unit = {}
 ){
     Row(
         modifier = modifier
@@ -32,16 +35,20 @@ fun HomeHeader(
             contentDescription = "Symbol",
             tint = Color.Unspecified
         )
-        //검색창 component 제작 후 넣어야함
+        //Todo:검색창 component 제작 후 추가
         Spacer(modifier = Modifier.weight(1f))
         Icon(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier
+                .size(24.dp)
+                .noRippleClickable(onClick = onHistoryClick),
             painter = painterResource(id = R.drawable.ic_history),
             contentDescription = "History",
             tint = CatchTableTheme.colors.gray900
         )
         Icon(
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier
+                .size(24.dp)
+                .noRippleClickable(onClick = onNotificationClick),
             painter = painterResource(id = R.drawable.ic_notification),
             contentDescription = "Notification",
             tint = CatchTableTheme.colors.gray900

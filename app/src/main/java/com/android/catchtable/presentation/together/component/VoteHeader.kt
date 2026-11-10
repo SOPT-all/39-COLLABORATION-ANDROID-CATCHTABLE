@@ -16,6 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.together.VoteRole
 import com.android.catchtable.presentation.together.VoteStatus
@@ -24,7 +25,10 @@ import com.android.catchtable.presentation.together.VoteStatus
 fun VoteHeader(
     modifier: Modifier = Modifier,
     status: VoteStatus = VoteStatus.NOT_STARTED,
-    role: VoteRole = VoteRole.GUEST
+    role: VoteRole = VoteRole.GUEST,
+    onBackClick: () -> Unit,
+    onShareClick: () -> Unit = {},
+    onVoteEndClick: () -> Unit = {}
 ){
     Row(
         modifier = modifier
@@ -36,7 +40,9 @@ fun VoteHeader(
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Icon(
-                modifier = Modifier.size(22.dp),
+                modifier = Modifier
+                    .size(22.dp)
+                    .noRippleClickable(onClick = onBackClick),
                 painter = painterResource(id = R.drawable.ic_back),
                 contentDescription = "Back",
                 tint = CatchTableTheme.colors.gray900
@@ -53,11 +59,13 @@ fun VoteHeader(
             if (status == VoteStatus.IN_PROGRESS) {
                 if (role == VoteRole.HOST) {
                     //투표종료 component
-                    VoteTag(type = VoteTagType.VOTE_ENDED)
+                    VoteTag(type = VoteTagType.VOTE_ENDED, onClick = onVoteEndClick)
                 }
                 //공유하기
                 Icon(
-                    modifier = Modifier.size(24.dp),
+                    modifier = Modifier
+                        .size(24.dp)
+                        .noRippleClickable(onClick = onShareClick),
                     painter = painterResource(id = R.drawable.ic_share24),
                     contentDescription = "Share",
                     tint = Color.Unspecified
@@ -76,9 +84,9 @@ fun VoteHeaderPreview() {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            VoteHeader(modifier = Modifier.fillMaxWidth(),status = VoteStatus.NOT_STARTED)
-            VoteHeader(modifier = Modifier.fillMaxWidth(),status = VoteStatus.IN_PROGRESS, role = VoteRole.GUEST)
-            VoteHeader(modifier = Modifier.fillMaxWidth(), status = VoteStatus.IN_PROGRESS, role = VoteRole.HOST)
+            VoteHeader(modifier = Modifier.fillMaxWidth(),status = VoteStatus.NOT_STARTED, onBackClick = {})
+            VoteHeader(modifier = Modifier.fillMaxWidth(),status = VoteStatus.IN_PROGRESS, role = VoteRole.GUEST, onBackClick = {})
+            VoteHeader(modifier = Modifier.fillMaxWidth(), status = VoteStatus.IN_PROGRESS, role = VoteRole.HOST, onBackClick = {})
         }
     }
 }

@@ -36,8 +36,9 @@ enum class VoteTagType {
 
 @Composable
 fun VoteTag(
+    modifier: Modifier = Modifier,
     type: VoteTagType,
-    modifier: Modifier = Modifier
+    onClick: () -> Unit
 ) {
     val style = when (type) {
         VoteTagType.RESERVED -> VoteTagStyle(
@@ -96,9 +97,9 @@ fun VoteTagPreview(){
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            VoteTag(type = VoteTagType.RESERVED)
-            VoteTag(type = VoteTagType.VIEW_ALL)
-            VoteTag(type = VoteTagType.VOTE_ENDED)
+            VoteTag(type = VoteTagType.RESERVED, onClick = {})
+            VoteTag(type = VoteTagType.VIEW_ALL, onClick = {})
+            VoteTag(type = VoteTagType.VOTE_ENDED, onClick = {})
         }
     }
 }

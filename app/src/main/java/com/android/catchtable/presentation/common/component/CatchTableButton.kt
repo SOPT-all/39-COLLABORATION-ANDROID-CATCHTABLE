@@ -41,7 +41,7 @@ fun CatchTableButton(
     modifier: Modifier = Modifier,
     text: String = "Button",
     type: CatchTableButtonType,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -113,10 +113,10 @@ fun CatchTableButtonPreview(){
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             //pressed는 interactive Mode로 확인 가능
-            CatchTableButton(type = CatchTableButtonType.PRIMARY_ENABLED)
-            CatchTableButton(type = CatchTableButtonType.PRIMARY_DISABLED_PRIMARY)
-            CatchTableButton(type = CatchTableButtonType.PRIMARY_DISABLED_SECONDARY)
-            CatchTableButton(type = CatchTableButtonType.WHITE_ENABLED)
+            CatchTableButton(type = CatchTableButtonType.PRIMARY_ENABLED, onClick = {})
+            CatchTableButton(type = CatchTableButtonType.PRIMARY_DISABLED_PRIMARY, onClick = {})
+            CatchTableButton(type = CatchTableButtonType.PRIMARY_DISABLED_SECONDARY, onClick = {})
+            CatchTableButton(type = CatchTableButtonType.WHITE_ENABLED, onClick = {})
         }
     }
 }
