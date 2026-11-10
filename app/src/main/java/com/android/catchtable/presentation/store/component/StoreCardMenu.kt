@@ -46,7 +46,7 @@ fun StoreCardMenu(
         )
 
         Text(
-            text = "${menu.price}원$",
+            text = "${menu.price}원",
             color = CatchTableTheme.colors.gray900,
             style = CatchTableTheme.typography.h3SB14,
             maxLines = 1,
