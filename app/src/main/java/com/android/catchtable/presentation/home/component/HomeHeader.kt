@@ -35,8 +35,10 @@ fun HomeHeader(
             contentDescription = "Symbol",
             tint = Color.Unspecified
         )
+
         //Todo:검색창 component 제작 후 추가
         Spacer(modifier = Modifier.weight(1f))
+
         Icon(
             modifier = Modifier
                 .size(24.dp)
@@ -45,6 +47,7 @@ fun HomeHeader(
             contentDescription = "History",
             tint = CatchTableTheme.colors.gray900
         )
+
         Icon(
             modifier = Modifier
                 .size(24.dp)

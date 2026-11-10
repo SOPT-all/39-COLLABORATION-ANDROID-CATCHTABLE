@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
@@ -26,7 +27,8 @@ fun VoteRadioButton(
 
     Box(
         modifier = modifier
-            .size(22.dp)
+            .size(24.dp)
+            .padding(all = 1.dp)
             .clip(CircleShape)
             .border(width = 1.dp, color = borderColor, shape = CircleShape)
             .noRippleClickable(onClick = onClick),

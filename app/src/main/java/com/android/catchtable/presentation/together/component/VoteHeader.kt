@@ -18,21 +18,25 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.together.VoteRole
-import com.android.catchtable.presentation.together.VoteStatus
+import com.android.catchtable.presentation.together.model.VoteRole
+import com.android.catchtable.presentation.together.model.VoteStatus
+import com.android.catchtable.presentation.together.model.VoteTagType
 
 @Composable
 fun VoteHeader(
     modifier: Modifier = Modifier,
     status: VoteStatus = VoteStatus.NOT_STARTED,
     role: VoteRole = VoteRole.GUEST,
-    onBackClick: () -> Unit,
     onShareClick: () -> Unit = {},
-    onVoteEndClick: () -> Unit = {}
-){
+    onVoteEndClick: (Int) -> Unit = {},
+    onBackClick: () -> Unit
+) {
+    //임의 vote id 값
+    val voteId = 1
+
     Row(
         modifier = modifier
-            .padding(vertical = 8.dp, horizontal = 20.dp),
+            .padding(vertical = 5.dp, horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -49,29 +53,29 @@ fun VoteHeader(
             )
             Text(
                 text = "함께 고르기",
-                style = CatchTableTheme.typography.displayB18
+                style = CatchTableTheme.typography.displayB18,
+                color = CatchTableTheme.colors.gray900
             )
         }
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(9.dp)
-        ) {
-            if (status == VoteStatus.IN_PROGRESS) {
+        if (status == VoteStatus.IN_PROGRESS) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
                 if (role == VoteRole.HOST) {
                     //투표종료 component
-                    VoteTag(type = VoteTagType.VOTE_ENDED, onClick = onVoteEndClick)
+                    VoteTag(type = VoteTagType.VOTE_ENDED, onClick = { onVoteEndClick(voteId) })
                 }
                 //공유하기
                 Icon(
                     modifier = Modifier
-                        .size(24.dp)
+                        .size(30.dp)
+                        .padding(all = 3.dp)
                         .noRippleClickable(onClick = onShareClick),
                     painter = painterResource(id = R.drawable.ic_share24),
                     contentDescription = "Share",
                     tint = Color.Unspecified
                 )
-            } else {
-                //아무것도 없음 (공백)
             }
         }
     }

@@ -21,21 +21,24 @@ import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun TogetherTag(
+fun StoreTogetherTag(
     modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: (Int) -> Unit
 ) {
+    //임의 store id 값
+    val storeId = 1
+
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(30.dp))
             .background(CatchTableTheme.colors.white)
             .border(
                 1.dp,
-                 CatchTableTheme.colors.gray300,
+                 CatchTableTheme.colors.gray200,
                 RoundedCornerShape(30.dp)
             )
             .padding(vertical = 8.dp, horizontal = 12.dp)
-            .noRippleClickable { onClick() },
+            .noRippleClickable { onClick(storeId) },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {
@@ -55,9 +58,9 @@ fun TogetherTag(
 
 @Preview(showBackground = true)
 @Composable
-private fun TogetherTagPreview(){
+private fun StoreTogetherTagPreview(){
     CatchTableTheme {
-        TogetherTag(
+        StoreTogetherTag(
             onClick = {}
         )
     }
