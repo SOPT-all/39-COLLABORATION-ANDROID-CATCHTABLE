@@ -18,7 +18,7 @@ fun CatchTableBadgeSBD(
         text = "신분당",
         color = CatchTableTheme.colors.white,
         style = CatchTableTheme.typography.captionB8,
-        modifier = Modifier
+        modifier = modifier
             .background(
                 color = CatchTableTheme.colors.lineSBD,
                 shape = CircleShape

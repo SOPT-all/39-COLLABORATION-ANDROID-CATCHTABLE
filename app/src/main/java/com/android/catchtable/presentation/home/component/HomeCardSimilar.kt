@@ -23,16 +23,20 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.component.CatchTableDot
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
 
 @Composable
 fun HomeCardSimilar(
     store: SimilarStoreUiModel,
+    onCardClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .noRippleClickable(onClick = { onCardClick(store.id) })
     ) {
         CatchTableAsyncImage(
             imgUrl = store.thumbnailUrl,
@@ -156,6 +160,7 @@ private fun HomeCardSimilarPreview() {
             dummyStores.forEach { store ->
                 HomeCardSimilar(
                     store = store,
+                    onCardClick = {},
                     modifier = Modifier.weight(1f)
                 )
             }

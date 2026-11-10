@@ -32,7 +32,7 @@ import com.android.catchtable.presentation.vote.model.VoteStoreUiModel
 @Composable
 fun VoteCardStore(
     store: VoteStoreUiModel,
-    onButtonClick: (Int) -> Unit,
+    onCheckClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
     isSelected: Boolean? = null,
 ) {
@@ -62,7 +62,7 @@ fun VoteCardStore(
                         .align(Alignment.TopEnd)
                         .padding(top = 12.dp, end = 12.dp)
                         .size(24.dp)
-                        .clickable { onButtonClick(store.id) },
+                        .clickable { onCheckClick(store.id) },
                 )
             }
 
@@ -136,20 +136,20 @@ private fun VoteCardStorePreview() {
             VoteCardStore(
                 store = dummyStore,
                 isSelected = true,
-                onButtonClick = {},
+                onCheckClick = {},
                 modifier = Modifier.weight(1f)
             )
 
             VoteCardStore(
                 store = dummyStore,
                 isSelected = false,
-                onButtonClick = {},
+                onCheckClick = {},
                 modifier = Modifier.weight(1f)
             )
 
             VoteCardStore(
                 store = dummyStore,
-                onButtonClick = {},
+                onCheckClick = {},
                 modifier = Modifier.weight(1f)
             )
         }

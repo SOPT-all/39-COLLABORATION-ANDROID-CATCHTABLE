@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.model.HomeBadgeType
 
@@ -51,7 +50,7 @@ private fun HomeBadgePreview() {
         Row(
             modifier = Modifier.padding(20.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
-        ){
+        ) {
             HomeBadge(
                 type = HomeBadgeType.HOT
             )
