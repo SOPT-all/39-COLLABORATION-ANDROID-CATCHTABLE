@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
@@ -33,7 +32,6 @@ fun BottomNavigationBar(
         modifier = modifier
             .fillMaxWidth()
             .background(CatchTableTheme.colors.white)
-            .navigationBarsPadding(),
     ) {
         HorizontalDivider(
             thickness = 1.dp, color = CatchTableTheme.colors.gray200
