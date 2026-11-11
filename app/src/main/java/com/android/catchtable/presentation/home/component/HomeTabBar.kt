@@ -81,11 +81,9 @@ private fun HomeTabItem(
             color = textColor,
         )
         Spacer(modifier = Modifier.height(6.dp))
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(1.dp)
-                .background(if (isSelected) CatchTableTheme.colors.gray900 else Color.Transparent),
+        HorizontalDivider(
+            thickness = 1.dp,
+            color = if (isSelected) CatchTableTheme.colors.gray900 else Color.Transparent,
         )
     }
 }
