@@ -120,7 +120,7 @@ val defaultCatchTableTypography: CatchTableTypography
 
 @Preview(showBackground = true)
 @Composable
-fun CatchTableTypographyPreview(){
+private fun CatchTableTypographyPreview(){
     CatchTableTheme{
         val typographyGroups = CatchTableTheme.typography.groupedTypography
 
