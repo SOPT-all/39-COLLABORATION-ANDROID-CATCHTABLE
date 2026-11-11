@@ -1,6 +1,5 @@
 package com.android.catchtable.presentation.common.component
 
-import android.R.attr.text
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
