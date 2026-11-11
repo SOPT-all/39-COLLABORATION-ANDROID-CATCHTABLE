@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.common.component.bottomsheet
+package com.android.catchtable.presentation.vote.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,7 +24,7 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CatchTableBottomSheet(
+fun VoteBottomSheet(
     onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
     sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
@@ -40,13 +40,13 @@ fun CatchTableBottomSheet(
         shape = shape,
         containerColor = colors.white,
         scrimColor = colors.blackAlpha70,
-        dragHandle = { CatchTableBottomSheetDragHandle() },
+        dragHandle = { VoteBottomSheetDragHandle() },
         content = content,
     )
 }
 
 @Composable
-private fun CatchTableBottomSheetDragHandle(
+private fun VoteBottomSheetDragHandle(
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -62,13 +62,13 @@ private fun CatchTableBottomSheetDragHandle(
 
 @Preview(showBackground = true)
 @Composable
-private fun CatchTableBottomSheetDragHandlePreview() {
+private fun VoteBottomSheetDragHandlePreview() {
     CatchTableTheme {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            CatchTableBottomSheetDragHandle()
+            VoteBottomSheetDragHandle()
 
             Text(
                 text = "여기에 화면별 내용 추가!!",

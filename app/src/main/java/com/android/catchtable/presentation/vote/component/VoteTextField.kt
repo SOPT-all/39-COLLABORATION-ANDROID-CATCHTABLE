@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.common.component.textfield
+package com.android.catchtable.presentation.vote.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun CatchTableTextField(
+fun VoteTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
@@ -88,13 +88,13 @@ fun CatchTableTextField(
 
 @Preview(showBackground = true)
 @Composable
-private fun CatchTableTextFieldPreview() {
+private fun VoteTextFieldPreview() {
     CatchTableTheme {
         Column(
             modifier = Modifier.padding(20.dp),
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
-            CatchTableTextField(
+            VoteTextField(
                 value = "익명1",
                 onValueChange = {},
                 showCounter = false,
@@ -103,17 +103,17 @@ private fun CatchTableTextFieldPreview() {
 
             var nickname by remember { mutableStateOf("우수한 셀럽_121") }
 
-            CatchTableTextField(
+            VoteTextField(
                 value = nickname,
                 onValueChange = { nickname = it },
             )
 
-            CatchTableTextField(
+            VoteTextField(
                 value = "우수한 셀럽_12128",
                 onValueChange = {},
             )
 
-            CatchTableTextField(
+            VoteTextField(
                 value = "",
                 onValueChange = {},
                 placeholder = "닉네임을 입력해주세요.",

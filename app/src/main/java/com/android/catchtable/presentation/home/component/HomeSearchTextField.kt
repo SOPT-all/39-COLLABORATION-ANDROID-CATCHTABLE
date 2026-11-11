@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.common.component.textfield
+package com.android.catchtable.presentation.home.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -22,12 +22,13 @@ import com.android.catchtable.R
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
-fun CatchTableSearchTextField(
+fun HomeSearchTextField(
     modifier: Modifier = Modifier,
     placeholder: String = "혜택을 검색해보세요!",
 ) {
     val colors = CatchTableTheme.colors
     val typography = CatchTableTheme.typography
+
     Row(
         modifier = modifier
             .clip(CircleShape)
@@ -54,9 +55,9 @@ fun CatchTableSearchTextField(
 
 @Preview(showBackground = true)
 @Composable
-private fun CatchTableSearchTextFieldPreview() {
+private fun HomeSearchTextFieldPreview() {
     CatchTableTheme {
-        CatchTableSearchTextField(
+        HomeSearchTextField(
             modifier = Modifier
                 .padding(20.dp)
                 .width(248.dp),
