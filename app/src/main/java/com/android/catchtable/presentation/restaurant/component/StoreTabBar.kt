@@ -52,7 +52,6 @@ fun StoreTabBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .height(44.dp)
             .background(CatchTableTheme.colors.white),
     ) {
         HorizontalDivider(
