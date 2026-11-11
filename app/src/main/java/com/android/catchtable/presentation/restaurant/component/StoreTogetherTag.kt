@@ -22,12 +22,9 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun StoreTogetherTag(
-    onClick: (Int) -> Unit,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    //임의 store id 값
-    val storeId = 1
-
     Row(
         modifier = modifier
             .clip(RoundedCornerShape(30.dp))
@@ -38,7 +35,7 @@ fun StoreTogetherTag(
                 RoundedCornerShape(30.dp)
             )
             .padding(vertical = 8.dp, horizontal = 12.dp)
-            .noRippleClickable { onClick(storeId) },
+            .noRippleClickable { onClick() },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(2.dp)
     ) {

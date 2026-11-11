@@ -29,11 +29,8 @@ fun VoteHeader(
     status: VoteStatus = VoteStatus.NOT_STARTED,
     role: VoteRole = VoteRole.GUEST,
     onShareClick: () -> Unit = {},
-    onVoteEndClick: (Int) -> Unit = {}
+    onVoteEndClick: () -> Unit = {}
 ) {
-    //임의 vote id 값
-    val voteId = 1
-
     Row(
         modifier = modifier
             .padding(vertical = 5.dp, horizontal = 20.dp),
@@ -64,7 +61,7 @@ fun VoteHeader(
             ) {
                 if (role == VoteRole.HOST) {
                     //투표종료 component
-                    VoteTag(type = VoteTagType.VOTE_ENDED, onClick = { onVoteEndClick(voteId) })
+                    VoteTag(type = VoteTagType.VOTE_ENDED, onClick = { onVoteEndClick() })
                 }
                 //공유하기
                 Icon(
