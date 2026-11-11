@@ -24,7 +24,7 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 @Composable
 fun CatchTableSearchTextField(
     modifier: Modifier = Modifier,
-    placeholder: String = "",
+    placeholder: String = "혜택을 검색해보세요!",
 ) {
     val colors = CatchTableTheme.colors
     val typography = CatchTableTheme.typography
@@ -60,7 +60,6 @@ private fun CatchTableSearchTextFieldPreview() {
             modifier = Modifier
                 .padding(20.dp)
                 .width(248.dp),
-            placeholder = "혜택을 검색해보세요!",
         )
     }
 }
