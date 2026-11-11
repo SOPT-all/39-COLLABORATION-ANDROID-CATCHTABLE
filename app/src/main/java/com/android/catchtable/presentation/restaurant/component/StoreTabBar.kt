@@ -64,7 +64,7 @@ fun StoreTabBar(
         Row(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 20.dp),
+                .padding(horizontal = 21.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             tabList.forEach { tab ->
