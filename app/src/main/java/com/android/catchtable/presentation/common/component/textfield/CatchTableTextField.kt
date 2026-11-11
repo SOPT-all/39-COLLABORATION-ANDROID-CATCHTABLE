@@ -70,6 +70,7 @@ fun CatchTableTextField(
                             color = colors.gray300,
                         )
                     }
+
                     innerTextField()
                 }
 
@@ -99,15 +100,19 @@ private fun CatchTableTextFieldPreview() {
                 showCounter = false,
                 enabled = false,
             )
+
             var nickname by remember { mutableStateOf("우수한 셀럽_121") }
+
             CatchTableTextField(
                 value = nickname,
                 onValueChange = { nickname = it },
             )
+
             CatchTableTextField(
                 value = "우수한 셀럽_12128",
                 onValueChange = {},
             )
+
             CatchTableTextField(
                 value = "",
                 onValueChange = {},
