@@ -36,7 +36,15 @@ fun VoteTextField(
     val colors = CatchTableTheme.colors
     val typography = CatchTableTheme.typography
 
-    val counterColor = if (value.isEmpty()) colors.gray400 else colors.gray900
+    val isMaxLength = value.length >= maxLength
+
+    val counterColor = when {
+        value.isEmpty() -> colors.gray400
+        isMaxLength -> colors.orangeBase
+        else -> colors.gray900
+    }
+
+    val counterStyle = if (isMaxLength) typography.captionB10 else typography.captionMD10
 
     BasicTextField(
         value = value,
@@ -77,7 +85,7 @@ fun VoteTextField(
                 if (showCounter) {
                     Text(
                         text = "${value.length}/${maxLength}자",
-                        style = typography.captionMD10,
+                        style = counterStyle,
                         color = counterColor,
                     )
                 }
