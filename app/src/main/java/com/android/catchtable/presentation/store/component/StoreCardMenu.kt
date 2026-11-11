@@ -46,7 +46,7 @@ fun StoreCardMenu(
         )
 
         Text(
-            text = "${menu.price}원",
+            text = "${menu.price}원${if (menu.isPriceFrom) " ~" else ""}",
             color = CatchTableTheme.colors.gray900,
             style = CatchTableTheme.typography.h3SB14,
             maxLines = 1,
@@ -60,11 +60,12 @@ fun StoreCardMenu(
 @Composable
 private fun StoreCardMenuPreview() {
     val dummyMenu = StoreMenuUiModel(
-            id = 4,
-            storeId = 1,
-            imgUrl = null,
-            name = "루로우판",
-            price = "4,500",
+        id = 4,
+        storeId = 1,
+        imgUrl = null,
+        name = "루로우판",
+        price = "4,500",
+        isPriceFrom = true
     )
 
     CatchTableTheme {

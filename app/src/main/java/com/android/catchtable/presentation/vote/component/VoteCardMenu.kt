@@ -50,9 +50,9 @@ fun VoteCardMenu(
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "${menu.price}원${if (menu.isPriceFrom) "~" else ""}",
+            text = "${menu.price}원${if (menu.isPriceFrom) " ~" else ""}",
             color = CatchTableTheme.colors.gray500,
-            style = CatchTableTheme.typography.bodyRG12,
+            style = CatchTableTheme.typography.bodyB12,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier.fillMaxWidth()
