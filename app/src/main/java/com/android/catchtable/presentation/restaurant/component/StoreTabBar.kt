@@ -7,8 +7,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -27,27 +25,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-
-data class StoreTab(
-    val label: String,
-    val count: String? = null,
-)
-
-private val storeTabList = listOf(
-    StoreTab("홈"),
-    StoreTab("소식"),
-    StoreTab("메뉴"),
-    StoreTab("사진", "9,999+"),
-    StoreTab("리뷰", "4,122"),
-    StoreTab("방송"),
-)
+import com.android.catchtable.presentation.restaurant.model.StoreTab
 
 @Composable
 fun StoreTabBar(
-    selectedTab: String,
-    onTabClick: (String) -> Unit,
+    selectedTab: StoreTab,
+    onTabClick: (StoreTab) -> Unit,
     modifier: Modifier = Modifier,
-    tabList: List<StoreTab> = storeTabList,
+    photoCount: String? = null,
+    reviewCount: String? = null,
 ) {
     Box(
         modifier = modifier
@@ -62,15 +48,21 @@ fun StoreTabBar(
 
         Row(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(horizontal = 21.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            tabList.forEach { tab ->
+            StoreTab.entries.forEach { tab ->
+                val count = when (tab) {
+                    StoreTab.PHOTO -> photoCount
+                    StoreTab.REVIEW -> reviewCount
+                    else -> null
+                }
                 StoreTabItem(
                     tab = tab,
-                    isSelected = tab.label == selectedTab,
-                    onClick = { onTabClick(tab.label) },
+                    count = count,
+                    isSelected = tab == selectedTab,
+                    onClick = { onTabClick(tab) },
                 )
             }
         }
@@ -80,6 +72,7 @@ fun StoreTabBar(
 @Composable
 private fun StoreTabItem(
     tab: StoreTab,
+    count: String?,
     isSelected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -90,7 +83,6 @@ private fun StoreTabItem(
 
     Column(
         modifier = modifier
-            .fillMaxHeight()
             .width(IntrinsicSize.Max)
             .noRippleClickable(onClick = onClick),
     ) {
@@ -105,9 +97,9 @@ private fun StoreTabItem(
                 style = textStyle,
                 color = textColor,
             )
-            tab.count?.let { count ->
+            count?.let {
                 Text(
-                    text = count,
+                    text = it,
                     style = CatchTableTheme.typography.h3MD14,
                     color = CatchTableTheme.colors.gray500,
                 )
@@ -129,10 +121,12 @@ private fun StoreTabItem(
 @Composable
 private fun StoreTabBarPreview() {
     CatchTableTheme {
-        var selectedTab by remember { mutableStateOf("홈") }
+        var selectedTab by remember { mutableStateOf(StoreTab.HOME) }
         StoreTabBar(
             selectedTab = selectedTab,
             onTabClick = { selectedTab = it },
+            photoCount = "9,999+",
+            reviewCount = "4,122",
         )
     }
 }
