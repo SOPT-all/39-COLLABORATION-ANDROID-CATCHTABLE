@@ -38,7 +38,7 @@ fun CatchTableSearchTextField(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_search),
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_search),
             contentDescription = null,
             modifier = Modifier.size(14.dp),
             tint = colors.gray400,
