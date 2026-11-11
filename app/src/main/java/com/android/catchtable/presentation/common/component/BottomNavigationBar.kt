@@ -86,6 +86,7 @@ private fun BottomNavTab(
             text = item.label,
             style = style,
             color = CatchTableTheme.colors.gray900,
+            modifier = Modifier.padding(bottom = 2.dp),
         )
     }
 }
