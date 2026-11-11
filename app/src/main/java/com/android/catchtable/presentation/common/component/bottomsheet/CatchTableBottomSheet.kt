@@ -53,9 +53,11 @@ fun CatchTableBottomSheet(
 
 // 바텀시트 맨 위 회색 손잡이
 @Composable
-private fun CatchTableBottomSheetDragHandle() {
+private fun CatchTableBottomSheetDragHandle(
+    modifier: Modifier = Modifier,
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .padding(top = 13.dp)
             .size(width = 50.dp, height = 6.dp)
             .background(
