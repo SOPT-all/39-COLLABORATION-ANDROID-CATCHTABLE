@@ -24,10 +24,10 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun CatchTableButton(
+    text: String,
     type: CatchTableButtonType,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    text: String = "Button",
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
@@ -67,10 +67,10 @@ private fun CatchTableButtonPreview(){
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             //pressed는 interactive Mode로 확인 가능
-            CatchTableButton(type = CatchTableButtonType.PRIMARY_ENABLED, onClick = {})
-            CatchTableButton(type = CatchTableButtonType.PRIMARY_DISABLED_PRIMARY, onClick = {})
-            CatchTableButton(type = CatchTableButtonType.PRIMARY_DISABLED_SECONDARY, onClick = {})
-            CatchTableButton(type = CatchTableButtonType.WHITE_ENABLED, onClick = {})
+            CatchTableButton(text="Button", type = CatchTableButtonType.PRIMARY_ENABLED, onClick = {})
+            CatchTableButton(text="Button", type = CatchTableButtonType.PRIMARY_DISABLED_PRIMARY, onClick = {})
+            CatchTableButton(text="Button", type = CatchTableButtonType.PRIMARY_DISABLED_SECONDARY, onClick = {})
+            CatchTableButton(text="Button", type = CatchTableButtonType.WHITE_ENABLED, onClick = {})
         }
     }
 }
