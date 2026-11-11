@@ -55,19 +55,13 @@ fun CatchTableBottomSheet(
 private fun CatchTableBottomSheetDragHandle() {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 13.dp),
-        contentAlignment = Alignment.Center,
-    ) {
-        Box(
-            modifier = Modifier
-                .size(width = 50.dp, height = 6.dp)
-                .background(
-                    color = CatchTableTheme.colors.gray200,
-                    shape = RoundedCornerShape(10.dp),
-                ),
-        )
-    }
+            .padding(top = 13.dp)
+            .size(width = 50.dp, height = 6.dp)
+            .background(
+                color = CatchTableTheme.colors.gray200,
+                shape = RoundedCornerShape(10.dp),
+            ),
+    )
 }
 
 // 손잡이 아래 내용 영역 (Preview에서도 확인할 수 있게 따로 분리)
@@ -106,7 +100,7 @@ private fun CatchTableBottomSheetContent(
 @Composable
 private fun CatchTableBottomSheetContentPreview() {
     CatchTableTheme {
-        Column {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             CatchTableBottomSheetDragHandle()
             CatchTableBottomSheetContent(
                 title = "어떤 방식으로 투표할까요?",
