@@ -1,6 +1,5 @@
 package com.android.catchtable.presentation.vote.component
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.model.VoteStoreUiModel
 
@@ -62,7 +62,7 @@ fun VoteCardStore(
                         .align(Alignment.TopEnd)
                         .padding(top = 12.dp, end = 12.dp)
                         .size(24.dp)
-                        .clickable { onCheckClick(store.id) },
+                        .noRippleClickable { onCheckClick(store.id) },
                 )
             }
 
@@ -106,7 +106,7 @@ fun VoteCardStore(
 
             Text(
                 text = "(" + store.reviewCount + ")",
-                color = CatchTableTheme.colors.gray400,
+                color = CatchTableTheme.colors.gray500,
                 style = CatchTableTheme.typography.bodyB12,
             )
         }

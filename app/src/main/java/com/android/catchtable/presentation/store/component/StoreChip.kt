@@ -34,7 +34,7 @@ fun StoreChip(
     ) {
         Text(
             text = text,
-            color = CatchTableTheme.colors.gray600,
+            color = CatchTableTheme.colors.coolGray600,
             style = CatchTableTheme.typography.captionMD10
         )
 
@@ -42,7 +42,7 @@ fun StoreChip(
             Icon(
                 painter = painterResource(id = R.drawable.ic_store_question),
                 contentDescription = "도움말",
-                tint = CatchTableTheme.colors.gray600,
+                tint = CatchTableTheme.colors.coolGray600,
                 modifier = Modifier
                     .padding(start = 4.dp)
                     .size(12.dp)
