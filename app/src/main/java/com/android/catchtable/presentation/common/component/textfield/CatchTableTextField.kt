@@ -5,10 +5,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Text
@@ -86,8 +84,6 @@ fun CatchTableTextField(
                 }
 
                 if (showCounter) {
-                    // 입력 글자가 길어져도 글자 수와 붙지 않도록 최소 간격 확보
-                    Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "${value.length}/${maxLength}자",
                         style = typography.captionMD10,
