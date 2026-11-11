@@ -60,7 +60,6 @@ fun StoreTabBar(
             color = CatchTableTheme.colors.gray100,
         )
 
-        // 탭 6개가 화면에 다 들어감 -> 스크롤 대신 Row + SpaceBetween (양 끝 20에 딱 맞춰서 쫙 벌림)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -93,13 +92,13 @@ private fun StoreTabItem(
     Column(
         modifier = modifier
             .fillMaxHeight()
-            .width(IntrinsicSize.Max) // 밑줄 폭 = 글자(+숫자) 폭 -> 없으면 밑줄이 옆으로 끝까지 늘어남
+            .width(IntrinsicSize.Max)
             .noRippleClickable(onClick = onClick),
     ) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Row(
-            horizontalArrangement = Arrangement.spacedBy(2.dp), //항상 글자 숫자 사이 간격 신경쓰기..
+            horizontalArrangement = Arrangement.spacedBy(2.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(

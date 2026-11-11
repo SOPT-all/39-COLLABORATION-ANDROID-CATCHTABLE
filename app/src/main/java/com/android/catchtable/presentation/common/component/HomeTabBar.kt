@@ -25,24 +25,22 @@ val homeTabLabels = listOf("랭킹", "상황별 추천", "캐치단독")
 
 @Composable
 fun HomeTabBar(
-    selectedTab: String, // 선택된 탭 글자 (밖에서 넘겨줌 : stateless)
-    onTabClick: (String) -> Unit, // 눌린 탭 글자 알려줌
+    selectedTab: String,
+    onTabClick: (String) -> Unit,
     modifier: Modifier = Modifier,
     tabList: List<String> = homeTabLabels,
 ) {
-    // Box -> 바닥 회색선이랑 탭들을 같은 자리에 겹쳐 그리려고
     Box(
         modifier = modifier
             .fillMaxWidth()
             .background(CatchTableTheme.colors.white),
     ) {
         HorizontalDivider(
-            modifier = Modifier.align(Alignment.BottomCenter), // Box 맨 아래 붙이기
+            modifier = Modifier.align(Alignment.BottomCenter),
             thickness = 1.dp,
             color = CatchTableTheme.colors.gray100,
         )
 
-        // 탭 3개는 화면에 다 들어가서 스크롤 필요 없음 -> LazyRow 말고 Row + SpaceBetween (피그마처럼 쫙 벌어짐)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -72,10 +70,10 @@ private fun HomeTab(
 
     Column(
         modifier = modifier
-            .width(93.dp) // 피그마 탭 1칸(밑줄) 폭
+            .width(93.dp)
             .noRippleClickable(onClick = onClick),
-        horizontalAlignment = Alignment.CenterHorizontally, // 글자 가운데
-        verticalArrangement = Arrangement.spacedBy(6.dp), // 글자-밑줄 사이 6
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Text(
             text = text,
@@ -85,9 +83,8 @@ private fun HomeTab(
         )
         Spacer(
             modifier = Modifier
-                .fillMaxWidth() // 탭 폭(93)만큼 꽉
+                .fillMaxWidth()
                 .height(1.dp)
-                // 선택 안 되면 지우지 말고 투명 -> 지우면 높이 1 줄어서 글자 들썩거림
                 .background(if (isSelected) CatchTableTheme.colors.gray900 else Color.Transparent),
         )
     }
@@ -98,7 +95,7 @@ private fun HomeTab(
 private fun HomeTabBarPreview() {
     CatchTableTheme {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            homeTabLabels.forEach { label -> // "랭킹", "상황별 추천", "캐치단독" 하나씩 선택된 버전
+            homeTabLabels.forEach { label ->
                 HomeTabBar(
                     selectedTab = label,
                     onTabClick = {},

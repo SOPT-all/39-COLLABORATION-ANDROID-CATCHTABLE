@@ -26,8 +26,8 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun BottomNavigationBar(
-    selectedItem: BottomNavItem, // 선택된 탭(밖에서 넘겨줌 : stateless)
-    onItemClick: (BottomNavItem) -> Unit, // 선택됐을 때 어떤 탭인지 알려줌
+    selectedItem: BottomNavItem,
+    onItemClick: (BottomNavItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -49,13 +49,13 @@ fun BottomNavigationBar(
                     end = 22.dp,
                     top = 7.dp,
                     bottom = 24.dp
-                ), //선이 1dp여서 top 7로 설정
+                ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            BottomNavItem.entries.forEach { item -> //각각의 탭에 접근
+            BottomNavItem.entries.forEach { item ->
                 BottomNavTab(
                     item = item,
-                    isSelected = item == selectedItem, // 선택됐는지
+                    isSelected = item == selectedItem,
                     onClick = { onItemClick(item) },
                     modifier = Modifier.weight(1f),
                 )
@@ -66,10 +66,9 @@ fun BottomNavigationBar(
 
 @Composable
 private fun BottomNavTab(
-    //탭 한 개
-    item: BottomNavItem, //어떤 탭인지
-    isSelected: Boolean, // 선택됐는지
-    onClick: () -> Unit, // 선택됐을 때
+    item: BottomNavItem,
+    isSelected: Boolean,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val style =
@@ -80,9 +79,9 @@ private fun BottomNavTab(
 
     Column(
         modifier = modifier
-            .noRippleClickable(onClick = onClick), //누를때 물결효과 x
+            .noRippleClickable(onClick = onClick),
         verticalArrangement = Arrangement.spacedBy(4.dp),
-        horizontalAlignment = Alignment.CenterHorizontally, // 가로로 정렬
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Icon(
             painter = painterResource(icon),
@@ -99,8 +98,8 @@ private fun BottomNavTab(
 
 enum class BottomNavItem(
     val label: String,
-    @DrawableRes val selectedIcon: Int,   // 선택됐을 때 (꽉 찬 아이콘)
-    @DrawableRes val unselectedIcon: Int, // 선택 안 됐을 때 (테두리 아이콘)
+    @DrawableRes val selectedIcon: Int,
+    @DrawableRes val unselectedIcon: Int,
 ) {
     HOME(
         "홈",
@@ -134,8 +133,8 @@ enum class BottomNavItem(
 @Composable
 private fun BottomNavigationBarPreview() {
     CatchTableTheme {
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) { // 바 5개 위아래로, 사이 8
-            BottomNavItem.entries.forEach { item ->                // 탭 5개 하나씩 꺼내서
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            BottomNavItem.entries.forEach { item ->
                 BottomNavigationBar(
                     selectedItem = item,
                     onItemClick = {},
