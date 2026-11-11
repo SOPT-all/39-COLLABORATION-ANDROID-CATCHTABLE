@@ -39,18 +39,7 @@ fun CatchTableTextField(
     val colors = CatchTableTheme.colors
     val typography = CatchTableTheme.typography
 
-    // 최대 글자 수에 도달했는지 여부 → 피그마의 error 상태
-    val isMaxLength = value.length >= maxLength
-
-    // 글자 수 텍스트 색상: 비어 있으면 회색, 최대치면 주황색, 그 외엔 검정색
-    val counterColor = when {
-        value.isEmpty() -> colors.gray400
-        isMaxLength -> colors.orangeBase
-        else -> colors.gray900
-    }
-
-    // 글자 수 텍스트 스타일: 최대치일 때만 Bold, 나머지는 Medium
-    val counterStyle = if (isMaxLength) typography.captionB10 else typography.captionMD10
+    val counterColor = if (value.isEmpty()) colors.gray400 else colors.gray900
 
     BasicTextField(
         //실제 입력칸
@@ -101,7 +90,7 @@ fun CatchTableTextField(
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
                         text = "${value.length}/${maxLength}자",
-                        style = counterStyle,
+                        style = typography.captionMD10,
                         color = counterColor,
                     )
                 }
