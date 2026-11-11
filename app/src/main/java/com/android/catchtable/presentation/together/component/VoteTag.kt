@@ -24,9 +24,9 @@ import com.android.catchtable.presentation.together.model.VoteTagType
 
 @Composable
 fun VoteTag(
-    modifier: Modifier = Modifier,
     type: VoteTagType,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val style = type.style()
     Row(

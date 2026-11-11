@@ -25,9 +25,9 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 @Composable
 fun CatchTableButton(
     type: CatchTableButtonType,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     text: String = "Button",
-    onClick: () -> Unit
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()

@@ -24,11 +24,11 @@ import com.android.catchtable.presentation.home.model.StoreBottomBarItemType
 
 @Composable
 fun StoreBottomBar(
+    onButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     onBookmarkClick: () -> Unit = {},
-    onPhoneClick: () -> Unit = {},
-    onButtonClick: () -> Unit
+    onPhoneClick: () -> Unit = {}
 ){
 
     Column{

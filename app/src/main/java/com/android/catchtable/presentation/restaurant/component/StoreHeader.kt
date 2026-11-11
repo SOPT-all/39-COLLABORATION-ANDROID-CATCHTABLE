@@ -18,11 +18,11 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun StoreHeader(
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     onSearchClick: () -> Unit = {},
     onBookmarkClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
-    onBackClick: () -> Unit
+    onShareClick: () -> Unit = {}
 ){
     Row(
         modifier = modifier

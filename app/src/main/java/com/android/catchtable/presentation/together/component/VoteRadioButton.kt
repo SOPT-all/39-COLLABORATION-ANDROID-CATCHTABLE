@@ -20,8 +20,8 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 @Composable
 fun VoteRadioButton(
     selected: Boolean,
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ){
     val borderColor = if (selected) CatchTableTheme.colors.orangeBase else CatchTableTheme.colors.gray300
 

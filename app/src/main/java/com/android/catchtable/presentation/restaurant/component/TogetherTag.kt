@@ -22,8 +22,8 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun StoreTogetherTag(
-    modifier: Modifier = Modifier,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     //임의 store id 값
     val storeId = 1

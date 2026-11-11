@@ -23,8 +23,8 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun HomeVoteStatusButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ){
     Row(
         modifier = modifier

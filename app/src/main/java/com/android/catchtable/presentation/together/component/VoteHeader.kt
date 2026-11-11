@@ -24,12 +24,12 @@ import com.android.catchtable.presentation.together.model.VoteTagType
 
 @Composable
 fun VoteHeader(
+    onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     status: VoteStatus = VoteStatus.NOT_STARTED,
     role: VoteRole = VoteRole.GUEST,
     onShareClick: () -> Unit = {},
-    onVoteEndClick: (Int) -> Unit = {},
-    onBackClick: () -> Unit
+    onVoteEndClick: (Int) -> Unit = {}
 ) {
     //임의 vote id 값
     val voteId = 1

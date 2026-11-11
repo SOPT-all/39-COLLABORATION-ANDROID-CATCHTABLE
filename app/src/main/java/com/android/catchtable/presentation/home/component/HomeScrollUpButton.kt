@@ -20,8 +20,8 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun HomeScrollUpButton(
-    modifier: Modifier = Modifier,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ){
     Box(
         modifier = modifier
