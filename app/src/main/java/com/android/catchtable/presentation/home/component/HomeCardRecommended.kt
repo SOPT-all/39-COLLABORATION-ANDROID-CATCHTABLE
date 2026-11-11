@@ -79,7 +79,6 @@ fun HomeCardRecommended(
                         text = store.rating,
                         color = CatchTableTheme.colors.black,
                         style = CatchTableTheme.typography.bodySB12,
-                        modifier = Modifier.padding(vertical = 2.dp)
                     )
 
                     Spacer(modifier = Modifier.width(5.dp))
@@ -106,8 +105,6 @@ fun HomeCardRecommended(
                     )
                 }
             }
-
-            Spacer(modifier = Modifier.width(8.dp))
 
             Icon(
                 painter = painterResource(id = R.drawable.ic_bookmark_20),
