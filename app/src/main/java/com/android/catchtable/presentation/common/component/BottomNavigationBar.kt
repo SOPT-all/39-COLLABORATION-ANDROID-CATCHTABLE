@@ -43,6 +43,7 @@ fun BottomNavigationBar(
                 .padding(
                     start = 22.dp, end = 22.dp, top = 8.dp, bottom = 24.dp
                 ),
+            horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             BottomNavItem.entries.forEach { item ->
@@ -50,7 +51,6 @@ fun BottomNavigationBar(
                     item = item,
                     isSelected = item == selectedItem,
                     onClick = { onItemClick(item) },
-                    modifier = Modifier.weight(1f),
                 )
             }
         }
@@ -78,7 +78,9 @@ private fun BottomNavTab(
             tint = Color.Unspecified,
             painter = painterResource(icon),
             contentDescription = null,
-            modifier = Modifier.size(24.dp),
+            modifier = Modifier
+                .padding(horizontal = 10.dp)
+                .size(24.dp),
         )
         Text(
             text = item.label,
