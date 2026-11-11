@@ -73,13 +73,12 @@ private fun HomeTabItem(
             .width(93.dp)
             .noRippleClickable(onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(6.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(
             text = text,
             style = textStyle,
             color = textColor,
-            modifier = Modifier.height(18.dp),
         )
         Spacer(
             modifier = Modifier
