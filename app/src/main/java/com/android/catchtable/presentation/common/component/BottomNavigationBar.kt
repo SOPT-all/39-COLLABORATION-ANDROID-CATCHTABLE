@@ -1,6 +1,5 @@
 package com.android.catchtable.presentation.common.component
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,9 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.R
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.main.model.BottomNavItem
 
 
 @Composable
@@ -89,28 +88,6 @@ private fun BottomNavTab(
             color = CatchTableTheme.colors.gray900,
         )
     }
-}
-
-enum class BottomNavItem(
-    val label: String,
-    @DrawableRes val selectedIcon: Int,
-    @DrawableRes val unselectedIcon: Int,
-) {
-    HOME(
-        "홈", R.drawable.icon_nav_home_filled, R.drawable.icon_nav_home_outline
-    ),
-    SAVED(
-        "저장", R.drawable.icon_nav_saved_filled, R.drawable.icon_nav_saved_outline
-    ),
-    NEARBY(
-        "내 주변", R.drawable.icon_nav_nearby, R.drawable.icon_nav_nearby
-    ),
-    DINING(
-        "마이다이닝", R.drawable.icon_nav_dining_filled, R.drawable.icon_nav_dining_outline
-    ),
-    MY(
-        "my", R.drawable.icon_nav_account_filled, R.drawable.icon_nav_account_outline
-    ),
 }
 
 
