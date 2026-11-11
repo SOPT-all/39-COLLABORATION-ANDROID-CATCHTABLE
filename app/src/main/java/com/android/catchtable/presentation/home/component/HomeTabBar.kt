@@ -80,6 +80,7 @@ private fun HomeTabItem(
             style = textStyle,
             color = textColor,
         )
+        Spacer(modifier = Modifier.height(6.dp))
         Spacer(
             modifier = Modifier
                 .fillMaxWidth()
