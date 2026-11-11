@@ -20,15 +20,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.home.model.HomeTab
 
-private val homeTabLabels = listOf("랭킹", "상황별 추천", "캐치단독")
 
 @Composable
 fun HomeTabBar(
-    selectedTab: String,
-    onTabClick: (String) -> Unit,
+    selectedTab: HomeTab,
+    onTabClick: (HomeTab) -> Unit,
     modifier: Modifier = Modifier,
-    tabList: List<String> = homeTabLabels,
 ) {
     Box(
         modifier = modifier
@@ -47,11 +46,11 @@ fun HomeTabBar(
                 .padding(horizontal = 27.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            tabList.forEach { item ->
-                HomeTab(
-                    text = item,
-                    isSelected = item == selectedTab,
-                    onClick = { onTabClick(item) },
+            HomeTab.entries.forEach { tab ->
+                HomeTabItem(
+                    text = tab.label,
+                    isSelected = tab == selectedTab,
+                    onClick = { onTabClick(tab) },
                 )
             }
         }
@@ -59,7 +58,7 @@ fun HomeTabBar(
 }
 
 @Composable
-private fun HomeTab(
+private fun HomeTabItem(
     text: String,
     isSelected: Boolean,
     onClick: () -> Unit,
@@ -96,9 +95,9 @@ private fun HomeTab(
 private fun HomeTabBarPreview() {
     CatchTableTheme {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            homeTabLabels.forEach { label ->
+            HomeTab.entries.forEach { tab ->
                 HomeTabBar(
-                    selectedTab = label,
+                    selectedTab = tab,
                     onTabClick = {},
                 )
             }
