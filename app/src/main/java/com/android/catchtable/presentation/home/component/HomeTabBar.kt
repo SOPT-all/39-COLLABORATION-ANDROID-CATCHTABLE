@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
-val homeTabLabels = listOf("랭킹", "상황별 추천", "캐치단독")
+private val homeTabLabels = listOf("랭킹", "상황별 추천", "캐치단독")
 
 @Composable
 fun HomeTabBar(

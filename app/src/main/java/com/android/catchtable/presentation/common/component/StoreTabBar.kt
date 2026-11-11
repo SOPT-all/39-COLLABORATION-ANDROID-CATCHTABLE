@@ -33,7 +33,7 @@ data class StoreTab(
     val count: String? = null,
 )
 
-val storeTabList = listOf(
+private val storeTabList = listOf(
     StoreTab("홈"),
     StoreTab("소식"),
     StoreTab("메뉴"),
