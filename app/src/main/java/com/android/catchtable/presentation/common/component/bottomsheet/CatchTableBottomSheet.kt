@@ -60,7 +60,6 @@ private fun CatchTableBottomSheetDragHandle(
     )
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun CatchTableBottomSheetDragHandlePreview() {
@@ -70,6 +69,7 @@ private fun CatchTableBottomSheetDragHandlePreview() {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             CatchTableBottomSheetDragHandle()
+
             Text(
                 text = "여기에 화면별 내용 추가!!",
                 style = CatchTableTheme.typography.h3MD14,
