@@ -19,6 +19,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.presentation.common.extension.elevation1
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,12 +31,13 @@ fun CatchTableBottomSheet(
     content: @Composable ColumnScope.() -> Unit, //바텀시트 안에 들어갈 내용
 ) {
     val colors = CatchTableTheme.colors
+    val shape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp)
 
     ModalBottomSheet(
         onDismissRequest = onDismissRequest,
-        modifier = modifier,
+        modifier = modifier.elevation1(shape = shape),
         sheetState = sheetState,
-        shape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp),
+        shape = shape,
         containerColor = colors.white,
         scrimColor = colors.blackAlpha70,
         dragHandle = { CatchTableBottomSheetDragHandle() },
