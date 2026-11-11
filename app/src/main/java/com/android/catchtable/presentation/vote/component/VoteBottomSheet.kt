@@ -2,9 +2,7 @@ package com.android.catchtable.presentation.vote.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -63,16 +61,14 @@ private fun VoteBottomSheetDragHandle(
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
-private fun VoteBottomSheetDragHandlePreview() {
+private fun VoteBottomSheetPreview() {
     CatchTableTheme {
-        Column(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
+        VoteBottomSheet(
+            onDismissRequest = {},
         ) {
-            VoteBottomSheetDragHandle()
-
             Text(
                 text = "여기에 화면별 내용 추가!!",
                 style = CatchTableTheme.typography.h3MD14,
