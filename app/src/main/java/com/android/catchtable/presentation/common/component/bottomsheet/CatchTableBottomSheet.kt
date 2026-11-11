@@ -25,10 +25,10 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CatchTableBottomSheet(
-    onDismissRequest: () -> Unit, //바텀시트를 닫으려 할 때 쓰는 함수
+    onDismissRequest: () -> Unit,
     modifier: Modifier = Modifier,
-    sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true), //열림,닫힘 상태
-    content: @Composable ColumnScope.() -> Unit, //바텀시트 안에 들어갈 내용
+    sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     val colors = CatchTableTheme.colors
     val shape = RoundedCornerShape(topStart = 36.dp, topEnd = 36.dp)
@@ -45,7 +45,6 @@ fun CatchTableBottomSheet(
     )
 }
 
-// 바텀시트 맨 위 회색 손잡이
 @Composable
 private fun CatchTableBottomSheetDragHandle(
     modifier: Modifier = Modifier,
