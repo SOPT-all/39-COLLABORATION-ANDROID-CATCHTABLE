@@ -28,7 +28,7 @@ fun VoteTextField(
     value: String,
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "",
+    placeholder: String = "닉네임을 입력해주세요.",
     maxLength: Int = 12,
     showCounter: Boolean = true,
     enabled: Boolean = true,
@@ -116,7 +116,6 @@ private fun VoteTextFieldPreview() {
             VoteTextField(
                 value = "",
                 onValueChange = {},
-                placeholder = "닉네임을 입력해주세요.",
             )
         }
     }
