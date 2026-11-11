@@ -35,7 +35,7 @@ fun BottomNavigationBar(
     ) {
         HorizontalDivider(
             thickness = 1.dp, color = CatchTableTheme.colors.gray200
-        ) //맨 위 회색 선
+        )
 
         Row(
             modifier = Modifier
