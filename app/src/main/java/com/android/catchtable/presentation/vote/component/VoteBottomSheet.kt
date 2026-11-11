@@ -40,9 +40,12 @@ fun VoteBottomSheet(
         shape = shape,
         containerColor = colors.white,
         scrimColor = colors.blackAlpha70,
-        dragHandle = { VoteBottomSheetDragHandle() },
-        content = content,
-    )
+        dragHandle = null,
+    ) {
+        VoteBottomSheetDragHandle(modifier = Modifier.align(Alignment.CenterHorizontally))
+
+        content()
+    }
 }
 
 @Composable
