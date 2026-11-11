@@ -37,18 +37,14 @@ fun BottomNavigationBar(
             .navigationBarsPadding(),
     ) {
         HorizontalDivider(
-            thickness = 1.dp,
-            color = CatchTableTheme.colors.gray200
+            thickness = 1.dp, color = CatchTableTheme.colors.gray200
         ) //맨 위 회색 선
 
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    start = 22.dp,
-                    end = 22.dp,
-                    top = 7.dp,
-                    bottom = 24.dp
+                    start = 22.dp, end = 22.dp, top = 7.dp, bottom = 24.dp
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -71,15 +67,13 @@ private fun BottomNavTab(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val style =
-        if (isSelected) CatchTableTheme.typography.captionB10
-        else CatchTableTheme.typography.captionMD10
+    val style = if (isSelected) CatchTableTheme.typography.captionB10
+    else CatchTableTheme.typography.captionMD10
     val icon = if (isSelected) item.selectedIcon else item.unselectedIcon
 
 
     Column(
-        modifier = modifier
-            .noRippleClickable(onClick = onClick),
+        modifier = modifier.noRippleClickable(onClick = onClick),
         verticalArrangement = Arrangement.spacedBy(4.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -103,29 +97,19 @@ enum class BottomNavItem(
     @DrawableRes val unselectedIcon: Int,
 ) {
     HOME(
-        "홈",
-        R.drawable.icon_nav_home_filled,
-        R.drawable.icon_nav_home_outline
+        "홈", R.drawable.icon_nav_home_filled, R.drawable.icon_nav_home_outline
     ),
     SAVED(
-        "저장",
-        R.drawable.icon_nav_saved_filled,
-        R.drawable.icon_nav_saved_outline
+        "저장", R.drawable.icon_nav_saved_filled, R.drawable.icon_nav_saved_outline
     ),
     NEARBY(
-        "내 주변",
-        R.drawable.icon_nav_nearby,
-        R.drawable.icon_nav_nearby
+        "내 주변", R.drawable.icon_nav_nearby, R.drawable.icon_nav_nearby
     ),
     DINING(
-        "마이다이닝",
-        R.drawable.icon_nav_dining_filled,
-        R.drawable.icon_nav_dining_outline
+        "마이다이닝", R.drawable.icon_nav_dining_filled, R.drawable.icon_nav_dining_outline
     ),
     MY(
-        "my",
-        R.drawable.icon_nav_account_filled,
-        R.drawable.icon_nav_account_outline
+        "my", R.drawable.icon_nav_account_filled, R.drawable.icon_nav_account_outline
     ),
 }
 

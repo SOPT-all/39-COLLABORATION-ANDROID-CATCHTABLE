@@ -66,7 +66,8 @@ private fun HomeTab(
     modifier: Modifier = Modifier,
 ) {
     val textStyle = CatchTableTheme.typography.h3MD14
-    val textColor = if (isSelected) CatchTableTheme.colors.gray900 else CatchTableTheme.colors.gray500
+    val textColor =
+        if (isSelected) CatchTableTheme.colors.gray900 else CatchTableTheme.colors.gray500
 
     Column(
         modifier = modifier
