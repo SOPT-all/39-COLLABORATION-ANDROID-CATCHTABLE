@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -19,6 +20,10 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -35,7 +40,9 @@ import com.android.catchtable.presentation.store.component.StoreBottomBar
 import com.android.catchtable.presentation.store.component.StoreCardPhoto
 import com.android.catchtable.presentation.store.component.StoreChip
 import com.android.catchtable.presentation.store.component.StoreHeader
+import com.android.catchtable.presentation.store.component.StoreTabBar
 import com.android.catchtable.presentation.store.component.StoreTogetherTag
+import com.android.catchtable.presentation.store.model.StoreTab
 
 @Composable
 fun StoreScreen(
@@ -54,10 +61,14 @@ fun StoreScreen(
     phoneNumber: String,
     maxReservationCount: Int,
     facilities: List<String>,
+    photoTabCount: String,
+    reviewTabCount: String,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var selectedTab by remember { mutableStateOf(StoreTab.HOME) }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -377,6 +388,25 @@ fun StoreScreen(
                     }
                 }
             }
+
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 12.dp)
+                        .fillMaxWidth()
+                        .height(8.dp)
+                        .background(color = CatchTableTheme.colors.gray100),
+                )
+            }
+
+            stickyHeader {
+                StoreTabBar(
+                    selectedTab = selectedTab,
+                    onTabClick = { tab -> selectedTab = tab },
+                    photoCount = photoTabCount,
+                    reviewCount = reviewTabCount,
+                )
+            }
         }
 
         StoreBottomBar(
@@ -406,6 +436,8 @@ private fun StoreScreenPreview() {
             phoneNumber = "0507-1350-8260",
             maxReservationCount = 8,
             facilities = listOf("주차", "발렛", "콜키지", "장애인 편의시설", "단체", "무선 인터넷"),
+            photoTabCount = "9,999+",
+            reviewTabCount = "4,122",
             onBackClick = {},
             onTogetherClick = {},
         )
