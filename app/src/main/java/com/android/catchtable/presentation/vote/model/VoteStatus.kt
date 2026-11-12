@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.together.model
+package com.android.catchtable.presentation.vote.model
 
 enum class VoteStatus {
     NOT_STARTED,

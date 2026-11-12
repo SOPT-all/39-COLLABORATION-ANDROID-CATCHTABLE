@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.restaurant.component
+package com.android.catchtable.presentation.store.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

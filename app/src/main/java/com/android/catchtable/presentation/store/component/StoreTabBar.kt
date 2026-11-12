@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.restaurant.component
+package com.android.catchtable.presentation.store.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.restaurant.model.StoreTab
+import com.android.catchtable.presentation.store.model.StoreTab
 
 @Composable
 fun StoreTabBar(

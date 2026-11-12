@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.together.model
+package com.android.catchtable.presentation.vote.model
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color

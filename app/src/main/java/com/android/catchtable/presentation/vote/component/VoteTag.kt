@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.together.component
+package com.android.catchtable.presentation.vote.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.together.model.VoteTagType
+import com.android.catchtable.presentation.vote.model.VoteTagType
 
 @Composable
 fun VoteTag(

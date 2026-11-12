@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.restaurant.component
+package com.android.catchtable.presentation.store.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border

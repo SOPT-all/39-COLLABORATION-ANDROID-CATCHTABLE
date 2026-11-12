@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.together.component
+package com.android.catchtable.presentation.vote.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
