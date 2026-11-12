@@ -37,11 +37,13 @@ import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
 import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreBottomBar
+import com.android.catchtable.presentation.store.component.StoreCardMenu
 import com.android.catchtable.presentation.store.component.StoreCardPhoto
 import com.android.catchtable.presentation.store.component.StoreChip
 import com.android.catchtable.presentation.store.component.StoreHeader
 import com.android.catchtable.presentation.store.component.StoreTabBar
 import com.android.catchtable.presentation.store.component.StoreTogetherTag
+import com.android.catchtable.presentation.store.model.StoreMenuUiModel
 import com.android.catchtable.presentation.store.model.StoreTab
 
 @Composable
@@ -63,6 +65,7 @@ fun StoreScreen(
     facilities: List<String>,
     photoTabCount: String,
     reviewTabCount: String,
+    menus: List<StoreMenuUiModel>,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -407,6 +410,66 @@ fun StoreScreen(
                     reviewCount = reviewTabCount,
                 )
             }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = "메뉴",
+                            style = CatchTableTheme.typography.h1MD16,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .size(12.dp),
+                            tint = CatchTableTheme.colors.gray400,
+                        )
+                    }
+
+                    Text(
+                        text = "메뉴판 이미지",
+                        style = CatchTableTheme.typography.h3RG14,
+                        color = CatchTableTheme.colors.orangeBase,
+                    )
+                }
+            }
+
+            item {
+                LazyRow(
+                    modifier = Modifier.padding(top = 14.dp),
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    items(menus) { menu ->
+                        StoreCardMenu(
+                            menu = menu,
+                            modifier = Modifier.width(136.dp),
+                        )
+                    }
+                }
+            }
+
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 22.dp)
+                        .fillMaxWidth()
+                        .height(8.dp)
+                        .background(color = CatchTableTheme.colors.gray100),
+                )
+            }
         }
 
         StoreBottomBar(
@@ -438,6 +501,32 @@ private fun StoreScreenPreview() {
             facilities = listOf("주차", "발렛", "콜키지", "장애인 편의시설", "단체", "무선 인터넷"),
             photoTabCount = "9,999+",
             reviewTabCount = "4,122",
+            menus = listOf(
+                StoreMenuUiModel(
+                    id = 1,
+                    storeId = 1,
+                    imgUrl = null,
+                    name = "루로우판",
+                    price = "4,500",
+                    isPriceFrom = false,
+                ),
+                StoreMenuUiModel(
+                    id = 2,
+                    storeId = 1,
+                    imgUrl = null,
+                    name = "탄탄면",
+                    price = "5,000",
+                    isPriceFrom = false,
+                ),
+                StoreMenuUiModel(
+                    id = 3,
+                    storeId = 1,
+                    imgUrl = null,
+                    name = "돼지고기튀김",
+                    price = "5,900",
+                    isPriceFrom = false,
+                ),
+            ),
             onBackClick = {},
             onTogetherClick = {},
         )
