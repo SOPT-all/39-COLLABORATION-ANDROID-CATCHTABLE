@@ -21,6 +21,6 @@ enum class BottomNavItem(
         "마이다이닝", R.drawable.icon_nav_dining_filled, R.drawable.icon_nav_dining_outline
     ),
     MY(
-        "MY", R.drawable.icon_nav_account_filled, R.drawable.icon_nav_account_outline
+        "mY", R.drawable.icon_nav_account_filled, R.drawable.icon_nav_account_outline
     ),
 }
