@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -32,6 +33,7 @@ import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreBottomBar
 import com.android.catchtable.presentation.store.component.StoreCardPhoto
+import com.android.catchtable.presentation.store.component.StoreChip
 import com.android.catchtable.presentation.store.component.StoreHeader
 import com.android.catchtable.presentation.store.component.StoreTogetherTag
 
@@ -50,6 +52,8 @@ fun StoreScreen(
     openStatus: String,
     lastOrderTime: String,
     phoneNumber: String,
+    maxReservationCount: Int,
+    facilities: List<String>,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -352,6 +356,27 @@ fun StoreScreen(
                     )
                 }
             }
+
+            item {
+                LazyRow(
+                    modifier = Modifier.padding(top = 16.dp),
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    item {
+                        StoreChip(
+                            text = "최대 ${maxReservationCount}명 예약",
+                            isIconVisible = true,
+                        )
+                    }
+
+                    items(facilities) { facility ->
+                        StoreChip(
+                            text = facility,
+                        )
+                    }
+                }
+            }
         }
 
         StoreBottomBar(
@@ -379,6 +404,8 @@ private fun StoreScreenPreview() {
             openStatus = "영업 중",
             lastOrderTime = "새벽 05:00 라스트오더",
             phoneNumber = "0507-1350-8260",
+            maxReservationCount = 8,
+            facilities = listOf("주차", "발렛", "콜키지", "장애인 편의시설", "단체", "무선 인터넷"),
             onBackClick = {},
             onTogetherClick = {},
         )
