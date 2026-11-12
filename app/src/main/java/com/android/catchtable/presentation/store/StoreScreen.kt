@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,8 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
+import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
 import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreBottomBar
@@ -41,6 +44,7 @@ fun StoreScreen(
     area: String,
     category: String,
     description: String,
+    subwayInfo: String,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -167,6 +171,65 @@ fun StoreScreen(
                     )
                 }
             }
+
+            item {
+                HorizontalDivider(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp),
+                    thickness = 1.dp,
+                    color = CatchTableTheme.colors.gray200,
+                )
+            }
+
+            item {
+                Row(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_location),
+                        contentDescription = null,
+                        modifier = Modifier.size(14.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    CatchTableBadgeLine9(
+                        modifier = Modifier.padding(start = 8.dp),
+                    )
+
+                    CatchTableBadgeSBD(
+                        modifier = Modifier.padding(start = 4.dp),
+                    )
+
+                    Text(
+                        text = subwayInfo,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_map),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .size(20.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Text(
+                        text = "위치",
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.blue,
+                    )
+                }
+            }
         }
 
         StoreBottomBar(
@@ -189,6 +252,7 @@ private fun StoreScreenPreview() {
             area = "강남",
             category = "중식",
             description = "중국 본토의 맛 그대로, 차원이 다른 No.1 훠궈",
+            subwayInfo = "신논현역에서 221m",
             onBackClick = {},
             onTogetherClick = {},
         )
