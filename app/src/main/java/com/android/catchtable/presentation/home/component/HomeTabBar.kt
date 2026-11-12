@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
@@ -73,14 +71,13 @@ private fun HomeTabItem(
             .width(93.dp)
             .noRippleClickable(onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(4.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Text(
             text = text,
             style = textStyle,
             color = textColor,
         )
-        Spacer(modifier = Modifier.height(6.dp))
         HorizontalDivider(
             thickness = 1.dp,
             color = if (isSelected) CatchTableTheme.colors.gray900 else Color.Transparent,
