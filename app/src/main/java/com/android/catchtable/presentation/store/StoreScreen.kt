@@ -8,16 +8,23 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.R
+import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreBottomBar
 import com.android.catchtable.presentation.store.component.StoreCardPhoto
@@ -29,6 +36,11 @@ fun StoreScreen(
     photoUrls: List<String>,
     userCount: Int,
     storeName: String,
+    rating: String,
+    reviewCount: String,
+    area: String,
+    category: String,
+    description: String,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -81,6 +93,79 @@ fun StoreScreen(
                     )
                 }
             }
+
+            item {
+                Column(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 4.dp),
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_star),
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.Unspecified,
+                        )
+
+                        Text(
+                            text = rating,
+                            modifier = Modifier.padding(start = 2.dp),
+                            style = CatchTableTheme.typography.h3SB14,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        CatchTableDot(
+                            modifier = Modifier.padding(start = 2.dp, end = 4.dp),
+                            size = 4.dp,
+                            color = CatchTableTheme.colors.gray300,
+                        )
+
+                        Text(
+                            text = "리뷰 ${reviewCount}개",
+                            style = CatchTableTheme.typography.h3SB14,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
+                            contentDescription = null,
+                            modifier = Modifier.size(12.dp),
+                            tint = CatchTableTheme.colors.gray900,
+                        )
+
+                        CatchTableDot(
+                            modifier = Modifier.padding(horizontal = 6.dp),
+                            size = 4.dp,
+                            color = CatchTableTheme.colors.gray300,
+                        )
+
+                        Text(
+                            text = area,
+                            style = CatchTableTheme.typography.bodyMD12,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        CatchTableDot(
+                            modifier = Modifier.padding(horizontal = 6.dp),
+                            size = 4.dp,
+                            color = CatchTableTheme.colors.gray300,
+                        )
+
+                        Text(
+                            text = category,
+                            style = CatchTableTheme.typography.bodyMD12,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+                    }
+
+                    Text(
+                        text = description,
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray500,
+                    )
+                }
+            }
         }
 
         StoreBottomBar(
@@ -98,6 +183,11 @@ private fun StoreScreenPreview() {
             photoUrls = listOf("", ""),
             userCount = 75,
             storeName = "하이디라오 서초점",
+            rating = "4.7",
+            reviewCount = "6,139",
+            area = "강남",
+            category = "중식",
+            description = "중국 본토의 맛 그대로, 차원이 다른 No.1 훠궈",
             onBackClick = {},
             onTogetherClick = {},
         )
