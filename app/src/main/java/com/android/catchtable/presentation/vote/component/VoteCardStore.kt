@@ -32,7 +32,7 @@ import com.android.catchtable.presentation.vote.model.VoteStoreUiModel
 @Composable
 fun VoteCardStore(
     store: VoteStoreUiModel,
-    onCheckClick: (Int) -> Unit,
+    onCheckClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     isSelected: Boolean? = null,
 ) {
@@ -110,8 +110,6 @@ fun VoteCardStore(
                 style = CatchTableTheme.typography.bodyB12,
             )
         }
-
-        Spacer(modifier = Modifier.height(4.dp))
     }
 }
 

@@ -29,7 +29,7 @@ fun VoteCardMenu(
         modifier = modifier.fillMaxWidth()
     ) {
         CatchTableAsyncImage(
-            imgUrl = menu.imgUrl,
+            imgUrl = menu.menuImageUrl,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
@@ -65,17 +65,17 @@ fun VoteCardMenu(
 private fun VoteCardMenuPreview() {
     val dummyMenus = listOf(
         VoteMenuUiModel(
-            id = 4,
+            menuId = 4,
             storeId = 1,
-            imgUrl = null,
+            menuImageUrl = null,
             name = "우유마라훠궈",
             price = "9,000",
             isPriceFrom = true,
         ),
         VoteMenuUiModel(
-            id = 5,
+            menuId = 5,
             storeId = 2,
-            imgUrl = null,
+            menuImageUrl = null,
             name = "2인 SET",
             price = "55,000",
             isPriceFrom = false,
