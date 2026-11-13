@@ -1,7 +1,9 @@
 package com.android.catchtable.presentation.store
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -16,6 +18,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -26,15 +29,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
 import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
 import com.android.catchtable.presentation.common.component.CatchTableDot
+import com.android.catchtable.presentation.common.extension.elevation1
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreBottomBar
 import com.android.catchtable.presentation.store.component.StoreCardMenu
@@ -66,6 +74,8 @@ fun StoreScreen(
     photoTabCount: String,
     reviewTabCount: String,
     menus: List<StoreMenuUiModel>,
+    summaryTitle: String,
+    summaries: List<String>,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -470,6 +480,128 @@ fun StoreScreen(
                         .background(color = CatchTableTheme.colors.gray100),
                 )
             }
+
+            item {
+                val summaryShape = RoundedCornerShape(14.dp)
+
+                Column(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 20.dp),
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_sparkle),
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = Color.Unspecified,
+                        )
+
+                        Text(
+                            text = buildAnnotatedString {
+                                withStyle(
+                                    style = SpanStyle(
+                                        brush = Brush.verticalGradient(
+                                            colors = listOf(Color(0xFFFF537D), Color(0xFFF9604F)),
+                                        ),
+                                    ),
+                                ) {
+                                    append("AI")
+                                }
+                                append("가 요약했어요")
+                            },
+                            modifier = Modifier.padding(start = 4.dp),
+                            style = CatchTableTheme.typography.displayB18,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_help),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .size(16.dp),
+                            tint = Color.Unspecified,
+                        )
+                    }
+
+                    Column(
+                        modifier = Modifier
+                            .padding(top = 24.dp)
+                            .fillMaxWidth()
+                            .elevation1(shape = summaryShape)
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(CatchTableTheme.colors.white, Color(0xFFFEF6F8)),
+                                ),
+                                shape = summaryShape,
+                            )
+                            .border(
+                                width = 1.dp,
+                                color = Color(0xFFFF537D),
+                                shape = summaryShape,
+                            )
+                            .padding(horizontal = 20.dp, vertical = 18.dp),
+                    ) {
+                        Text(
+                            text = summaryTitle,
+                            style = CatchTableTheme.typography.bodySB12,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Column(
+                            modifier = Modifier.padding(top = 13.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            summaries.forEach { summary ->
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Box(
+                                        modifier = Modifier.size(24.dp),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Icon(
+                                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(4.dp),
+                                            tint = Color.Unspecified,
+                                        )
+                                    }
+
+                                    Text(
+                                        text = summary,
+                                        modifier = Modifier.weight(1f),
+                                        style = CatchTableTheme.typography.bodyMD12,
+                                        color = CatchTableTheme.colors.gray500,
+                                    )
+                                }
+                            }
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .align(Alignment.End)
+                                .padding(top = 23.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_like),
+                                contentDescription = null,
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.Unspecified,
+                            )
+
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dislike),
+                                contentDescription = null,
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.Unspecified,
+                            )
+                        }
+                    }
+                }
+            }
         }
 
         StoreBottomBar(
@@ -526,6 +658,12 @@ private fun StoreScreenPreview() {
                     price = "5,900",
                     isPriceFrom = false,
                 ),
+            ),
+            summaryTitle = "중국 본토의 맛 그대로, 차원이 다른 훠궈 전문점",
+            summaries = listOf(
+                "다양한 재료를 취향대로 골라 먹을 수 있는 중국 본토 스타일의 훠궈 전문점이에요.",
+                "소스바에서 입맛에 맞게 소스를 만들어 즐길 수 있으며, 달콤한 케이크도 맛볼 수 있어요.",
+                "자리에서 화려한 면 퍼포먼스를 감상할 수 있고, 생일이나 기념일에 방문하기 좋은 곳이에요.",
             ),
             onBackClick = {},
             onTogetherClick = {},
