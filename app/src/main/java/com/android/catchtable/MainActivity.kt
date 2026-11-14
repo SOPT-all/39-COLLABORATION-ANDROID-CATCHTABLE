@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.vote.VoteRoute
+import com.android.catchtable.presentation.vote.model.VoteRole
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -16,17 +16,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.extension.noRippleClickable
-import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.model.VoteRole
 import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.presentation.common.extension.noRippleClickable
+import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.model.VoteTagType
 
 @Composable
 fun VoteHeader(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    status: VoteStatus = VoteStatus.NOT_STARTED,
+    status: VoteStatus = VoteStatus.CREATE,
     role: VoteRole = VoteRole.GUEST,
     onShareClick: () -> Unit = {},
     onVoteEndClick: () -> Unit = {}
@@ -54,7 +54,7 @@ fun VoteHeader(
                 color = CatchTableTheme.colors.gray900
             )
         }
-        if (status == VoteStatus.IN_PROGRESS) {
+        if (status == VoteStatus.OPEN) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
@@ -85,9 +85,9 @@ private fun VoteHeaderPreview() {
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-            VoteHeader(modifier = Modifier.fillMaxWidth(),status = VoteStatus.NOT_STARTED, onBackClick = {})
-            VoteHeader(modifier = Modifier.fillMaxWidth(),status = VoteStatus.IN_PROGRESS, role = VoteRole.GUEST, onBackClick = {})
-            VoteHeader(modifier = Modifier.fillMaxWidth(), status = VoteStatus.IN_PROGRESS, role = VoteRole.HOST, onBackClick = {})
+            VoteHeader(modifier = Modifier.fillMaxWidth(), status = VoteStatus.CREATE, onBackClick = {})
+            VoteHeader(modifier = Modifier.fillMaxWidth(), status = VoteStatus.OPEN, role = VoteRole.GUEST, onBackClick = {})
+            VoteHeader(modifier = Modifier.fillMaxWidth(), status = VoteStatus.OPEN, role = VoteRole.HOST, onBackClick = {})
         }
     }
 }
