@@ -35,7 +35,7 @@ fun StoreCardPhoto(
     imgUrl: String?,
     userCount: Int,
     modifier: Modifier = Modifier,
-    isUserCountVisible: Boolean = true,
+    isUserCountVisible: Boolean = false,
 ) {
     val hazeState = rememberHazeState()
     val tintColor = CatchTableTheme.colors.blackAlpha40
