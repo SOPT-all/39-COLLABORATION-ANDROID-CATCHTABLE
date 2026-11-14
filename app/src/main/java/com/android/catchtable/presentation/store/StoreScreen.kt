@@ -121,7 +121,7 @@ fun StoreScreen(
                 ) {
                     Text(
                         text = storeName,
-                        style = CatchTableTheme.typography.displayB20,
+                        style = CatchTableTheme.typography.displayB22,
                         color = CatchTableTheme.colors.gray900,
                     )
 
