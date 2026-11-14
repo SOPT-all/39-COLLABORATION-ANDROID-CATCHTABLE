@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -32,10 +33,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.home.component.HomeBadge
 import com.android.catchtable.presentation.home.component.HomeCategoryItem
 import com.android.catchtable.presentation.home.component.HomeHeader
 import com.android.catchtable.presentation.home.component.HomeTabBar
+import com.android.catchtable.presentation.home.model.HomeBadgeType
 import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
+import com.android.catchtable.presentation.home.model.HomeLocationUiModel
 import com.android.catchtable.presentation.home.model.HomeTab
 import com.android.catchtable.presentation.main.component.BottomNavigationBar
 import com.android.catchtable.presentation.main.model.BottomNavItem
@@ -89,6 +93,39 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                     HorizontalDivider(
                         thickness = 20.dp, color = CatchTableTheme.colors.gray200
                     )
+                }
+                item {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(CatchTableTheme.colors.gray200)
+                            .background(
+                                CatchTableTheme.colors.white,
+                                RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                            )
+                            .padding(top = 38.dp, bottom = 16.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp)
+                    ) {
+                        HomeSectionHeader(
+                            title = "어디로 가시나요?",
+                            actionText = "전체보기",
+                            titleIcon = R.drawable.ic_home_destination,
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            locationList.forEach { location ->
+                                HomeLocationItem(
+                                    name = location.name,
+                                    imageRes = location.imageRes,
+                                    badge = location.badge
+                                )
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -185,6 +222,42 @@ private fun HomeSectionHeader(
     }
 }
 
+@Composable
+private fun HomeLocationItem(
+    name: String,
+    @DrawableRes imageRes: Int,
+    modifier: Modifier = Modifier,
+    badge: HomeBadgeType? = null,
+) {
+    Column(
+        modifier = modifier.width(64.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Box {
+            Image(
+                painter = painterResource(id = imageRes),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(64.dp)
+                    .clip(RoundedCornerShape(20.dp)),
+            )
+            if (badge != null) {
+                HomeBadge(
+                    type = badge,
+                    modifier = Modifier.align(Alignment.BottomStart),
+                )
+            }
+        }
+        Text(
+            text = name,
+            style = CatchTableTheme.typography.bodyMD12,
+            color = CatchTableTheme.colors.gray900,
+        )
+    }
+}
+
 private val rankingCategories = listOf(
     HomeCategoryUiModel(name = "줄서기예약", imageRes = R.drawable.img_category_01),
     HomeCategoryUiModel(name = "2026미쉐린", imageRes = R.drawable.img_category_02),
@@ -209,6 +282,18 @@ private val exclusiveCategories = listOf(
     HomeCategoryUiModel(name = "브랜드혜택존", imageRes = R.drawable.img_category_13),
 )
 
+private val locationList = listOf(
+    HomeLocationUiModel(
+        name = "청담", imageRes = R.drawable.img_area_cheongdam, badge = HomeBadgeType.TOP
+    ),
+    HomeLocationUiModel(name = "부산", imageRes = R.drawable.img_area_busan, badge = null),
+    HomeLocationUiModel(
+        name = "강남·역삼", imageRes = R.drawable.img_area_gangnam_yeoksam, badge = HomeBadgeType.TOP
+    ),
+    HomeLocationUiModel(
+        name = "용산·삼각지", imageRes = R.drawable.img_area_yongsan, badge = HomeBadgeType.HOT
+    ),
+)
 
 @Preview(showBackground = true)
 @Composable
