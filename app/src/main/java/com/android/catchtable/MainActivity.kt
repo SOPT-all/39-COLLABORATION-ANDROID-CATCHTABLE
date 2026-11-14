@@ -23,11 +23,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             CatchTableTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    VoteRoute(
-                        onBackClick = {},
-                        modifier = Modifier.padding(innerPadding),
-                        voteId = 10L,
-                        role = VoteRole.HOST
+                    Greeting(
+                        name = "Android",
+                        modifier = Modifier.padding(innerPadding)
                     )
                 }
             }

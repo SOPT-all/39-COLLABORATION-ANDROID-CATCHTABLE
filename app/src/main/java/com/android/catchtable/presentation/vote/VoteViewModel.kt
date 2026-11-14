@@ -29,9 +29,13 @@ class VoteViewModel @Inject constructor(
                 val voteDetail = getVoteDetailUseCase(voteId, role)
                 _uiState.value = VoteUiState(
                     voteDetail = voteDetail,
-                    selectedStoreId = voteDetail.candidates
-                        .firstOrNull { it.candidateId == voteDetail.viewer.selectedCandidateId }
-                        ?.store?.storeId
+                    selectedStoreId = if (voteDetail.viewer.hasVoted) {
+                        voteDetail.candidates
+                            .firstOrNull { it.candidateId == voteDetail.viewer.selectedCandidateId }
+                            ?.store?.storeId
+                    } else {
+                        null
+                    }
                 )
             } catch (exception: CancellationException) {
                 throw exception

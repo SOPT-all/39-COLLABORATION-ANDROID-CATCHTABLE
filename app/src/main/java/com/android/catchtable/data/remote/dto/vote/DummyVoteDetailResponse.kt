@@ -20,14 +20,14 @@ internal object DummyVoteDetailResponse {
         message = "투표 상세 조회 성공",
         data = VoteDetailResponseModel(
             voteId = voteId,
-            status = VoteStatus.OPEN,
+            status = VoteStatus.CREATE,
             participantCount = 2,
             candidates = listOf(createFirstCandidate(), createSecondCandidate()),
             viewer = VoteViewerResponseModel(
                 userId = 2L,
                 isHost = role == VoteRole.HOST,
                 hasVoted = false,
-                selectedCandidateId = if (role == VoteRole.GUEST) 21L else null,
+                selectedCandidateId = null,
                 displayName = "테스트1",
                 defaultNickname = "테스트1"
             ),

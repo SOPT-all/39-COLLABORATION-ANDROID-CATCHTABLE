@@ -74,7 +74,11 @@ fun VoteScreen(
                     voters = voters,
                     voterRowCount = voterRowCount,
                     status = uiState.status,
-                    isSelected = store.storeId == uiState.selectedStoreId,
+                    isSelected = when (uiState.status) {
+                        VoteStatus.CREATE -> true
+                        VoteStatus.OPEN -> store.storeId == uiState.selectedStoreId
+                        VoteStatus.CLOSED -> store.storeId == uiState.selectedStoreId
+                    },
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
                     modifier = Modifier.weight(1f),
@@ -154,8 +158,6 @@ private fun previewVoteState(
     val firstCandidate = voteDetail.candidates.first()
     val selectedStoreId = when {
         hasVoted -> firstCandidate.store.storeId
-        status == VoteStatus.OPEN && role == VoteRole.GUEST ->
-            firstCandidate.store.storeId
         else -> null
     }
     val viewer = voteDetail.viewer.copy(

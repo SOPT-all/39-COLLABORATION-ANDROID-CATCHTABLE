@@ -20,7 +20,7 @@ fun createDummyVoteDetailResponseModel() = VoteDetailResponseModel(
         userId = 2L,
         isHost = false,
         hasVoted = false,
-        selectedCandidateId = FIRST_CANDIDATE_ID,
+        selectedCandidateId = null,
         displayName = "테스트1",
         defaultNickname = "테스트1"
     ),
