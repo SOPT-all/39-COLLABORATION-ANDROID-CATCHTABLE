@@ -142,7 +142,7 @@ fun StoreScreen(
                             imageVector = ImageVector.vectorResource(id = R.drawable.ic_star),
                             contentDescription = null,
                             modifier = Modifier.size(20.dp),
-                            tint = Color.Unspecified,
+                            tint = CatchTableTheme.colors.yellow,
                         )
 
                         Text(
@@ -243,7 +243,7 @@ fun StoreScreen(
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = Color.Unspecified,
+                        tint = CatchTableTheme.colors.gray400,
                     )
 
                     Icon(
@@ -338,7 +338,7 @@ fun StoreScreen(
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
                         contentDescription = null,
                         modifier = Modifier.size(20.dp),
-                        tint = Color.Unspecified,
+                        tint = CatchTableTheme.colors.gray400,
                     )
                 }
             }
@@ -352,7 +352,7 @@ fun StoreScreen(
                         imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_phone),
                         contentDescription = null,
                         modifier = Modifier.size(14.dp),
-                        tint = Color.Unspecified,
+                        tint = CatchTableTheme.colors.gray900,
                     )
 
                     Text(
@@ -368,7 +368,7 @@ fun StoreScreen(
                         modifier = Modifier
                             .padding(start = 2.dp)
                             .size(14.dp),
-                        tint = Color.Unspecified,
+                        tint = CatchTableTheme.colors.gray400,
                     )
 
                     Text(
@@ -523,7 +523,7 @@ fun StoreScreen(
                             modifier = Modifier
                                 .padding(start = 4.dp)
                                 .size(16.dp),
-                            tint = Color.Unspecified,
+                            tint = CatchTableTheme.colors.gray900,
                         )
                     }
 
