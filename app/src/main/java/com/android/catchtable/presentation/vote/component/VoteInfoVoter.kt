@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
@@ -65,3 +66,20 @@ fun VoteInfoVoter(
 private const val MAX_VISIBLE_VOTER_COUNT = 5
 private const val VOTER_ROW_HEIGHT_DP = 16
 private const val VOTER_ROW_SPACING_DP = 4
+
+@Preview(showBackground = true)
+@Composable
+private fun VoteInfoVoterPreview(){
+    CatchTableTheme {
+        VoteInfoVoter(
+            voters = listOf(
+                VoteVoterResponseModel("김승혁"),
+                VoteVoterResponseModel("김승현"),
+                VoteVoterResponseModel("김승호"),
+                VoteVoterResponseModel("김승희"),
+                VoteVoterResponseModel("김승훈"),
+                VoteVoterResponseModel("김승열")
+            )
+        )
+    }
+}
