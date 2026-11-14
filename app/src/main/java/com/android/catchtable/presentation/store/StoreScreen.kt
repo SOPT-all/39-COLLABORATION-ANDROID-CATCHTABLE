@@ -257,6 +257,7 @@ fun StoreScreen(
 
                     Text(
                         text = "위치",
+                        modifier = Modifier.padding(start = 1.dp),
                         style = CatchTableTheme.typography.bodyMD12,
                         color = CatchTableTheme.colors.blue,
                     )
@@ -488,7 +489,7 @@ fun StoreScreen(
                         start = 20.dp,
                         end = 20.dp,
                         top = 28.dp,
-                        bottom = 20.dp
+                        bottom = 75.dp
                     ),
                 ) {
                     Row(
@@ -521,7 +522,7 @@ fun StoreScreen(
                             imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_help),
                             contentDescription = null,
                             modifier = Modifier
-                                .padding(start = 4.dp)
+                                .padding(start = 2.dp)
                                 .size(16.dp),
                             tint = CatchTableTheme.colors.gray900,
                         )
