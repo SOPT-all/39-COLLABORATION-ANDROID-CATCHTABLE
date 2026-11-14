@@ -1,5 +1,6 @@
 package com.android.catchtable.presentation.home
 
+import android.R.attr.top
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
@@ -36,7 +38,9 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.component.HomeBadge
 import com.android.catchtable.presentation.home.component.HomeCategoryItem
 import com.android.catchtable.presentation.home.component.HomeHeader
+import com.android.catchtable.presentation.home.component.HomeSearchTextField
 import com.android.catchtable.presentation.home.component.HomeTabBar
+import com.android.catchtable.presentation.home.component.HomeVoteStatusButton
 import com.android.catchtable.presentation.home.model.HomeBadgeType
 import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
 import com.android.catchtable.presentation.home.model.HomeLocationUiModel
@@ -54,7 +58,23 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(CatchTableTheme.colors.white),
     ) {
-        HomeHeader(modifier = Modifier.fillMaxWidth())
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 6.dp)
+        ) {
+            HomeHeader(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .align(Alignment.CenterStart)
+            )
+            HomeSearchTextField(
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+                    .padding(start=49.dp, end=78.dp)
+                    .fillMaxWidth()
+            )
+        }
 
         Box(modifier = Modifier.weight(1f)) {
             LazyColumn(
@@ -126,6 +146,24 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                             }
                         }
                     }
+                }
+                item {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp, bottom = 28.dp),
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
+                    ) {
+                        HomeSectionHeader(
+                            title = "최근 본 매장과 비슷한 곳",
+                            actionText = "최근 본 매장",
+                        )
+                        Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
+                            LazyRow() {}
+                            LazyRow() {}
+                        }
+                    }
+
                 }
             }
         }
