@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -552,17 +551,14 @@ fun StoreScreen(
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                 ) {
-                                    Box(
-                                        modifier = Modifier.size(24.dp),
-                                        contentAlignment = Alignment.Center,
-                                    ) {
-                                        Icon(
-                                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
-                                            contentDescription = null,
-                                            modifier = Modifier.size(4.dp),
-                                            tint = Color.Unspecified,
-                                        )
-                                    }
+                                    Icon(
+                                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
+                                        contentDescription = null,
+                                        modifier = Modifier
+                                            .padding(10.dp)
+                                            .size(4.dp),
+                                        tint = CatchTableTheme.colors.gray500,
+                                    )
 
                                     Text(
                                         text = summary,
