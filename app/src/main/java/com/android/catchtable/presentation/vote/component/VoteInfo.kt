@@ -30,6 +30,7 @@ import com.android.catchtable.presentation.vote.model.createDummyVoteDetailRespo
 fun VoteInfo(
     store: VoteDetailStoreResponseModel,
     voters: List<VoteVoterResponseModel>,
+    voterRowCount: Int = voters.size,
     status: VoteStatus,
     isSelected: Boolean,
     backgroundColor: Color,
@@ -63,7 +64,7 @@ fun VoteInfo(
         VoteInfoDivider(strokeColor)
 
         if (status != VoteStatus.CREATE) {
-            VoteInfoVoter(voters)
+            VoteInfoVoter(voters, rowCount = voterRowCount)
             VoteInfoDivider(strokeColor)
         }
 

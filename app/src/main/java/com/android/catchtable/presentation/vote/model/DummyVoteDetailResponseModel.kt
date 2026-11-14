@@ -10,6 +10,7 @@ import com.android.catchtable.domain.model.vote.VoteStationResponseModel
 import com.android.catchtable.domain.model.vote.VoteViewerResponseModel
 import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
 
+//Preview 전용 더미데이터
 fun createDummyVoteDetailResponseModel() = VoteDetailResponseModel(
     voteId = 10L,
     status = VoteStatus.OPEN,
@@ -18,7 +19,7 @@ fun createDummyVoteDetailResponseModel() = VoteDetailResponseModel(
     viewer = VoteViewerResponseModel(
         userId = 2L,
         isHost = false,
-        hasVoted = true,
+        hasVoted = false,
         selectedCandidateId = FIRST_CANDIDATE_ID,
         displayName = "테스트1",
         defaultNickname = "테스트1"
@@ -61,7 +62,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
         priceRange = "점심 저녁 동일가 3 - 5만원",
         representativeMenus = listOf(
             VoteRepresentativeMenuResponseModel(
-                menuId = 1L,
+                menuId = 2101L,
                 name = "소기름훠궈",
                 price = 9000,
                 isPriceFrom = true,
@@ -69,7 +70,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
                 displayOrder = 1
             ),
             VoteRepresentativeMenuResponseModel(
-                menuId = 2L,
+                menuId = 2102L,
                 name = "청유마라훠궈",
                 price = 9000,
                 isPriceFrom = true,
@@ -114,7 +115,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
         priceRange = "점심 1 - 2만원 / 저녁 1 - 3만원",
         representativeMenus = listOf(
             VoteRepresentativeMenuResponseModel(
-                menuId = 5L,
+                menuId = 2201L,
                 name = "2인 SET",
                 price = 55000,
                 isPriceFrom = false,
@@ -122,7 +123,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
                 displayOrder = 1
             ),
             VoteRepresentativeMenuResponseModel(
-                menuId = 6L,
+                menuId = 2202L,
                 name = "3인 SET",
                 price = 69000,
                 isPriceFrom = false,

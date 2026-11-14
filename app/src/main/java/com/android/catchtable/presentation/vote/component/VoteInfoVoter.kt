@@ -24,16 +24,21 @@ import kotlin.collections.getOrNull
 @Composable
 fun VoteInfoVoter(
     voters: List<VoteVoterResponseModel>,
+    rowCount: Int = voters.size,
     modifier: Modifier = Modifier
 ){
+    val votersCount = voters.size
+    val visibleRowCount = maxOf(votersCount, rowCount)
     VoteInfoSection(
-        title = { VoteInfoSectionTitle(text = "${voters.size}명 투표") },
+        title = { VoteInfoSectionTitle(text = "${votersCount}명 투표") },
         content = {
             Column(
-                modifier = modifier.height((VOTER_ROW_HEIGHT_DP * MAX_VISIBLE_VOTER_COUNT + VOTER_ROW_SPACING_DP * (MAX_VISIBLE_VOTER_COUNT - 1)).dp),
+                modifier = modifier.height(
+                    (VOTER_ROW_HEIGHT_DP * visibleRowCount + VOTER_ROW_SPACING_DP * (visibleRowCount - 1).coerceAtLeast(0)).dp
+                ),
                 verticalArrangement = Arrangement.spacedBy(VOTER_ROW_SPACING_DP.dp)
             ){
-                repeat(MAX_VISIBLE_VOTER_COUNT) { index ->
+                repeat(visibleRowCount) { index ->
                     val voter = voters.getOrNull(index)
                     Row(
                         modifier = Modifier.height(VOTER_ROW_HEIGHT_DP.dp),
@@ -62,8 +67,6 @@ fun VoteInfoVoter(
     )
 }
 
-
-private const val MAX_VISIBLE_VOTER_COUNT = 5
 private const val VOTER_ROW_HEIGHT_DP = 16
 private const val VOTER_ROW_SPACING_DP = 4
 

@@ -32,6 +32,7 @@ fun VoteScreen(
     modifier: Modifier = Modifier
 ) {
     val candidates = uiState.voteDetail?.candidates.orEmpty()
+    val voterRowCount = candidates.maxOfOrNull { it.voters.size } ?: 0
 
     Column(
         modifier = modifier
@@ -71,6 +72,7 @@ fun VoteScreen(
                 VoteInfo(
                     store = store,
                     voters = voters,
+                    voterRowCount = voterRowCount,
                     status = uiState.status,
                     isSelected = store.storeId == uiState.selectedStoreId,
                     backgroundColor = backgroundColor,

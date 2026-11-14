@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.vote.VoteRoute
+import com.android.catchtable.presentation.vote.model.VoteRole
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,9 +23,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             CatchTableTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                    VoteRoute(
+                        onBackClick = {},
+                        modifier = Modifier.padding(innerPadding),
+                        voteId = 10L,
+                        role = VoteRole.HOST
                     )
                 }
             }
