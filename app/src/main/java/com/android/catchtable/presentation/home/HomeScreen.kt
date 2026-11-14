@@ -48,8 +48,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
         Box(modifier = Modifier.weight(1f)) {
             LazyColumn(
-                state = listState,
-                modifier = Modifier.fillMaxSize(),
+                state = listState, modifier = Modifier.fillMaxSize()
             ) {
                 item {
                     Image(
@@ -103,8 +102,13 @@ private fun HomeCategorySection(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .background(CatchTableTheme.colors.gray200)
+            .background(
+                CatchTableTheme.colors.white,
+                RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
+            )
             .padding(start = 21.dp, top = 23.dp, end = 22.dp, bottom = 24.dp),
-        horizontalArrangement = Arrangement.spacedBy(20.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
         categories.forEach { category ->
             HomeCategoryItem(
