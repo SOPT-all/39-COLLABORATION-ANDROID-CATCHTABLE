@@ -1,6 +1,8 @@
 package com.android.catchtable.presentation.home.model
 
+import androidx.annotation.DrawableRes
+
 data class HomeCategoryUiModel(
     val name: String,
-    val imageUrl: String?,
+    @DrawableRes val imageRes: Int,
 )
