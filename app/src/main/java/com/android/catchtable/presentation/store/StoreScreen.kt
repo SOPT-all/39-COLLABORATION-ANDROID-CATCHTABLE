@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -425,27 +426,24 @@ fun StoreScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(start = 20.dp, end = 20.dp, top = 20.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Text(
-                            text = "메뉴",
-                            style = CatchTableTheme.typography.h1MD16,
-                            color = CatchTableTheme.colors.gray900,
-                        )
+                    Text(
+                        text = "메뉴",
+                        style = CatchTableTheme.typography.h1MD16,
+                        color = CatchTableTheme.colors.gray900,
+                    )
 
-                        Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(start = 4.dp)
-                                .size(12.dp),
-                            tint = CatchTableTheme.colors.gray400,
-                        )
-                    }
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .size(12.dp),
+                        tint = CatchTableTheme.colors.gray400,
+                    )
+
+                    Spacer(modifier = Modifier.weight(1f))
 
                     Text(
                         text = "메뉴판 이미지",
