@@ -1,15 +1,25 @@
 package com.android.catchtable.presentation.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.android.catchtable.R
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.component.HomeHeader
 import com.android.catchtable.presentation.main.component.BottomNavigationBar
@@ -31,6 +41,18 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                 state = listState,
                 modifier = Modifier.fillMaxSize(),
             ) {
+                item{
+                    Image(
+                        painter = painterResource(id = R.drawable.img_home_banner),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier= Modifier
+                            .padding(horizontal = 20.dp,
+                                vertical = 16.dp)
+                            .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                    )
+                }
             }
         }
 
