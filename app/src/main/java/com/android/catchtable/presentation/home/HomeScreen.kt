@@ -27,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,26 +42,38 @@ import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.component.HomeBadge
+import com.android.catchtable.presentation.home.component.HomeCardRecommended
 import com.android.catchtable.presentation.home.component.HomeCardSimilar
 import com.android.catchtable.presentation.home.component.HomeCategoryItem
 import com.android.catchtable.presentation.home.component.HomeHeader
+import com.android.catchtable.presentation.home.component.HomeScrollUpButton
 import com.android.catchtable.presentation.home.component.HomeSearchTextField
 import com.android.catchtable.presentation.home.component.HomeTabBar
+import com.android.catchtable.presentation.home.component.HomeVoteStatusButton
 import com.android.catchtable.presentation.home.model.HomeBadgeType
 import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
 import com.android.catchtable.presentation.home.model.HomeLocationUiModel
 import com.android.catchtable.presentation.home.model.HomeRecentUiModel
 import com.android.catchtable.presentation.home.model.HomeTab
+import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
 import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
 import com.android.catchtable.presentation.main.component.BottomNavigationBar
 import com.android.catchtable.presentation.main.model.BottomNavItem
+import kotlinx.coroutines.launch
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    recentStores: List<HomeRecentUiModel>,
+    similarStores: List<SimilarStoreUiModel>,
+    recommendStores: List<RecommendStoreUiModel>,
+    modifier: Modifier = Modifier,
+    isVoting: Boolean = false,
+) {
     val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
     var selectedTab by remember { mutableStateOf(HomeTab.RANKING) }
     var selectedRecentId by remember { mutableIntStateOf(1) }
-    
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -171,7 +184,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                                 contentPadding = PaddingValues(horizontal = 20.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                items(recentList) { recent ->
+                                items(recentStores) { recent ->
                                     HomeRecentItem(
                                         recent = recent,
                                         isSelected = recent.id == selectedRecentId,
@@ -183,7 +196,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                                 contentPadding = PaddingValues(horizontal = 20.dp),
                                 horizontalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
-                                items(similarList) { store ->
+                                items(similarStores) { store ->
                                     HomeCardSimilar(
                                         store = store,
                                         onCardClick = {},
@@ -195,6 +208,49 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
                     }
                 }
+                item() {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 20.dp, bottom = 28.dp),
+                        verticalArrangement = Arrangement.spacedBy(12.dp),
+                    ) {
+                        HomeSectionHeader(
+                            title = "윤린우님이 좋아할 맛집",
+                            actionText = "전체보기",
+                            subtitle = "마음에 들 만한 곳으로 모았어요",
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 20.dp),
+                            horizontalArrangement = Arrangement.spacedBy(15.dp),
+                        ) {
+                            recommendStores.forEach { store ->
+                                HomeCardRecommended(
+                                    store = store,
+                                    modifier = Modifier.weight(1f),
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+            if (isVoting) {
+                HomeVoteStatusButton(
+                    onClick = {},
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+                        .fillMaxWidth()
+                )
+
+                HomeScrollUpButton(
+                    onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 20.dp, bottom = if (isVoting) 76.dp else 17.dp)
+                )
             }
         }
 
@@ -406,47 +462,66 @@ private val locationList = listOf(
     ),
 )
 
-private val recentList = listOf(
-    HomeRecentUiModel(
-        id = 1, thumbnailUrl = null, name = "하이디라오 서초점", region = "강남", category = "중식"
-    ),
-    HomeRecentUiModel(id = 2, thumbnailUrl = null, name = "와아", region = "성수", category = "와인"),
-)
-
-private val similarList = listOf(
-    SimilarStoreUiModel(
-        id = 1,
-        thumbnailUrl = null,
-        name = "하이디라오 서초점",
-        category = "중식",
-        region = "강남",
-        rating = "4.7",
-        reviewCount = "6,139"
-    ),
-    SimilarStoreUiModel(
-        id = 3,
-        thumbnailUrl = null,
-        name = "하이디라오 가산점",
-        category = "중식",
-        region = "가산디지털단지",
-        rating = "4.7",
-        reviewCount = "6,139"
-    ),
-    SimilarStoreUiModel(
-        id = 4,
-        thumbnailUrl = null,
-        name = "징관청훠궈 가로수길",
-        category = "중식",
-        region = "가로수길",
-        rating = "4.6",
-        reviewCount = "18"
-    ),
-)
-
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
     CatchTableTheme {
-        HomeScreen()
+        HomeScreen(
+            recentStores = listOf(
+                HomeRecentUiModel(
+                    id = 1, thumbnailUrl = null, name = "하이디라오 서초점", region = "강남", category = "중식"
+                ),
+                HomeRecentUiModel(
+                    id = 2, thumbnailUrl = null, name = "와아", region = "성수", category = "와인"
+                ),
+            ),
+            similarStores = listOf(
+                SimilarStoreUiModel(
+                    id = 1,
+                    thumbnailUrl = null,
+                    name = "하이디라오 서초점",
+                    category = "중식",
+                    region = "강남",
+                    rating = "4.7",
+                    reviewCount = "6,139"
+                ),
+                SimilarStoreUiModel(
+                    id = 3,
+                    thumbnailUrl = null,
+                    name = "하이디라오 가산점",
+                    category = "중식",
+                    region = "가산디지털단지",
+                    rating = "4.7",
+                    reviewCount = "6,139"
+                ),
+                SimilarStoreUiModel(
+                    id = 4,
+                    thumbnailUrl = null,
+                    name = "징관청훠궈 가로수길",
+                    category = "중식",
+                    region = "가로수길",
+                    rating = "4.6",
+                    reviewCount = "18"
+                ),
+            ),
+            recommendStores = listOf(
+                RecommendStoreUiModel(
+                    id = 5,
+                    thumbnailUrl = null,
+                    name = "만가타",
+                    category = "유러피안음식",
+                    region = "삼청",
+                    rating = "4.8"
+                ),
+                RecommendStoreUiModel(
+                    id = 6,
+                    thumbnailUrl = null,
+                    name = "만가타",
+                    category = "유러피안음식",
+                    region = "삼청",
+                    rating = "4.8"
+                ),
+            ),
+        )
     }
 }
