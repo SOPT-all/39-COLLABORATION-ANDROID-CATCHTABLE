@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +42,12 @@ private val red = Color(0xFFFF1300)
 private val blue = Color(0xFF0082F9)
 private val yellow = Color(0xFFFEC300)
 private val pink = Color(0xFFFADCD9)
+private val pinkGradient = Brush.verticalGradient(
+    colors = listOf(Color(0xFFFF537D), Color(0xFFF9604F)),
+)
+private val pinkGradientLight = Brush.verticalGradient(
+    colors = listOf(Color(0xFFFFFFFF), Color(0xFFFEF6F8)),
+)
 
 //Subway Color
 private val line9 = Color(0xFFBDB092)
@@ -72,39 +79,12 @@ data class CatchTableColors(
     val blue: Color,
     val yellow: Color,
     val pink: Color,
+    val pinkGradient: Brush,
+    val pinkGradientLight: Brush,
     val line9: Color,
     val lineSBD: Color
-){
-    val allColors: List<Color>
-        get() = listOf(
-            orangeBase,
-            orangeBaseAlpha05,
-            orangeBaseClicked,
-            black,
-            blackAlpha70,
-            blackAlpha40,
-            blackAlpha04,
-            gray900,
-            gray800,
-            gray700,
-            gray600,
-            gray500,
-            gray400,
-            gray300,
-            gray200,
-            gray100,
-            gray50,
-            coolGray600,
-            coolGray200,
-            white,
-            red,
-            blue,
-            yellow,
-            pink,
-            line9,
-            lineSBD
-        )
-}
+)
+
 val defaultCatchTableColors = CatchTableColors(
     orangeBase = orangeBase,
     orangeBaseAlpha05 = orangeBaseAlpha05,
@@ -130,6 +110,8 @@ val defaultCatchTableColors = CatchTableColors(
     blue = blue,
     yellow = yellow,
     pink = pink,
+    pinkGradient = pinkGradient,
+    pinkGradientLight = pinkGradientLight,
     line9 = line9,
     lineSBD = lineSBD
 )
@@ -138,17 +120,56 @@ val defaultCatchTableColors = CatchTableColors(
 @Composable
 private fun CatchTableColorPreview() {
     CatchTableTheme {
-        val colors = CatchTableTheme.colors.allColors
+        val colors = CatchTableTheme.colors
+        val solidColors = listOf(
+            colors.orangeBase,
+            colors.orangeBaseAlpha05,
+            colors.orangeBaseClicked,
+            colors.black,
+            colors.blackAlpha70,
+            colors.blackAlpha40,
+            colors.blackAlpha04,
+            colors.gray900,
+            colors.gray800,
+            colors.gray700,
+            colors.gray600,
+            colors.gray500,
+            colors.gray400,
+            colors.gray300,
+            colors.gray200,
+            colors.gray100,
+            colors.gray50,
+            colors.coolGray600,
+            colors.coolGray200,
+            colors.white,
+            colors.red,
+            colors.blue,
+            colors.yellow,
+            colors.pink,
+            colors.line9,
+            colors.lineSBD,
+        )
+        val gradients = listOf(
+            colors.pinkGradient,
+            colors.pinkGradientLight,
+        )
 
         FlowRow(
             modifier = Modifier.padding(16.dp),
             maxItemsInEachRow = 6,
         ) {
-            colors.forEach { c ->
+            solidColors.forEach { color ->
                 Box(
                     modifier = Modifier
                         .size(50.dp)
-                        .background(c)
+                        .background(color)
+                )
+            }
+            gradients.forEach { brush ->
+                Box(
+                    modifier = Modifier
+                        .size(50.dp)
+                        .background(brush)
                 )
             }
         }
