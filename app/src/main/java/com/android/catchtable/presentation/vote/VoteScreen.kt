@@ -13,40 +13,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.presentation.vote.model.VoteRole
+import com.android.catchtable.presentation.vote.model.VoteStatus
 import com.android.catchtable.presentation.common.component.CatchTableButton
-import com.android.catchtable.presentation.common.model.CatchTableButtonType
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.component.VoteHeader
 import com.android.catchtable.presentation.vote.component.VoteInfo
-import com.android.catchtable.presentation.vote.model.DummyVoteStores.dummyVoteStores
-import com.android.catchtable.presentation.vote.model.VoteRole
-import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
 
 @Composable
 fun VoteScreen(
-    modifier: Modifier = Modifier,
-    onBackClick: () -> Unit = {},
-    onShareClick: () -> Unit = {},
-    onVoteEndClick: () -> Unit = {},
-    //status: VoteStatus = VoteStatus.IN_PROGRESS,
-    //role: VoteRole = VoteRole.HOST,
-    //viewModel: VoteViewModel = viewModel()
+    uiState: VoteUiState,
+    onBackClick: () -> Unit,
+    onShareClick: () -> Unit,
+    onVoteEndClick: () -> Unit,
+    onStoreClick: (Long) -> Unit,
+    onBottomButtonClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
-
-
+    val candidates = uiState.voteDetail?.candidates.orEmpty()
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .background(CatchTableTheme.colors.white)
-    ){
+    ) {
         VoteHeader(
-            onBackClick = { onBackClick() },
+            onBackClick = onBackClick,
             modifier = Modifier.fillMaxWidth(),
-            status = VoteStatus.IN_PROGRESS,
-            role = VoteRole.HOST,
-            onShareClick = { onShareClick() },
-            onVoteEndClick = { onVoteEndClick() }
+            status = uiState.status,
+            role = uiState.role,
+            onShareClick = onShareClick,
+            onVoteEndClick = onVoteEndClick
         )
 
         Row(
@@ -55,44 +53,123 @@ fun VoteScreen(
                 .weight(1f)
                 .verticalScroll(rememberScrollState())
                 .padding(top = 20.dp, bottom = 24.dp, start = 12.dp, end = 12.dp)
-        ){
-            VoteInfo(
-                store = dummyVoteStores[0],
-                isSelected = false,
-                modifier = Modifier.weight(1f),
-                backgroundColor = CatchTableTheme.colors.white,
-                strokeColor = CatchTableTheme.colors.gray200
-            )
+        ) {
+            candidates.take(MAX_VISIBLE_STORE_COUNT).forEachIndexed { index, candidate ->
+                val store = candidate.store
+                val backgroundColor = if (index % 2 == 0) {
+                    CatchTableTheme.colors.white
+                } else {
+                    CatchTableTheme.colors.gray100
+                }
+                val strokeColor = if (index % 2 == 0) {
+                    CatchTableTheme.colors.gray200
+                } else {
+                    CatchTableTheme.colors.white
+                }
 
-            VoteInfo(
-                store = dummyVoteStores[1],
-                isSelected = true,
-                modifier = Modifier.weight(1f),
-                backgroundColor = CatchTableTheme.colors.gray100,
-                strokeColor = CatchTableTheme.colors.white
-            )
+                VoteInfo(
+                    store = store,
+                    isSelected = store.storeId == uiState.selectedStoreId,
+                    backgroundColor = backgroundColor,
+                    strokeColor = strokeColor,
+                    modifier = Modifier.weight(1f),
+                    onCheckClick = { onStoreClick(store.storeId) }
+                )
+            }
         }
 
         CatchTableButton(
-            text = "text",
-            type = CatchTableButtonType.PRIMARY_ENABLED,
-            onClick = {  },
+            text = uiState.buttonText,
+            type = uiState.buttonType,
+            onClick = onBottomButtonClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .background(CatchTableTheme.colors.white)
-                .padding(vertical = 12.dp ,horizontal = 20.dp)
+                .padding(vertical = 12.dp, horizontal = 20.dp)
         )
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Preview(showBackground = true, showSystemUi = true, name = "CREATE")
 @Composable
-fun VoteScreenPreview() {
+private fun VoteCreateHostPreview() = VoteScreenPreviewContent(
+    status = VoteStatus.CREATE,
+    role = VoteRole.HOST
+)
+
+@Preview(showBackground = true, showSystemUi = true, name = "OPEN · HOST")
+@Composable
+private fun VoteOpenHostPreview() = VoteScreenPreviewContent(
+    status = VoteStatus.OPEN,
+    role = VoteRole.HOST
+)
+
+@Preview(showBackground = true, showSystemUi = true, name = "OPEN · GUEST · 미투표")
+@Composable
+private fun VoteOpenGuestPreview() = VoteScreenPreviewContent(
+    status = VoteStatus.OPEN,
+    role = VoteRole.GUEST
+)
+
+@Preview(showBackground = true, showSystemUi = true, name = "OPEN · GUEST · 투표완료")
+@Composable
+private fun VoteOpenGuestVotedPreview() = VoteScreenPreviewContent(
+    status = VoteStatus.OPEN,
+    role = VoteRole.GUEST,
+    hasVoted = true
+)
+
+@Composable
+private fun VoteScreenPreviewContent(
+    status: VoteStatus,
+    role: VoteRole,
+    hasVoted: Boolean = false
+) {
     CatchTableTheme {
-        Scaffold { innerPadding ->
+        Scaffold {innerPadding ->
             VoteScreen(
-                modifier = Modifier.padding(innerPadding)
+                uiState = previewVoteState(status, role, hasVoted),
+                onBackClick = {},
+                onShareClick = {},
+                onVoteEndClick = {},
+                onStoreClick = {},
+                onBottomButtonClick = {},
+                modifier = Modifier.fillMaxSize().padding(innerPadding)
             )
         }
     }
 }
+
+private fun previewVoteState(
+    status: VoteStatus,
+    role: VoteRole,
+    hasVoted: Boolean
+): VoteUiState {
+    val voteDetail = createDummyVoteDetailResponseModel()
+    val firstCandidate = voteDetail.candidates.first()
+    val selectedStoreId = when {
+        hasVoted -> firstCandidate.store.storeId
+        status == VoteStatus.OPEN && role == VoteRole.GUEST ->
+            firstCandidate.store.storeId
+        else -> null
+    }
+    val viewer = voteDetail.viewer.copy(
+        isHost = role == VoteRole.HOST,
+        hasVoted = hasVoted,
+        selectedCandidateId = if (hasVoted) {
+            firstCandidate.candidateId
+        } else {
+            null
+        }
+    )
+
+    return VoteUiState(
+        voteDetail = voteDetail.copy(
+            status = status,
+            viewer = viewer
+        ),
+        selectedStoreId = selectedStoreId
+    )
+}
+
+private const val MAX_VISIBLE_STORE_COUNT = 2
