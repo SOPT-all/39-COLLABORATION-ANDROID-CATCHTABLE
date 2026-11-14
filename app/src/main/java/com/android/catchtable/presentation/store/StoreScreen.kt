@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -403,12 +402,10 @@ fun StoreScreen(
             }
 
             item {
-                Spacer(
-                    modifier = Modifier
-                        .padding(top = 12.dp)
-                        .fillMaxWidth()
-                        .height(8.dp)
-                        .background(color = CatchTableTheme.colors.gray100),
+                HorizontalDivider(
+                    modifier = Modifier.padding(top = 12.dp),
+                    thickness = 8.dp,
+                    color = CatchTableTheme.colors.gray100,
                 )
             }
 
@@ -470,14 +467,11 @@ fun StoreScreen(
                     }
                 }
             }
-
             item {
-                Spacer(
-                    modifier = Modifier
-                        .padding(top = 22.dp)
-                        .fillMaxWidth()
-                        .height(8.dp)
-                        .background(color = CatchTableTheme.colors.gray100),
+                HorizontalDivider(
+                    modifier = Modifier.padding(top = 22.dp),
+                    thickness = 8.dp,
+                    color = CatchTableTheme.colors.gray100,
                 )
             }
 
