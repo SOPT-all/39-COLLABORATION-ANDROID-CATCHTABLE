@@ -35,6 +35,7 @@ fun StoreCardPhoto(
     imgUrl: String?,
     userCount: Int,
     modifier: Modifier = Modifier,
+    isUserCountVisible: Boolean = true,
 ) {
     val hazeState = rememberHazeState()
     val tintColor = CatchTableTheme.colors.blackAlpha40
@@ -61,33 +62,35 @@ fun StoreCardPhoto(
 
             )
 
-        Row(
-            modifier = Modifier
-                .align(Alignment.BottomStart)
-                .padding(start = 8.dp, bottom = 11.dp)
-                .clip(shape = CircleShape)
-                .hazeBlur(
-                    input = HazeInput.Sources(hazeState),
-                    style = blurStyle,
+        if (isUserCountVisible) {
+            Row(
+                modifier = Modifier
+                    .align(Alignment.BottomStart)
+                    .padding(start = 8.dp, bottom = 11.dp)
+                    .clip(shape = CircleShape)
+                    .hazeBlur(
+                        input = HazeInput.Sources(hazeState),
+                        style = blurStyle,
+                    )
+
+                    .padding(start = 7.dp, end = 11.dp, top = 6.dp, bottom = 6.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_store_fire),
+                    contentDescription = null,
+                    tint = Color.Unspecified,
+                    modifier = Modifier
+                        .size(20.dp)
                 )
 
-                .padding(start = 7.dp, end = 11.dp, top = 6.dp, bottom = 6.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(2.dp),
-        ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_store_fire),
-                contentDescription = null,
-                tint = Color.Unspecified,
-                modifier = Modifier
-                    .size(20.dp)
-            )
-
-            Text(
-                text = userCount.toString() + "명이 보고 있어요!",
-                color = CatchTableTheme.colors.white,
-                style = CatchTableTheme.typography.bodySB12,
-            )
+                Text(
+                    text = userCount.toString() + "명이 보고 있어요!",
+                    color = CatchTableTheme.colors.white,
+                    style = CatchTableTheme.typography.bodySB12,
+                )
+            }
         }
     }
 }

@@ -1,0 +1,672 @@
+package com.android.catchtable.presentation.store
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.android.catchtable.R
+import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
+import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
+import com.android.catchtable.presentation.common.component.CatchTableDot
+import com.android.catchtable.presentation.common.extension.elevation1
+import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.store.component.StoreBottomBar
+import com.android.catchtable.presentation.store.component.StoreCardMenu
+import com.android.catchtable.presentation.store.component.StoreCardPhoto
+import com.android.catchtable.presentation.store.component.StoreChip
+import com.android.catchtable.presentation.store.component.StoreHeader
+import com.android.catchtable.presentation.store.component.StoreTabBar
+import com.android.catchtable.presentation.store.component.StoreTogetherTag
+import com.android.catchtable.presentation.store.model.StoreMenuUiModel
+import com.android.catchtable.presentation.store.model.StoreTab
+
+@Composable
+fun StoreScreen(
+    photoUrls: List<String>,
+    userCount: Int,
+    storeName: String,
+    rating: String,
+    reviewCount: String,
+    area: String,
+    category: String,
+    description: String,
+    subwayInfo: String,
+    priceRange: String,
+    openStatus: String,
+    lastOrderTime: String,
+    phoneNumber: String,
+    maxReservationCount: Int,
+    facilities: List<String>,
+    photoTabCount: String,
+    reviewTabCount: String,
+    menus: List<StoreMenuUiModel>,
+    summaryTitle: String,
+    summaries: List<String>,
+    onBackClick: () -> Unit,
+    onTogetherClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    var selectedTab by remember { mutableStateOf(StoreTab.HOME) }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = CatchTableTheme.colors.white),
+    ) {
+        StoreHeader(
+            onBackClick = onBackClick,
+            modifier = Modifier.fillMaxWidth(),
+        )
+
+        LazyColumn(
+            modifier = Modifier.weight(1f),
+        ) {
+            item {
+                LazyRow(
+                    modifier = Modifier.padding(top = 12.dp),
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    itemsIndexed(photoUrls) { index, photoUrl ->
+                        StoreCardPhoto(
+                            imgUrl = photoUrl,
+                            userCount = userCount,
+                            modifier = Modifier.width(294.dp),
+                            isUserCountVisible = index == 0,
+                        )
+                    }
+                }
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = storeName,
+                        style = CatchTableTheme.typography.displayB20,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    StoreTogetherTag(
+                        onClick = onTogetherClick,
+                    )
+                }
+            }
+
+            item {
+                Column(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 4.dp),
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_star),
+                            contentDescription = null,
+                            modifier = Modifier.size(20.dp),
+                            tint = Color.Unspecified,
+                        )
+
+                        Text(
+                            text = rating,
+                            modifier = Modifier.padding(start = 2.dp),
+                            style = CatchTableTheme.typography.h3SB14,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        CatchTableDot(
+                            modifier = Modifier.padding(start = 2.dp, end = 4.dp),
+                            size = 4.dp,
+                            color = CatchTableTheme.colors.gray300,
+                        )
+
+                        Text(
+                            text = "리뷰 ${reviewCount}개",
+                            style = CatchTableTheme.typography.h3SB14,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
+                            contentDescription = null,
+                            modifier = Modifier.size(12.dp),
+                            tint = CatchTableTheme.colors.gray900,
+                        )
+
+                        CatchTableDot(
+                            modifier = Modifier.padding(horizontal = 6.dp),
+                            size = 4.dp,
+                            color = CatchTableTheme.colors.gray300,
+                        )
+
+                        Text(
+                            text = area,
+                            style = CatchTableTheme.typography.bodyMD12,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        CatchTableDot(
+                            modifier = Modifier.padding(horizontal = 6.dp),
+                            size = 4.dp,
+                            color = CatchTableTheme.colors.gray300,
+                        )
+
+                        Text(
+                            text = category,
+                            style = CatchTableTheme.typography.bodyMD12,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+                    }
+
+                    Text(
+                        text = description,
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray500,
+                    )
+                }
+            }
+
+            item {
+                HorizontalDivider(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp),
+                    thickness = 1.dp,
+                    color = CatchTableTheme.colors.gray200,
+                )
+            }
+
+            item {
+                Row(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_location),
+                        contentDescription = null,
+                        modifier = Modifier.size(14.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    CatchTableBadgeLine9(
+                        modifier = Modifier.padding(start = 8.dp),
+                    )
+
+                    CatchTableBadgeSBD(
+                        modifier = Modifier.padding(start = 4.dp),
+                    )
+
+                    Text(
+                        text = subwayInfo,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_map),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .size(20.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Text(
+                        text = "위치",
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.blue,
+                    )
+                }
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 6.dp)
+                        .height(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_price),
+                        contentDescription = null,
+                        modifier = Modifier.size(14.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Text(
+                        text = "1인당",
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Text(
+                        text = priceRange,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_question),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = 4.dp)
+                            .size(12.dp),
+                        tint = CatchTableTheme.colors.gray400,
+                    )
+                }
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .padding(start = 20.dp, end = 20.dp, top = 6.dp)
+                        .height(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_time),
+                        contentDescription = null,
+                        modifier = Modifier.size(14.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Text(
+                        text = openStatus,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    CatchTableDot(
+                        modifier = Modifier.padding(start = 2.dp, end = 4.dp),
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Text(
+                        text = lastOrderTime,
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
+                        contentDescription = null,
+                        modifier = Modifier.size(20.dp),
+                        tint = Color.Unspecified,
+                    )
+                }
+            }
+
+            item {
+                Row(
+                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 6.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_phone),
+                        contentDescription = null,
+                        modifier = Modifier.size(14.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Text(
+                        text = phoneNumber,
+                        modifier = Modifier.padding(start = 8.dp),
+                        style = CatchTableTheme.typography.bodyMD12,
+                        color = CatchTableTheme.colors.gray900,
+                    )
+
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_info),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .padding(start = 2.dp)
+                            .size(14.dp),
+                        tint = Color.Unspecified,
+                    )
+
+                    Text(
+                        text = "복사",
+                        modifier = Modifier.padding(start = 6.dp),
+                        style = CatchTableTheme.typography.captionMD10,
+                        color = CatchTableTheme.colors.orangeBase,
+                    )
+                }
+            }
+
+            item {
+                LazyRow(
+                    modifier = Modifier.padding(top = 16.dp),
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    item {
+                        StoreChip(
+                            text = "최대 ${maxReservationCount}명 예약",
+                            isIconVisible = true,
+                        )
+                    }
+
+                    items(facilities) { facility ->
+                        StoreChip(
+                            text = facility,
+                        )
+                    }
+                }
+            }
+
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 12.dp)
+                        .fillMaxWidth()
+                        .height(8.dp)
+                        .background(color = CatchTableTheme.colors.gray100),
+                )
+            }
+
+            stickyHeader {
+                StoreTabBar(
+                    selectedTab = selectedTab,
+                    onTabClick = { tab -> selectedTab = tab },
+                    photoCount = photoTabCount,
+                    reviewCount = reviewTabCount,
+                )
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 20.dp, end = 20.dp, top = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Text(
+                            text = "메뉴",
+                            style = CatchTableTheme.typography.h1MD16,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .size(12.dp),
+                            tint = CatchTableTheme.colors.gray400,
+                        )
+                    }
+
+                    Text(
+                        text = "메뉴판 이미지",
+                        style = CatchTableTheme.typography.h3RG14,
+                        color = CatchTableTheme.colors.orangeBase,
+                    )
+                }
+            }
+
+            item {
+                LazyRow(
+                    modifier = Modifier.padding(top = 14.dp),
+                    contentPadding = PaddingValues(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp),
+                ) {
+                    items(menus) { menu ->
+                        StoreCardMenu(
+                            menu = menu,
+                            modifier = Modifier.width(136.dp),
+                        )
+                    }
+                }
+            }
+
+            item {
+                Spacer(
+                    modifier = Modifier
+                        .padding(top = 22.dp)
+                        .fillMaxWidth()
+                        .height(8.dp)
+                        .background(color = CatchTableTheme.colors.gray100),
+                )
+            }
+
+            item {
+                val summaryShape = RoundedCornerShape(14.dp)
+
+                Column(
+                    modifier = Modifier.padding(
+                        start = 20.dp,
+                        end = 20.dp,
+                        top = 28.dp,
+                        bottom = 20.dp
+                    ),
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_sparkle),
+                            contentDescription = null,
+                            modifier = Modifier.size(16.dp),
+                            tint = Color.Unspecified,
+                        )
+
+                        Text(
+                            text = buildAnnotatedString {
+                                withStyle(
+                                    style = SpanStyle(
+                                        brush = CatchTableTheme.colors.pinkGradient
+                                    ),
+                                ) {
+                                    append("AI")
+                                }
+                                append("가 요약했어요")
+                            },
+                            modifier = Modifier.padding(start = 4.dp),
+                            style = CatchTableTheme.typography.displayB18,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Icon(
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_help),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .padding(start = 4.dp)
+                                .size(16.dp),
+                            tint = Color.Unspecified,
+                        )
+                    }
+
+                    Column(
+                        modifier = Modifier
+                            .padding(top = 24.dp)
+                            .fillMaxWidth()
+                            .elevation1(shape = summaryShape)
+                            .background(
+                                brush = CatchTableTheme.colors.pinkGradientLight,
+                                shape = summaryShape,
+                            )
+                            .border(
+                                width = 1.dp,
+                                brush = CatchTableTheme.colors.pinkGradient,
+                                shape = summaryShape,
+                            )
+                            .padding(horizontal = 20.dp, vertical = 18.dp),
+                    ) {
+                        Text(
+                            text = summaryTitle,
+                            style = CatchTableTheme.typography.bodySB12,
+                            color = CatchTableTheme.colors.gray900,
+                        )
+
+                        Column(
+                            modifier = Modifier.padding(top = 13.dp),
+                            verticalArrangement = Arrangement.spacedBy(6.dp),
+                        ) {
+                            summaries.forEach { summary ->
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                ) {
+                                    Box(
+                                        modifier = Modifier.size(24.dp),
+                                        contentAlignment = Alignment.Center,
+                                    ) {
+                                        Icon(
+                                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(4.dp),
+                                            tint = Color.Unspecified,
+                                        )
+                                    }
+
+                                    Text(
+                                        text = summary,
+                                        modifier = Modifier.weight(1f),
+                                        style = CatchTableTheme.typography.bodyMD12,
+                                        color = CatchTableTheme.colors.gray500,
+                                    )
+                                }
+                            }
+                        }
+
+                        Row(
+                            modifier = Modifier
+                                .align(Alignment.End)
+                                .padding(top = 23.dp),
+                            horizontalArrangement = Arrangement.spacedBy(10.dp),
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_like),
+                                contentDescription = null,
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.Unspecified,
+                            )
+
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dislike),
+                                contentDescription = null,
+                                modifier = Modifier.size(28.dp),
+                                tint = Color.Unspecified,
+                            )
+                        }
+                    }
+                }
+            }
+        }
+
+        StoreBottomBar(
+            onButtonClick = {},
+            enabled = false,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StoreScreenPreview() {
+    CatchTableTheme {
+        StoreScreen(
+            photoUrls = listOf("", ""),
+            userCount = 75,
+            storeName = "하이디라오 서초점",
+            rating = "4.7",
+            reviewCount = "6,139",
+            area = "강남",
+            category = "중식",
+            description = "중국 본토의 맛 그대로, 차원이 다른 No.1 훠궈",
+            subwayInfo = "신논현역에서 221m",
+            priceRange = "3-5만원",
+            openStatus = "영업 중",
+            lastOrderTime = "새벽 05:00 라스트오더",
+            phoneNumber = "0507-1350-8260",
+            maxReservationCount = 8,
+            facilities = listOf("주차", "발렛", "콜키지", "장애인 편의시설", "단체", "무선 인터넷"),
+            photoTabCount = "9,999+",
+            reviewTabCount = "4,122",
+            menus = listOf(
+                StoreMenuUiModel(
+                    id = 1,
+                    storeId = 1,
+                    imgUrl = null,
+                    name = "루로우판",
+                    price = "4,500",
+                    isPriceFrom = false,
+                ),
+                StoreMenuUiModel(
+                    id = 2,
+                    storeId = 1,
+                    imgUrl = null,
+                    name = "탄탄면",
+                    price = "5,000",
+                    isPriceFrom = false,
+                ),
+                StoreMenuUiModel(
+                    id = 3,
+                    storeId = 1,
+                    imgUrl = null,
+                    name = "돼지고기튀김",
+                    price = "5,900",
+                    isPriceFrom = false,
+                ),
+            ),
+            summaryTitle = "중국 본토의 맛 그대로, 차원이 다른 훠궈 전문점",
+            summaries = listOf(
+                "다양한 재료를 취향대로 골라 먹을 수 있는 중국 본토 스타일의 훠궈 전문점이에요.",
+                "소스바에서 입맛에 맞게 소스를 만들어 즐길 수 있으며, 달콤한 케이크도 맛볼 수 있어요.",
+                "자리에서 화려한 면 퍼포먼스를 감상할 수 있고, 생일이나 기념일에 방문하기 좋은 곳이에요.",
+            ),
+            onBackClick = {},
+            onTogetherClick = {},
+        )
+    }
+}
