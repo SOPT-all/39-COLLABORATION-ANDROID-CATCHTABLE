@@ -1,13 +1,16 @@
-package com.android.catchtable.presentation.vote.component
+package com.android.catchtable.presentation.vote.component.bottomsheet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
@@ -41,8 +44,6 @@ fun VoteBottomSheet(
         dragHandle = null,
     ) {
         VoteBottomSheetDragHandle(modifier = Modifier.align(Alignment.CenterHorizontally))
-
-        content()
     }
 }
 
