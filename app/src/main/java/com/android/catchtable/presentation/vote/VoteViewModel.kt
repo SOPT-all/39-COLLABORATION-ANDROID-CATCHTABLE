@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -66,18 +67,15 @@ class VoteViewModel @Inject constructor(
         }
     }
 
-    fun updateVoteStatusToClosed() {
-        _uiState.update { state ->
-            if (state.status != VoteStatus.OPEN || state.role != VoteRole.HOST) {
-                return@update state
-            }
-            state.copy(voteDetail = state.voteDetail?.copy(status = VoteStatus.CLOSED))
+    fun patchVoteClose() {
+        _uiState.update { it.copy(isLoading = true, errorMessage = null) }
+        viewModelScope.launch {
+            //투표 종료 API 연동
         }
     }
 
     private fun VoteUiState.canSelectStore(): Boolean = when (status) {
         VoteStatus.CREATE -> role == VoteRole.HOST
         VoteStatus.OPEN -> role == VoteRole.GUEST && !hasVoted
-        VoteStatus.CLOSED -> false
     }
 }

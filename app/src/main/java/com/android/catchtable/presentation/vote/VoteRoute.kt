@@ -17,16 +17,13 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.catchtable.presentation.vote.component.VoteBottomSheet
 import com.android.catchtable.presentation.vote.model.VoteButtonType
-import com.android.catchtable.presentation.vote.model.VoteRole
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VoteRoute(
     voteId: Long,
-    role: VoteRole,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    onShareClick: () -> Unit = {},
     onVoteEndClick: () -> Unit = {},
     viewModel: VoteViewModel = hiltViewModel()
 ) {
@@ -34,18 +31,21 @@ fun VoteRoute(
     val context = LocalContext.current
     var isVoteBottomSheetVisible by remember { mutableStateOf(false) }
 
-    LaunchedEffect(voteId, role) {
-        viewModel.initVote(voteId, role)
+
+    LaunchedEffect(voteId, uiState.role) {
+        viewModel.initVote(voteId, uiState.role)
     }
 
     VoteScreen(
         uiState = uiState,
         modifier = modifier,
         onBackClick = onBackClick,
-        onShareClick = onShareClick,
+        onShareClick = {
+
+        },
         onVoteEndClick = {
-            viewModel.updateVoteStatusToClosed()
-            onVoteEndClick()
+            viewModel.patchVoteClose()
+            onVoteEndClick() //홈 화면ㅇㄹ 이동
         },
         onStoreClick = viewModel::updateVoteSelection,
         onBottomButtonClick = {

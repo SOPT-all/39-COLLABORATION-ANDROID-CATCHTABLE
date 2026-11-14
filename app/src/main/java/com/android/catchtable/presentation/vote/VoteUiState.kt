@@ -12,7 +12,7 @@ data class VoteUiState(
     val errorMessage: String? = null
 ) {
     val status: VoteStatus
-        get() = voteDetail?.status ?: VoteStatus.CLOSED
+        get() = voteDetail?.status ?: VoteStatus.CREATE
 
     val role: VoteRole
         get() = if (voteDetail?.viewer?.isHost == true) VoteRole.HOST else VoteRole.GUEST
@@ -33,14 +33,13 @@ data class VoteUiState(
             else -> CatchTableButtonType.PRIMARY_DISABLED_PRIMARY
         }
 
-    val buttonText: String
+    val buttonText: String?
         get() = when (status) {
-            VoteStatus.CREATE -> "${voteDetail?.candidates?.size ?: 0}개 · 투표 링크 공유하기"
+            VoteStatus.CREATE -> "${voteDetail?.candidates?.size ?: 0}개 · 투표 생성하기"
             VoteStatus.OPEN -> when {
-                hasVoted && role == VoteRole.GUEST -> "투표 완료"
+                hasVoted && role == VoteRole.GUEST -> null
                 !hasVoted && selectedStoreId != null -> "매장 선택 완료"
                 else -> "가고 싶은 매장을 투표해주세요"
             }
-            VoteStatus.CLOSED -> "투표가 종료되었어요"
         }
 }

@@ -77,7 +77,6 @@ fun VoteScreen(
                     isSelected = when (uiState.status) {
                         VoteStatus.CREATE -> true
                         VoteStatus.OPEN -> store.storeId == uiState.selectedStoreId
-                        VoteStatus.CLOSED -> store.storeId == uiState.selectedStoreId
                     },
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
@@ -87,15 +86,17 @@ fun VoteScreen(
             }
         }
 
-        CatchTableButton(
-            text = uiState.buttonText,
-            type = uiState.buttonType,
-            onClick = onBottomButtonClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(CatchTableTheme.colors.white)
-                .padding(vertical = 12.dp, horizontal = 20.dp)
-        )
+        uiState.buttonText?.let { buttonText ->
+            CatchTableButton(
+                text = buttonText,
+                type = uiState.buttonType,
+                onClick = onBottomButtonClick,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(CatchTableTheme.colors.white)
+                    .padding(vertical = 12.dp, horizontal = 20.dp)
+            )
+        }
     }
 }
 
