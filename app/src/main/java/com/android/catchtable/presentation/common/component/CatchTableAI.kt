@@ -10,7 +10,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -47,11 +46,9 @@ fun CatchTableAI(
             text = buildAnnotatedString {
                 withStyle(
                     style = SpanStyle(
-                        brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFFFF537D), Color(0xFFF9604F)),
+                        brush = CatchTableTheme.colors.pinkGradient
                         ),
-                    ),
-                ) {
+                    ){
                     append("AI")
                 }
                 append(title)
