@@ -16,20 +16,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
 import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.vote.model.VoteMenuUiModel
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
+import java.text.NumberFormat
+import java.util.Locale
 
 @Composable
 fun VoteCardMenu(
-    menu: VoteMenuUiModel,
+    menu: VoteRepresentativeMenuResponseModel,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
         CatchTableAsyncImage(
-            imgUrl = menu.menuImageUrl,
+            imgUrl = menu.imageUrl,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
@@ -50,7 +53,7 @@ fun VoteCardMenu(
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = "${menu.price}원${if (menu.isPriceFrom) " ~" else ""}",
+            text = "${NumberFormat.getNumberInstance(Locale.KOREA).format(menu.price)}원${if (menu.isPriceFrom) " ~" else ""}",
             color = CatchTableTheme.colors.gray500,
             style = CatchTableTheme.typography.bodyB12,
             maxLines = 1,
@@ -63,24 +66,9 @@ fun VoteCardMenu(
 @Preview(showBackground = true, widthDp = 375)
 @Composable
 private fun VoteCardMenuPreview() {
-    val dummyMenus = listOf(
-        VoteMenuUiModel(
-            menuId = 4,
-            storeId = 1,
-            menuImageUrl = null,
-            name = "우유마라훠궈",
-            price = "9,000",
-            isPriceFrom = true,
-        ),
-        VoteMenuUiModel(
-            menuId = 5,
-            storeId = 2,
-            menuImageUrl = null,
-            name = "2인 SET",
-            price = "55,000",
-            isPriceFrom = false,
-        ),
-    )
+    val dummyMenus = createDummyVoteDetailResponseModel().candidates
+        .flatMap { it.store.representativeMenus }
+        .take(2)
 
     CatchTableTheme {
         Row(

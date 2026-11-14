@@ -27,11 +27,14 @@ import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.vote.model.VoteStoreUiModel
+import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
+import java.text.NumberFormat
+import java.util.Locale
 
 @Composable
 fun VoteCardStore(
-    store: VoteStoreUiModel,
+    store: VoteDetailStoreResponseModel,
     onCheckClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     isSelected: Boolean? = null,
@@ -43,7 +46,7 @@ fun VoteCardStore(
             modifier = Modifier.fillMaxWidth()
         ) {
             CatchTableAsyncImage(
-                imgUrl = store.thumbnailUrl,
+                imgUrl = store.imageUrls.firstOrNull(),
                 modifier = Modifier
                     .fillMaxWidth()
                     .aspectRatio(1f)
@@ -62,7 +65,7 @@ fun VoteCardStore(
                         .align(Alignment.TopEnd)
                         .padding(top = 12.dp, end = 12.dp)
                         .size(24.dp)
-                        .noRippleClickable { onCheckClick(store.id) },
+                        .noRippleClickable { onCheckClick(store.storeId) },
                 )
             }
 
@@ -97,7 +100,7 @@ fun VoteCardStore(
             Spacer(modifier = Modifier.width(4.dp))
 
             Text(
-                text = store.rating,
+                text = store.rating.toString(),
                 color = CatchTableTheme.colors.black,
                 style = CatchTableTheme.typography.bodyB12,
             )
@@ -105,7 +108,7 @@ fun VoteCardStore(
             Spacer(modifier = Modifier.width(2.dp))
 
             Text(
-                text = "(" + store.reviewCount + ")",
+                text = "(${NumberFormat.getNumberInstance(Locale.KOREA).format(store.reviewCount)})",
                 color = CatchTableTheme.colors.gray500,
                 style = CatchTableTheme.typography.bodyB12,
             )
@@ -116,13 +119,7 @@ fun VoteCardStore(
 @Preview(showBackground = true)
 @Composable
 private fun VoteCardStorePreview() {
-    val dummyStore = VoteStoreUiModel(
-        id = 1,
-        thumbnailUrl = null,
-        name = "하이디라오 서초점",
-        rating = "4.7",
-        reviewCount = "6,204",
-    )
+    val dummyStore = createDummyVoteDetailResponseModel().candidates.first().store
 
     CatchTableTheme {
         Row(

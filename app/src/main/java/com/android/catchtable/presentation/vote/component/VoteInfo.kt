@@ -19,20 +19,19 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.component.CatchTableAI
 import com.android.catchtable.presentation.common.component.CatchTableSubwayBadge
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.vote.model.DummyVoteStores.dummyVoteStore
-import com.android.catchtable.presentation.vote.model.VoteMenuUiModel
-import com.android.catchtable.presentation.vote.model.VoteStoreModel
-import com.android.catchtable.presentation.vote.model.VoteStoreUiModel
+import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
 import com.android.catchtable.presentation.vote.model.VoteTagType
 
 //고민! 이걸 component로 부르기엔 좀 그렇다. 네이밍을 screen으로 바꿔야할지 말지
 @Composable
 fun VoteInfo(
-    store: VoteStoreModel,
+    store: VoteDetailStoreResponseModel,
     isSelected: Boolean,
-    modifier: Modifier = Modifier,
     backgroundColor: Color,
-    strokeColor: Color
+    strokeColor: Color,
+    modifier: Modifier = Modifier,
+    onCheckClick: (Long) -> Unit = {}
 ){
     Column(
         modifier = modifier
@@ -46,17 +45,8 @@ fun VoteInfo(
             verticalArrangement = Arrangement.spacedBy(48.dp)
         ){
             VoteCardStore(
-                store = VoteStoreUiModel(
-                    id = store.storeId,
-                    thumbnailUrl = store.imageUrls,
-                    name = store.name,
-                    rating = store.rating.toString(),
-                    reviewCount = store.reviewCount
-                ),
-                onCheckClick = {
-
-
-                },
+                store = store,
+                onCheckClick = { onCheckClick(store.storeId) },
                 isSelected = isSelected,
             )
             VoteTag(
@@ -96,7 +86,7 @@ fun VoteInfo(
                     style = CatchTableTheme.typography.h3B14
                 )
             },
-            content = { VoteInfoSectionContent(text = store.aiSummary?.title.orEmpty()) }
+            content = { VoteInfoSectionContent(text = store.aiSummary.lines.joinToString("\n")) }
         )
 
         VoteInfoDivider(strokeColor)
@@ -119,29 +109,15 @@ fun VoteInfo(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
-                        store.representativeMenu.getOrNull(0)?.let { menu ->
+                        store.representativeMenus.getOrNull(0)?.let { menu ->
                             VoteCardMenu(
-                                menu = VoteMenuUiModel(
-                                    menuId = menu.menuId,
-                                    storeId = store.storeId,
-                                    menuImageUrl = menu.imageUrl,
-                                    name = menu.name,
-                                    price = menu.price.toString(),
-                                    isPriceFrom = menu.isPriceFrom
-                                ),
+                                menu = menu,
                                 modifier = Modifier.weight(1f)
                             )
                         }
-                        store.representativeMenu.getOrNull(1)?.let { menu ->
+                        store.representativeMenus.getOrNull(1)?.let { menu ->
                             VoteCardMenu(
-                                menu = VoteMenuUiModel(
-                                    menuId = menu.menuId,
-                                    storeId = store.storeId,
-                                    menuImageUrl = menu.imageUrl,
-                                    name = menu.name,
-                                    price = menu.price.toString(),
-                                    isPriceFrom = menu.isPriceFrom
-                                ),
+                                menu = menu,
                                 modifier = Modifier.weight(1f)
                             )
                         }
@@ -162,7 +138,7 @@ fun VoteInfo(
             title = { VoteInfoSectionTitle(text = "주류 및 콜키지") },
             content = {
                 VoteInfoSectionContent(
-                    text = store.amenities.content,
+                    text = store.amenities.joinToString("\n") { it.content },
                     minLines = 3
                 )
             }
@@ -188,7 +164,7 @@ private fun VoteInfoDivider(
 private fun VoteInfoPreview(){
     CatchTableTheme {
         VoteInfo(
-            store = dummyVoteStore,
+            store = createDummyVoteDetailResponseModel().candidates.first().store,
             isSelected = true,
             modifier = Modifier.width(300.dp),
             backgroundColor = CatchTableTheme.colors.white,
