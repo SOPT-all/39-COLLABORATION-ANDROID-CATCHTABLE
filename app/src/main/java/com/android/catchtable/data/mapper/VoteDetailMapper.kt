@@ -15,7 +15,7 @@ import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
 import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
 import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
 import com.android.catchtable.domain.model.vote.VoteStationResponseModel
-import com.android.catchtable.domain.model.vote.VoteStatus
+import com.android.catchtable.presentation.vote.model.VoteStatus
 import com.android.catchtable.domain.model.vote.VoteViewerResponseModel
 import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
 

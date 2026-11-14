@@ -10,7 +10,7 @@ import com.android.catchtable.data.remote.dto.vote.response.VoteRepresentativeMe
 import com.android.catchtable.data.remote.dto.vote.response.VoteStationResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteViewerResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteVoterResponseDto
-import com.android.catchtable.domain.model.vote.VoteRole
+import com.android.catchtable.presentation.vote.model.VoteRole
 
 internal object DummyVoteDetailResponse {
     fun create(voteId: Long, role: VoteRole) = BaseResponse(
