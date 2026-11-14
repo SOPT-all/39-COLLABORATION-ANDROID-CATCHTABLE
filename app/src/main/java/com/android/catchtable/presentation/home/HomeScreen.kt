@@ -1,12 +1,13 @@
 package com.android.catchtable.presentation.home
 
-import android.R.attr.top
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
@@ -22,6 +24,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -34,17 +37,21 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
+import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.component.HomeBadge
+import com.android.catchtable.presentation.home.component.HomeCardSimilar
 import com.android.catchtable.presentation.home.component.HomeCategoryItem
 import com.android.catchtable.presentation.home.component.HomeHeader
 import com.android.catchtable.presentation.home.component.HomeSearchTextField
 import com.android.catchtable.presentation.home.component.HomeTabBar
-import com.android.catchtable.presentation.home.component.HomeVoteStatusButton
 import com.android.catchtable.presentation.home.model.HomeBadgeType
 import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
 import com.android.catchtable.presentation.home.model.HomeLocationUiModel
+import com.android.catchtable.presentation.home.model.HomeRecentUiModel
 import com.android.catchtable.presentation.home.model.HomeTab
+import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
 import com.android.catchtable.presentation.main.component.BottomNavigationBar
 import com.android.catchtable.presentation.main.model.BottomNavItem
 
@@ -52,7 +59,8 @@ import com.android.catchtable.presentation.main.model.BottomNavItem
 fun HomeScreen(modifier: Modifier = Modifier) {
     val listState = rememberLazyListState()
     var selectedTab by remember { mutableStateOf(HomeTab.RANKING) }
-
+    var selectedRecentId by remember { mutableIntStateOf(1) }
+    
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -71,7 +79,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
             HomeSearchTextField(
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .padding(start=49.dp, end=78.dp)
+                    .padding(start = 49.dp, end = 78.dp)
                     .fillMaxWidth()
             )
         }
@@ -159,11 +167,33 @@ fun HomeScreen(modifier: Modifier = Modifier) {
                             actionText = "최근 본 매장",
                         )
                         Column(verticalArrangement = Arrangement.spacedBy(20.dp)) {
-                            LazyRow() {}
-                            LazyRow() {}
+                            LazyRow(
+                                contentPadding = PaddingValues(horizontal = 20.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                items(recentList) { recent ->
+                                    HomeRecentItem(
+                                        recent = recent,
+                                        isSelected = recent.id == selectedRecentId,
+                                        onClick = { selectedRecentId = recent.id },
+                                    )
+                                }
+                            }
+                            LazyRow(
+                                contentPadding = PaddingValues(horizontal = 20.dp),
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                items(similarList) { store ->
+                                    HomeCardSimilar(
+                                        store = store,
+                                        onCardClick = {},
+                                        modifier = Modifier.width(128.dp),
+                                    )
+                                }
+                            }
                         }
-                    }
 
+                    }
                 }
             }
         }
@@ -251,7 +281,7 @@ private fun HomeSectionHeader(
                 color = CatchTableTheme.colors.gray800,
             )
             Icon(
-                painter = painterResource(id = R.drawable.ic_vote_next),
+                painter = painterResource(id = R.drawable.ic_home_next),
                 contentDescription = null,
                 modifier = Modifier.size(12.dp),
                 tint = CatchTableTheme.colors.gray800,
@@ -296,6 +326,49 @@ private fun HomeLocationItem(
     }
 }
 
+@Composable
+private fun HomeRecentItem(
+    recent: HomeRecentUiModel,
+    isSelected: Boolean,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        modifier = modifier
+            .width(222.dp)
+            .border(
+                width = 1.dp,
+                color = if (isSelected) CatchTableTheme.colors.gray500 else CatchTableTheme.colors.gray100,
+                shape = RoundedCornerShape(12.dp)
+
+            )
+            .noRippleClickable(onClick = onClick)
+            .padding(horizontal = 9.dp, vertical = 8.dp),
+
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        CatchTableAsyncImage(
+            imgUrl = recent.thumbnailUrl,
+            modifier = Modifier
+                .size(48.dp)
+                .clip(RoundedCornerShape(8.dp))
+        )
+        Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            Text(
+                text = recent.name,
+                style = CatchTableTheme.typography.h3SB14,
+                color = CatchTableTheme.colors.gray900,
+            )
+            Text(
+                text = recent.region,
+                style = CatchTableTheme.typography.bodyRG12,
+                color = CatchTableTheme.colors.gray500,
+            )
+        }
+    }
+}
+
 private val rankingCategories = listOf(
     HomeCategoryUiModel(name = "줄서기예약", imageRes = R.drawable.img_category_01),
     HomeCategoryUiModel(name = "2026미쉐린", imageRes = R.drawable.img_category_02),
@@ -330,6 +403,43 @@ private val locationList = listOf(
     ),
     HomeLocationUiModel(
         name = "용산·삼각지", imageRes = R.drawable.img_area_yongsan, badge = HomeBadgeType.HOT
+    ),
+)
+
+private val recentList = listOf(
+    HomeRecentUiModel(
+        id = 1, thumbnailUrl = null, name = "하이디라오 서초점", region = "강남", category = "중식"
+    ),
+    HomeRecentUiModel(id = 2, thumbnailUrl = null, name = "와아", region = "성수", category = "와인"),
+)
+
+private val similarList = listOf(
+    SimilarStoreUiModel(
+        id = 1,
+        thumbnailUrl = null,
+        name = "하이디라오 서초점",
+        category = "중식",
+        region = "강남",
+        rating = "4.7",
+        reviewCount = "6,139"
+    ),
+    SimilarStoreUiModel(
+        id = 3,
+        thumbnailUrl = null,
+        name = "하이디라오 가산점",
+        category = "중식",
+        region = "가산디지털단지",
+        rating = "4.7",
+        reviewCount = "6,139"
+    ),
+    SimilarStoreUiModel(
+        id = 4,
+        thumbnailUrl = null,
+        name = "징관청훠궈 가로수길",
+        category = "중식",
+        region = "가로수길",
+        rating = "4.6",
+        reviewCount = "18"
     ),
 )
 
