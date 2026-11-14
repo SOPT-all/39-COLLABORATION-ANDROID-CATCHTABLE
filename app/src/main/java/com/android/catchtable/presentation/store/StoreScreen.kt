@@ -29,7 +29,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -485,7 +484,12 @@ fun StoreScreen(
                 val summaryShape = RoundedCornerShape(14.dp)
 
                 Column(
-                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 20.dp),
+                    modifier = Modifier.padding(
+                        start = 20.dp,
+                        end = 20.dp,
+                        top = 28.dp,
+                        bottom = 20.dp
+                    ),
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -501,9 +505,7 @@ fun StoreScreen(
                             text = buildAnnotatedString {
                                 withStyle(
                                     style = SpanStyle(
-                                        brush = Brush.verticalGradient(
-                                            colors = listOf(Color(0xFFFF537D), Color(0xFFF9604F)),
-                                        ),
+                                        brush = CatchTableTheme.colors.pinkGradient
                                     ),
                                 ) {
                                     append("AI")
@@ -531,14 +533,12 @@ fun StoreScreen(
                             .fillMaxWidth()
                             .elevation1(shape = summaryShape)
                             .background(
-                                brush = Brush.verticalGradient(
-                                    colors = listOf(CatchTableTheme.colors.white, Color(0xFFFEF6F8)),
-                                ),
+                                brush = CatchTableTheme.colors.pinkGradientLight,
                                 shape = summaryShape,
                             )
                             .border(
                                 width = 1.dp,
-                                color = Color(0xFFFF537D),
+                                brush = CatchTableTheme.colors.pinkGradient,
                                 shape = summaryShape,
                             )
                             .padding(horizontal = 20.dp, vertical = 18.dp),
