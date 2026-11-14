@@ -31,7 +31,13 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
     candidateId = FIRST_CANDIDATE_ID,
     displayOrder = 1,
     voteCount = 2,
-    voters = listOf(VoteVoterResponseModel(displayName = "테스트2")),
+    voters = listOf(
+        VoteVoterResponseModel(displayName = "김승혁"),
+        VoteVoterResponseModel(displayName = "카리나"),
+        VoteVoterResponseModel(displayName = "장원영"),
+        VoteVoterResponseModel(displayName = "설윤"),
+        VoteVoterResponseModel(displayName = "니노막시무스카이저소제")
+    ),
     store = VoteDetailStoreResponseModel(
         storeId = 1L,
         name = "하이디라오 서초점",

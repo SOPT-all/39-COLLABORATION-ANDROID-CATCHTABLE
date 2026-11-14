@@ -1,5 +1,6 @@
 package com.android.catchtable.presentation.vote.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -8,18 +9,26 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableAI
 import com.android.catchtable.presentation.common.component.CatchTableSubwayBadge
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
+import com.android.catchtable.presentation.vote.model.VoteStatus
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
 import com.android.catchtable.presentation.vote.model.VoteTagType
 
@@ -27,6 +36,8 @@ import com.android.catchtable.presentation.vote.model.VoteTagType
 @Composable
 fun VoteInfo(
     store: VoteDetailStoreResponseModel,
+    voters: List<VoteVoterResponseModel>,
+    status: VoteStatus,
     isSelected: Boolean,
     backgroundColor: Color,
     strokeColor: Color,
@@ -57,6 +68,11 @@ fun VoteInfo(
             )
         }
         VoteInfoDivider(strokeColor)
+
+        if (status != VoteStatus.CREATE) {
+            VoteInfoVoter(voters)
+            VoteInfoDivider(strokeColor)
+        }
 
         Column(
             modifier = Modifier.padding(horizontal = 12.dp),
@@ -163,8 +179,11 @@ private fun VoteInfoDivider(
 @Composable
 private fun VoteInfoPreview(){
     CatchTableTheme {
+        val candidate = createDummyVoteDetailResponseModel().candidates.first()
         VoteInfo(
-            store = createDummyVoteDetailResponseModel().candidates.first().store,
+            store = candidate.store,
+            voters = candidate.voters,
+            status = VoteStatus.OPEN,
             isSelected = true,
             modifier = Modifier.width(300.dp),
             backgroundColor = CatchTableTheme.colors.white,

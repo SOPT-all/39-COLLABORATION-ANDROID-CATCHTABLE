@@ -56,6 +56,7 @@ fun VoteScreen(
         ) {
             candidates.take(MAX_VISIBLE_STORE_COUNT).forEachIndexed { index, candidate ->
                 val store = candidate.store
+                val voters = candidate.voters
                 val backgroundColor = if (index % 2 == 0) {
                     CatchTableTheme.colors.white
                 } else {
@@ -69,6 +70,8 @@ fun VoteScreen(
 
                 VoteInfo(
                     store = store,
+                    voters = voters,
+                    status = uiState.status,
                     isSelected = store.storeId == uiState.selectedStoreId,
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
