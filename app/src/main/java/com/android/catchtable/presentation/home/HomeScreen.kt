@@ -16,6 +16,16 @@ import com.android.catchtable.presentation.main.component.BottomNavigationBar
 import com.android.catchtable.presentation.main.model.BottomNavItem
 
 @Composable
+fun HomeRoute(modifier: Modifier = Modifier) {
+    HomeScreen(
+        recentStores = emptyList(),
+        similarStores = emptyList(),
+        recommendStores = emptyList(),
+        modifier = modifier,
+    )
+}
+
+@Composable
 fun HomeScreen(
     recentStores: List<HomeRecentUiModel>,
     similarStores: List<SimilarStoreUiModel>,
