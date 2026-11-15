@@ -1,5 +1,5 @@
 package com.android.catchtable.presentation.home
 
-data class HomeUiSate(
+data class HomeUiState(
     val isVoting: Boolean=false,
 )
