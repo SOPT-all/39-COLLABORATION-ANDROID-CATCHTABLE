@@ -3,9 +3,11 @@ package com.android.catchtable.presentation.store.section
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -72,10 +74,11 @@ fun StoreAiSummarySection(
             )
         }
 
-        Column(
+        Box(
             modifier = Modifier
                 .padding(top = 24.dp)
                 .fillMaxWidth()
+                .height(226.dp)
                 .elevation1(shape = summaryShape)
                 .background(
                     brush = CatchTableTheme.colors.pinkGradientLight,
@@ -88,43 +91,43 @@ fun StoreAiSummarySection(
                 )
                 .padding(horizontal = 20.dp, vertical = 18.dp),
         ) {
-            Text(
-                text = summaryTitle,
-                style = CatchTableTheme.typography.bodySB12,
-                color = CatchTableTheme.colors.gray900,
-            )
+            Column {
+                Text(
+                    text = summaryTitle,
+                    style = CatchTableTheme.typography.bodySB12,
+                    color = CatchTableTheme.colors.gray900,
+                )
 
-            Column(
-                modifier = Modifier.padding(top = 13.dp),
-                verticalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                summaries.forEach { summary ->
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .padding(10.dp)
-                                .size(4.dp),
-                            tint = CatchTableTheme.colors.gray500,
-                        )
+                Column(
+                    modifier = Modifier.padding(top = 13.dp),
+                    verticalArrangement = Arrangement.spacedBy(6.dp),
+                ) {
+                    summaries.forEach { summary ->
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .padding(10.dp)
+                                    .size(4.dp),
+                                tint = CatchTableTheme.colors.gray500,
+                            )
 
-                        Text(
-                            text = summary,
-                            modifier = Modifier.weight(1f),
-                            style = CatchTableTheme.typography.bodyMD12,
-                            color = CatchTableTheme.colors.gray500,
-                        )
+                            Text(
+                                text = summary,
+                                modifier = Modifier.weight(1f),
+                                style = CatchTableTheme.typography.bodyMD12,
+                                color = CatchTableTheme.colors.gray500,
+                            )
+                        }
                     }
                 }
             }
 
             Row(
-                modifier = Modifier
-                    .align(Alignment.End)
-                    .padding(top = 23.dp),
+                modifier = Modifier.align(Alignment.BottomEnd),
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Icon(
