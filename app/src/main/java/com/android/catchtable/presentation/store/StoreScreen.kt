@@ -19,8 +19,11 @@ import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreBottomBar
 import com.android.catchtable.presentation.store.component.StoreHeader
 import com.android.catchtable.presentation.store.component.StoreTabBar
+import com.android.catchtable.presentation.store.model.StoreAiSummaryUiModel
 import com.android.catchtable.presentation.store.model.StoreMenuUiModel
+import com.android.catchtable.presentation.store.model.StoreStationUiModel
 import com.android.catchtable.presentation.store.model.StoreTab
+import com.android.catchtable.presentation.store.model.StoreUiModel
 import com.android.catchtable.presentation.store.section.StoreAiSummarySection
 import com.android.catchtable.presentation.store.section.StoreChipSection
 import com.android.catchtable.presentation.store.section.StoreInfoSection
@@ -30,26 +33,11 @@ import com.android.catchtable.presentation.store.section.StoreTitleSection
 
 @Composable
 fun StoreScreen(
-    photoUrls: List<String>,
+    store: StoreUiModel,
     userCount: Int,
-    storeName: String,
-    rating: String,
-    reviewCount: String,
-    area: String,
-    category: String,
-    description: String,
-    subwayInfo: String,
-    priceRange: String,
-    openStatus: String,
-    lastOrderTime: String,
-    phoneNumber: String,
     maxReservationCount: Int,
-    facilities: List<String>,
     photoTabCount: String,
     reviewTabCount: String,
-    menus: List<StoreMenuUiModel>,
-    summaryTitle: String,
-    summaries: List<String>,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
@@ -71,7 +59,7 @@ fun StoreScreen(
         ) {
             item {
                 StorePhotoSection(
-                    photoUrls = photoUrls,
+                    photoUrls = store.imageUrls,
                     userCount = userCount,
                     modifier = Modifier.padding(top = 12.dp),
                 )
@@ -79,12 +67,12 @@ fun StoreScreen(
 
             item {
                 StoreTitleSection(
-                    storeName = storeName,
-                    rating = rating,
-                    reviewCount = reviewCount,
-                    area = area,
-                    category = category,
-                    description = description,
+                    storeName = store.name,
+                    rating = store.rating,
+                    reviewCount = store.reviewCount,
+                    area = store.region,
+                    category = store.category,
+                    description = store.intro,
                     onTogetherClick = onTogetherClick,
                     modifier = Modifier
                         .fillMaxWidth()
@@ -102,11 +90,10 @@ fun StoreScreen(
 
             item {
                 StoreInfoSection(
-                    subwayInfo = subwayInfo,
-                    priceRange = priceRange,
-                    openStatus = openStatus,
-                    lastOrderTime = lastOrderTime,
-                    phoneNumber = phoneNumber,
+                    station = store.station,
+                    priceRange = store.priceRange,
+                    businessHours = store.businessHours,
+                    phone = store.phone,
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp),
                 )
             }
@@ -114,7 +101,7 @@ fun StoreScreen(
             item {
                 StoreChipSection(
                     maxReservationCount = maxReservationCount,
-                    facilities = facilities,
+                    facilities = store.amenities,
                     modifier = Modifier.padding(top = 16.dp),
                 )
             }
@@ -138,7 +125,7 @@ fun StoreScreen(
 
             item {
                 StoreMenuSection(
-                    menus = menus,
+                    menus = store.menus,
                     modifier = Modifier.padding(top = 20.dp),
                 )
             }
@@ -151,12 +138,14 @@ fun StoreScreen(
                 )
             }
 
-            item {
-                StoreAiSummarySection(
-                    summaryTitle = summaryTitle,
-                    summaries = summaries,
-                    modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 75.dp),
-                )
+            store.aiSummary?.let { aiSummary ->
+                item {
+                    StoreAiSummarySection(
+                        summaryTitle = aiSummary.title,
+                        summaries = aiSummary.lines,
+                        modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 75.dp),
+                    )
+                }
             }
         }
 
@@ -172,55 +161,63 @@ fun StoreScreen(
 private fun StoreScreenPreview() {
     CatchTableTheme {
         StoreScreen(
-            photoUrls = listOf("", ""),
+            store = StoreUiModel(
+                storeId = 1,
+                name = "하이디라오 서초점",
+                category = "중식",
+                region = "강남",
+                intro = "중국에서 시작해 전 세계에서 사랑받는 훠궈 브랜드, 하이디라오 훠궈",
+                rating = "4.7",
+                reviewCount = "6,204",
+                station = StoreStationUiModel(
+                    name = "신논현역",
+                    lines = listOf("9", "신분당"),
+                    distanceMeters = 221,
+                ),
+                priceRange = "점심 저녁 동일가 3 - 5만원",
+                businessHours = "매일 10:00 - 07:00",
+                phone = "0507-1350-8260",
+                imageUrls = listOf("", ""),
+                menus = listOf(
+                    StoreMenuUiModel(
+                        id = 1,
+                        storeId = 1,
+                        imgUrl = null,
+                        name = "소기름훠궈",
+                        price = "9,000",
+                        isPriceFrom = true,
+                    ),
+                    StoreMenuUiModel(
+                        id = 2,
+                        storeId = 1,
+                        imgUrl = null,
+                        name = "청유마라훠궈",
+                        price = "9,000",
+                        isPriceFrom = true,
+                    ),
+                    StoreMenuUiModel(
+                        id = 3,
+                        storeId = 1,
+                        imgUrl = null,
+                        name = "토마토탕훠궈",
+                        price = "9,000",
+                        isPriceFrom = true,
+                    ),
+                ),
+                aiSummary = StoreAiSummaryUiModel(
+                    title = "중국 본토의 맛 그대로, 차원이 다른 훠궈 전문점",
+                    lines = listOf(
+                        "다양한 재료를 취향대로 골라 먹을 수 있는 중국 본토 스타일의 훠궈 전문점이에요.",
+                        "소스바에서 입맛에 맞게 소스를 만들어 즐길 수 있으며, 달콤한 케이크도 맛볼 수 있어요.",
+                        "자리에서 화려한 면 퍼포먼스를 감상할 수 있고, 생일이나 기념일에 방문하기 좋은 곳이에요.",
+                    ),
+                ),
+                amenities = listOf("주류·콜키지"),
+            ),
             userCount = 75,
-            storeName = "하이디라오 서초점",
-            rating = "4.7",
-            reviewCount = "6,139",
-            area = "강남",
-            category = "중식",
-            description = "중국 본토의 맛 그대로, 차원이 다른 No.1 훠궈",
-            subwayInfo = "신논현역에서 221m",
-            priceRange = "3-5만원",
-            openStatus = "영업 중",
-            lastOrderTime = "새벽 05:00 라스트오더",
-            phoneNumber = "0507-1350-8260",
             maxReservationCount = 8,
-            facilities = listOf("주차", "발렛", "콜키지", "장애인 편의시설", "단체", "무선 인터넷"),
             photoTabCount = "9,999+",
             reviewTabCount = "4,122",
-            menus = listOf(
-                StoreMenuUiModel(
-                    id = 1,
-                    storeId = 1,
-                    imgUrl = null,
-                    name = "루로우판",
-                    price = "4,500",
-                    isPriceFrom = false,
-                ),
-                StoreMenuUiModel(
-                    id = 2,
-                    storeId = 1,
-                    imgUrl = null,
-                    name = "탄탄면",
-                    price = "5,000",
-                    isPriceFrom = false,
-                ),
-                StoreMenuUiModel(
-                    id = 3,
-                    storeId = 1,
-                    imgUrl = null,
-                    name = "돼지고기튀김",
-                    price = "5,900",
-                    isPriceFrom = false,
-                ),
-            ),
-            summaryTitle = "중국 본토의 맛 그대로, 차원이 다른 훠궈 전문점",
-            summaries = listOf(
-                "다양한 재료를 취향대로 골라 먹을 수 있는 중국 본토 스타일의 훠궈 전문점이에요.",
-                "소스바에서 입맛에 맞게 소스를 만들어 즐길 수 있으며, 달콤한 케이크도 맛볼 수 있어요.",
-                "자리에서 화려한 면 퍼포먼스를 감상할 수 있고, 생일이나 기념일에 방문하기 좋은 곳이에요.",
-            ),
             onBackClick = {},
             onTogetherClick = {},
         )

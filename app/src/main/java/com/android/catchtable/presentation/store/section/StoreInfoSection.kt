@@ -17,16 +17,15 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
 import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
-import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.store.model.StoreStationUiModel
 
 @Composable
 fun StoreInfoSection(
-    subwayInfo: String,
+    station: StoreStationUiModel,
     priceRange: String,
-    openStatus: String,
-    lastOrderTime: String,
-    phoneNumber: String,
+    businessHours: String,
+    phone: String,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -51,7 +50,7 @@ fun StoreInfoSection(
             )
 
             Text(
-                text = subwayInfo,
+                text = "${station.name}에서 ${station.distanceMeters}m",
                 modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
@@ -95,13 +94,6 @@ fun StoreInfoSection(
             )
 
             Text(
-                text = "1인당",
-                modifier = Modifier.padding(start = 8.dp),
-                style = CatchTableTheme.typography.bodyMD12,
-                color = CatchTableTheme.colors.gray900,
-            )
-
-            Text(
                 text = priceRange,
                 modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
@@ -132,19 +124,8 @@ fun StoreInfoSection(
             )
 
             Text(
-                text = openStatus,
+                text = businessHours,
                 modifier = Modifier.padding(start = 8.dp),
-                style = CatchTableTheme.typography.bodyMD12,
-                color = CatchTableTheme.colors.gray900,
-            )
-
-            CatchTableDot(
-                modifier = Modifier.padding(start = 2.dp, end = 4.dp),
-                color = CatchTableTheme.colors.gray900,
-            )
-
-            Text(
-                text = lastOrderTime,
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
             )
@@ -169,7 +150,7 @@ fun StoreInfoSection(
             )
 
             Text(
-                text = phoneNumber,
+                text = phone,
                 modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
