@@ -45,10 +45,9 @@ import com.android.catchtable.presentation.home.component.HomeBadge
 import com.android.catchtable.presentation.home.component.HomeCardRecommended
 import com.android.catchtable.presentation.home.component.HomeCardSimilar
 import com.android.catchtable.presentation.home.component.HomeCategoryItem
-import com.android.catchtable.presentation.home.component.HomeHeader
 import com.android.catchtable.presentation.home.component.HomeScrollUpButton
-import com.android.catchtable.presentation.home.component.HomeSearchTextField
 import com.android.catchtable.presentation.home.component.HomeTabBar
+import com.android.catchtable.presentation.home.component.HomeTopBar
 import com.android.catchtable.presentation.home.component.HomeVoteStatusButton
 import com.android.catchtable.presentation.home.model.HomeBadgeType
 import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
@@ -79,23 +78,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(CatchTableTheme.colors.white),
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 6.dp)
-        ) {
-            HomeHeader(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .align(Alignment.CenterStart)
-            )
-            HomeSearchTextField(
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .padding(start = 49.dp, end = 78.dp)
-                    .fillMaxWidth()
-            )
-        }
+        HomeTopBar()
 
         Box(modifier = Modifier.weight(1f)) {
             LazyColumn(
