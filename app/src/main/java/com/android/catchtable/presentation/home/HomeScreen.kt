@@ -4,8 +4,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.component.HomeContent
 import com.android.catchtable.presentation.home.component.HomeTopBar
@@ -16,12 +19,18 @@ import com.android.catchtable.presentation.main.component.BottomNavigationBar
 import com.android.catchtable.presentation.main.model.BottomNavItem
 
 @Composable
-fun HomeRoute(modifier: Modifier = Modifier) {
+fun HomeRoute(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
+) {
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
     HomeScreen(
         recentStores = emptyList(),
         similarStores = emptyList(),
         recommendStores = emptyList(),
         modifier = modifier,
+        isVoting = uiState.isVoting,
     )
 }
 
