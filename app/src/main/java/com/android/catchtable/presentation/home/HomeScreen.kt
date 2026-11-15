@@ -244,14 +244,14 @@ fun HomeScreen(
                         .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
                         .fillMaxWidth()
                 )
-
-                HomeScrollUpButton(
-                    onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
-                    modifier = Modifier
-                        .align(Alignment.BottomEnd)
-                        .padding(end = 20.dp, bottom = if (isVoting) 76.dp else 17.dp)
-                )
             }
+
+            HomeScrollUpButton(
+                onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 20.dp, bottom = if (isVoting) 76.dp else 17.dp)
+            )
         }
 
         BottomNavigationBar(
@@ -465,6 +465,17 @@ private val locationList = listOf(
 @Preview(showBackground = true)
 @Composable
 private fun HomeScreenPreview() {
+    HomeScreenPreviewContent(isVoting = false)
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun HomeScreenVotingPreview() {
+    HomeScreenPreviewContent(isVoting = true)
+}
+
+@Composable
+private fun HomeScreenPreviewContent(isVoting: Boolean) {
     CatchTableTheme {
         HomeScreen(
             recentStores = listOf(
@@ -522,6 +533,7 @@ private fun HomeScreenPreview() {
                     rating = "4.8"
                 ),
             ),
+            isVoting = isVoting,
         )
     }
 }
