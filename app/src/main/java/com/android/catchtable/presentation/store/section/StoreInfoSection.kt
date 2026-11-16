@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -43,7 +42,7 @@ fun StoreInfoSection(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_location),
                 contentDescription = null,
                 modifier = Modifier.size(14.dp),
-                tint = Color.Unspecified,
+                tint = CatchTableTheme.colors.gray900,
             )
 
             Spacer(modifier = Modifier.width(8.dp))
@@ -75,7 +74,7 @@ fun StoreInfoSection(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_map),
                 contentDescription = null,
                 modifier = Modifier.size(20.dp),
-                tint = Color.Unspecified,
+                tint = CatchTableTheme.colors.blue,
             )
 
             Spacer(modifier = Modifier.width(1.dp))
@@ -95,7 +94,7 @@ fun StoreInfoSection(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_price),
                 contentDescription = null,
                 modifier = Modifier.size(14.dp),
-                tint = Color.Unspecified,
+                tint = CatchTableTheme.colors.gray900,
             )
 
             Spacer(modifier = Modifier.width(8.dp))
@@ -123,7 +122,7 @@ fun StoreInfoSection(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_time),
                 contentDescription = null,
                 modifier = Modifier.size(14.dp),
-                tint = Color.Unspecified,
+                tint = CatchTableTheme.colors.gray900,
             )
 
             Spacer(modifier = Modifier.width(8.dp))
