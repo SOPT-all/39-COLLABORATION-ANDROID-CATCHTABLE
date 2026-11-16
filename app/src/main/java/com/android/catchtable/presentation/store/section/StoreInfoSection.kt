@@ -12,8 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
@@ -39,7 +38,7 @@ fun StoreInfoSection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_location),
+                painter = painterResource(id = R.drawable.ic_store_location),
                 contentDescription = null,
                 modifier = Modifier.size(14.dp),
                 tint = CatchTableTheme.colors.gray900,
@@ -62,7 +61,7 @@ fun StoreInfoSection(
             )
 
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
+                painter = painterResource(id = R.drawable.ic_store_dropdown),
                 contentDescription = null,
                 modifier = Modifier.size(20.dp),
                 tint = CatchTableTheme.colors.gray400,
@@ -71,7 +70,7 @@ fun StoreInfoSection(
             Spacer(modifier = Modifier.width(4.dp))
 
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_map),
+                painter = painterResource(id = R.drawable.ic_store_map),
                 contentDescription = null,
                 modifier = Modifier.size(20.dp),
                 tint = CatchTableTheme.colors.blue,
@@ -91,7 +90,7 @@ fun StoreInfoSection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_price),
+                painter = painterResource(id = R.drawable.ic_store_price),
                 contentDescription = null,
                 modifier = Modifier.size(14.dp),
                 tint = CatchTableTheme.colors.gray900,
@@ -108,7 +107,7 @@ fun StoreInfoSection(
             Spacer(modifier = Modifier.width(4.dp))
 
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_question),
+                painter = painterResource(id = R.drawable.ic_store_question),
                 contentDescription = null,
                 modifier = Modifier.size(12.dp),
                 tint = CatchTableTheme.colors.gray400,
@@ -119,7 +118,7 @@ fun StoreInfoSection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_time),
+                painter = painterResource(id = R.drawable.ic_store_time),
                 contentDescription = null,
                 modifier = Modifier.size(14.dp),
                 tint = CatchTableTheme.colors.gray900,
@@ -134,7 +133,7 @@ fun StoreInfoSection(
             )
 
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dropdown),
+                painter = painterResource(id = R.drawable.ic_store_dropdown),
                 contentDescription = null,
                 modifier = Modifier.size(20.dp),
                 tint = CatchTableTheme.colors.gray400,
@@ -146,7 +145,7 @@ fun StoreInfoSection(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_phone),
+                    painter = painterResource(id = R.drawable.ic_store_phone),
                     contentDescription = null,
                     modifier = Modifier.size(14.dp),
                     tint = CatchTableTheme.colors.gray900,
@@ -163,7 +162,7 @@ fun StoreInfoSection(
                 Spacer(modifier = Modifier.width(2.dp))
 
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_info),
+                    painter = painterResource(id = R.drawable.ic_store_info),
                     contentDescription = null,
                     modifier = Modifier.size(14.dp),
                     tint = CatchTableTheme.colors.gray400,

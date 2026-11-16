@@ -18,8 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
@@ -46,7 +45,7 @@ fun StoreAiSummarySection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_sparkle),
+                painter = painterResource(id = R.drawable.ic_store_sparkle),
                 contentDescription = null,
                 modifier = Modifier.size(16.dp),
                 tint = Color.Unspecified,
@@ -72,7 +71,7 @@ fun StoreAiSummarySection(
             Spacer(modifier = Modifier.width(2.dp))
 
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_help),
+                painter = painterResource(id = R.drawable.ic_store_help),
                 contentDescription = null,
                 modifier = Modifier.size(16.dp),
                 tint = CatchTableTheme.colors.gray900,
@@ -110,7 +109,7 @@ fun StoreAiSummarySection(
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_bullet),
+                            painter = painterResource(id = R.drawable.ic_store_bullet),
                             contentDescription = null,
                             modifier = Modifier
                                 .padding(10.dp)
@@ -135,14 +134,14 @@ fun StoreAiSummarySection(
                 horizontalArrangement = Arrangement.spacedBy(10.dp),
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_like),
+                    painter = painterResource(id = R.drawable.ic_store_like),
                     contentDescription = null,
                     modifier = Modifier.size(28.dp),
                     tint = Color.Unspecified,
                 )
 
                 Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_dislike),
+                    painter = painterResource(id = R.drawable.ic_store_dislike),
                     contentDescription = null,
                     modifier = Modifier.size(28.dp),
                     tint = Color.Unspecified,

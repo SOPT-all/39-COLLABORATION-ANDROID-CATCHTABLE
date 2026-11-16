@@ -11,8 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
@@ -58,7 +57,7 @@ fun StoreTitleSection(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_star),
+                painter = painterResource(id = R.drawable.ic_star),
                 contentDescription = null,
                 modifier = Modifier.size(20.dp),
                 tint = CatchTableTheme.colors.yellow,
@@ -84,7 +83,7 @@ fun StoreTitleSection(
             )
 
             Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
+                painter = painterResource(id = R.drawable.ic_store_next),
                 contentDescription = null,
                 modifier = Modifier.size(12.dp),
                 tint = CatchTableTheme.colors.gray900,
