@@ -36,7 +36,6 @@ fun HomeCategorySection(
         HomeTabBar(
             selectedTab = selectedTab,
             onTabClick = { selectedTab = it },
-            modifier = Modifier.padding(horizontal = 20.dp)
         )
         Row(
             modifier = Modifier
