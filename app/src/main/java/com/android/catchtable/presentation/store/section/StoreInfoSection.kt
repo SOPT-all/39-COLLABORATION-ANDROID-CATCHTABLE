@@ -29,7 +29,7 @@ fun StoreInfoSection(
     station: StoreStationUiModel,
     priceRange: String,
     businessHours: String,
-    phone: String,
+    phone: String?,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -142,40 +142,42 @@ fun StoreInfoSection(
             )
         }
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_phone),
-                contentDescription = null,
-                modifier = Modifier.size(14.dp),
-                tint = CatchTableTheme.colors.gray900,
-            )
+        if (phone != null) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_phone),
+                    contentDescription = null,
+                    modifier = Modifier.size(14.dp),
+                    tint = CatchTableTheme.colors.gray900,
+                )
 
-            Spacer(modifier = Modifier.width(8.dp))
+                Spacer(modifier = Modifier.width(8.dp))
 
-            Text(
-                text = phone,
-                style = CatchTableTheme.typography.bodyMD12,
-                color = CatchTableTheme.colors.gray900,
-            )
+                Text(
+                    text = phone,
+                    style = CatchTableTheme.typography.bodyMD12,
+                    color = CatchTableTheme.colors.gray900,
+                )
 
-            Spacer(modifier = Modifier.width(2.dp))
+                Spacer(modifier = Modifier.width(2.dp))
 
-            Icon(
-                imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_info),
-                contentDescription = null,
-                modifier = Modifier.size(14.dp),
-                tint = CatchTableTheme.colors.gray400,
-            )
+                Icon(
+                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_info),
+                    contentDescription = null,
+                    modifier = Modifier.size(14.dp),
+                    tint = CatchTableTheme.colors.gray400,
+                )
 
-            Spacer(modifier = Modifier.width(6.dp))
+                Spacer(modifier = Modifier.width(6.dp))
 
-            Text(
-                text = "복사",
-                style = CatchTableTheme.typography.captionMD10,
-                color = CatchTableTheme.colors.orangeBase,
-            )
+                Text(
+                    text = "복사",
+                    style = CatchTableTheme.typography.captionMD10,
+                    color = CatchTableTheme.colors.orangeBase,
+                )
+            }
         }
     }
 }

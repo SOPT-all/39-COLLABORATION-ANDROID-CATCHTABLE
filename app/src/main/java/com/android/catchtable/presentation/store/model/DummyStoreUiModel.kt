@@ -6,8 +6,8 @@ val dummyStoreUiModel = StoreUiModel(
     category = "중식",
     region = "강남",
     intro = "중국에서 시작해 전 세계에서 사랑받는 훠궈 브랜드, 하이디라오 훠궈",
-    rating = "4.7",
-    reviewCount = "6,204",
+    rating = 4.7,
+    reviewCount = 6204,
     station = StoreStationUiModel(
         name = "신논현역",
         lines = listOf("9", "신분당"),
@@ -51,5 +51,10 @@ val dummyStoreUiModel = StoreUiModel(
             "자리에서 화려한 면 퍼포먼스를 감상할 수 있고, 생일이나 기념일에 방문하기 좋은 곳이에요.",
         ),
     ),
-    amenities = listOf("주류·콜키지"),
+    amenities = listOf(
+        StoreAmenityUiModel(
+            category = "LIQUOR_CORKAGE",
+            content = "- 와인: 병당 5만원\n- 위스키: 병당 5만원\n- 사케: 병당 5만원",
+        ),
+    ),
 )

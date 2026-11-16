@@ -24,14 +24,16 @@ import com.android.catchtable.presentation.store.model.dummyStoreUiModel
 @Composable
 fun StoreTitleSection(
     storeName: String,
-    rating: String,
-    reviewCount: String,
+    rating: Double,
+    reviewCount: Int,
     area: String,
     category: String,
     description: String,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val formattedReviewCount = "%,d".format(reviewCount)
+
     Column(
         modifier = modifier,
     ) {
@@ -63,7 +65,7 @@ fun StoreTitleSection(
             )
 
             Text(
-                text = rating,
+                text = rating.toString(),
                 modifier = Modifier.padding(start = 2.dp),
                 style = CatchTableTheme.typography.h3SB14,
                 color = CatchTableTheme.colors.gray900,
@@ -76,7 +78,7 @@ fun StoreTitleSection(
             )
 
             Text(
-                text = "리뷰 ${reviewCount}개",
+                text = "리뷰 ${formattedReviewCount}개",
                 style = CatchTableTheme.typography.h3SB14,
                 color = CatchTableTheme.colors.gray900,
             )
