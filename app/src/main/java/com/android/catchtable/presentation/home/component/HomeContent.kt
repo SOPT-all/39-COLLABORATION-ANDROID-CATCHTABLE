@@ -56,8 +56,7 @@ fun HomeContent(
             }
 
             item {
-                HomeCategorySection(
-                )
+                HomeCategorySection()
             }
             item {
                 HorizontalDivider(
