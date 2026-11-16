@@ -6,10 +6,13 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -22,21 +25,24 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.extension.elevation1
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
+import com.android.catchtable.presentation.store.model.StoreAiSummaryUiModel
+import com.android.catchtable.presentation.store.model.dummyStoreUiModel
 
 @Composable
 fun StoreAiSummarySection(
-    summaryTitle: String,
-    summaries: List<String>,
+    aiSummary: StoreAiSummaryUiModel,
     modifier: Modifier = Modifier,
 ) {
     val summaryShape = RoundedCornerShape(14.dp)
 
     Column(
         modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(24.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -47,6 +53,8 @@ fun StoreAiSummarySection(
                 modifier = Modifier.size(16.dp),
                 tint = Color.Unspecified,
             )
+
+            Spacer(modifier = Modifier.width(4.dp))
 
             Text(
                 text = buildAnnotatedString {
@@ -59,26 +67,24 @@ fun StoreAiSummarySection(
                     }
                     append("가 요약했어요")
                 },
-                modifier = Modifier.padding(start = 4.dp),
                 style = CatchTableTheme.typography.displayB18,
                 color = CatchTableTheme.colors.gray900,
             )
 
+            Spacer(modifier = Modifier.width(2.dp))
+
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_help),
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 2.dp)
-                    .size(16.dp),
+                modifier = Modifier.size(16.dp),
                 tint = CatchTableTheme.colors.gray900,
             )
         }
 
         Box(
             modifier = Modifier
-                .padding(top = 24.dp)
                 .fillMaxWidth()
-                .height(226.dp)
+                .heightIn(min = 226.dp)
                 .elevation1(shape = summaryShape)
                 .background(
                     brush = CatchTableTheme.colors.pinkGradientLight,
@@ -93,16 +99,17 @@ fun StoreAiSummarySection(
         ) {
             Column {
                 Text(
-                    text = summaryTitle,
+                    text = aiSummary.title,
                     style = CatchTableTheme.typography.bodySB12,
                     color = CatchTableTheme.colors.gray900,
                 )
 
+                Spacer(modifier = Modifier.height(13.dp))
+
                 Column(
-                    modifier = Modifier.padding(top = 13.dp),
                     verticalArrangement = Arrangement.spacedBy(6.dp),
                 ) {
-                    summaries.forEach { summary ->
+                    aiSummary.lines.forEach { line ->
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
@@ -116,7 +123,7 @@ fun StoreAiSummarySection(
                             )
 
                             Text(
-                                text = summary,
+                                text = line,
                                 modifier = Modifier.weight(1f),
                                 style = CatchTableTheme.typography.bodyMD12,
                                 color = CatchTableTheme.colors.gray500,
@@ -144,6 +151,18 @@ fun StoreAiSummarySection(
                     tint = Color.Unspecified,
                 )
             }
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StoreAiSummarySectionPreview() {
+    CatchTableTheme {
+        dummyStoreUiModel.aiSummary?.let { aiSummary ->
+            StoreAiSummarySection(
+                aiSummary = aiSummary,
+            )
         }
     }
 }

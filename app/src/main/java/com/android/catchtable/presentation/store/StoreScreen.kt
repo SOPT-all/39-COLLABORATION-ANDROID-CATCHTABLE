@@ -139,8 +139,7 @@ fun StoreScreen(
             store.aiSummary?.let { aiSummary ->
                 item {
                     StoreAiSummarySection(
-                        summaryTitle = aiSummary.title,
-                        summaries = aiSummary.lines,
+                        aiSummary = aiSummary,
                         modifier = Modifier.padding(
                             start = 20.dp,
                             end = 20.dp,
@@ -151,12 +150,12 @@ fun StoreScreen(
                 }
             }
         }
-
-        StoreBottomBar(
-            onButtonClick = {},
-            enabled = false,
-        )
     }
+
+    StoreBottomBar(
+        onButtonClick = {},
+        enabled = false,
+    )
 }
 
 @Preview(showBackground = true)
