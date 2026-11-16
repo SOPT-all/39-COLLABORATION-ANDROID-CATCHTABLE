@@ -13,7 +13,7 @@ fun HomeTopBar(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(top = 6.dp)
     ) {
