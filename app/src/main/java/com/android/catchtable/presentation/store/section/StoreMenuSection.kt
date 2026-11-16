@@ -18,11 +18,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreCardMenu
 import com.android.catchtable.presentation.store.model.StoreMenuUiModel
+import com.android.catchtable.presentation.store.model.dummyStoreUiModel
 
 @Composable
 fun StoreMenuSection(
@@ -74,5 +76,15 @@ fun StoreMenuSection(
                 )
             }
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StoreMenuSectionPreview() {
+    CatchTableTheme {
+        StoreMenuSection(
+            menus = dummyStoreUiModel.menus,
+        )
     }
 }

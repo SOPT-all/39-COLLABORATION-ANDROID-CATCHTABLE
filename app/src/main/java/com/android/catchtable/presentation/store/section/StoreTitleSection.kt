@@ -13,11 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.component.StoreTogetherTag
+import com.android.catchtable.presentation.store.model.dummyStoreUiModel
 
 @Composable
 fun StoreTitleSection(
@@ -115,6 +117,22 @@ fun StoreTitleSection(
             text = description,
             style = CatchTableTheme.typography.bodyMD12,
             color = CatchTableTheme.colors.gray500,
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StoreTitleSectionPreview() {
+    CatchTableTheme {
+        StoreTitleSection(
+            storeName = dummyStoreUiModel.name,
+            rating = dummyStoreUiModel.rating,
+            reviewCount = dummyStoreUiModel.reviewCount,
+            area = dummyStoreUiModel.region,
+            category = dummyStoreUiModel.category,
+            description = dummyStoreUiModel.intro,
+            onTogetherClick = {},
         )
     }
 }

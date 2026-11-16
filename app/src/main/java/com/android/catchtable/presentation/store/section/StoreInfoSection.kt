@@ -13,12 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
 import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.model.StoreStationUiModel
+import com.android.catchtable.presentation.store.model.dummyStoreUiModel
 
 @Composable
 fun StoreInfoSection(
@@ -172,5 +174,18 @@ fun StoreInfoSection(
                 color = CatchTableTheme.colors.orangeBase,
             )
         }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun StoreInfoSectionPreview() {
+    CatchTableTheme {
+        StoreInfoSection(
+            station = dummyStoreUiModel.station,
+            priceRange = dummyStoreUiModel.priceRange,
+            businessHours = dummyStoreUiModel.businessHours,
+            phone = dummyStoreUiModel.phone,
+        )
     }
 }
