@@ -20,7 +20,6 @@ import com.android.catchtable.presentation.store.component.StoreBottomBar
 import com.android.catchtable.presentation.store.component.StoreHeader
 import com.android.catchtable.presentation.store.component.StoreTabBar
 import com.android.catchtable.presentation.store.model.StoreTab
-import com.android.catchtable.presentation.store.model.StoreUiModel
 import com.android.catchtable.presentation.store.model.dummyStoreUiModel
 import com.android.catchtable.presentation.store.section.StoreAiSummarySection
 import com.android.catchtable.presentation.store.section.StoreChipSection
@@ -31,15 +30,12 @@ import com.android.catchtable.presentation.store.section.StoreTitleSection
 
 @Composable
 fun StoreScreen(
-    store: StoreUiModel,
-    userCount: Int,
-    maxReservationCount: Int,
-    photoTabCount: String,
-    reviewTabCount: String,
+    uiState: StoreUiState,
     onBackClick: () -> Unit,
     onTogetherClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val store = uiState.store ?: return
     var selectedTab by remember { mutableStateOf(StoreTab.HOME) }
 
     Column(
@@ -58,7 +54,7 @@ fun StoreScreen(
             item {
                 StorePhotoSection(
                     photoUrls = store.imageUrls,
-                    userCount = userCount,
+                    userCount = uiState.userCount,
                     modifier = Modifier.padding(top = 12.dp),
                 )
             }
@@ -98,7 +94,7 @@ fun StoreScreen(
 
             item {
                 StoreChipSection(
-                    maxReservationCount = maxReservationCount,
+                    maxReservationCount = uiState.maxReservationCount,
                     facilities = store.amenities,
                     modifier = Modifier.padding(top = 20.dp),
                 )
@@ -116,8 +112,8 @@ fun StoreScreen(
                 StoreTabBar(
                     selectedTab = selectedTab,
                     onTabClick = { tab -> selectedTab = tab },
-                    photoCount = photoTabCount,
-                    reviewCount = reviewTabCount,
+                    photoCount = uiState.photoTabCount,
+                    reviewCount = uiState.reviewTabCount,
                 )
             }
 
@@ -140,22 +136,17 @@ fun StoreScreen(
                 item {
                     StoreAiSummarySection(
                         aiSummary = aiSummary,
-                        modifier = Modifier.padding(
-                            start = 20.dp,
-                            end = 20.dp,
-                            top = 28.dp,
-                            bottom = 75.dp
-                        ),
+                        modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 75.dp),
                     )
                 }
             }
         }
-    }
 
-    StoreBottomBar(
-        onButtonClick = {},
-        enabled = false,
-    )
+        StoreBottomBar(
+            onButtonClick = {},
+            enabled = false,
+        )
+    }
 }
 
 @Preview(showBackground = true)
@@ -163,11 +154,13 @@ fun StoreScreen(
 private fun StoreScreenPreview() {
     CatchTableTheme {
         StoreScreen(
-            store = dummyStoreUiModel,
-            userCount = 75,
-            maxReservationCount = 8,
-            photoTabCount = "9,999+",
-            reviewTabCount = "4,122",
+            uiState = StoreUiState(
+                store = dummyStoreUiModel,
+                userCount = 75,
+                maxReservationCount = 8,
+                photoTabCount = "9,999+",
+                reviewTabCount = "4,122",
+            ),
             onBackClick = {},
             onTogetherClick = {},
         )

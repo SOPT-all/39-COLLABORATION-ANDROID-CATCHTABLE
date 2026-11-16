@@ -21,16 +21,10 @@ fun StoreRoute(
         viewModel.getStoreDetail(storeId)
     }
 
-    uiState.store?.let { store ->
-        StoreScreen(
-            store = store,
-            userCount = uiState.userCount,
-            maxReservationCount = uiState.maxReservationCount,
-            photoTabCount = uiState.photoTabCount,
-            reviewTabCount = uiState.reviewTabCount,
-            onBackClick = onBackClick,
-            onTogetherClick = onTogetherClick,
-            modifier = modifier,
-        )
-    }
+    StoreScreen(
+        uiState = uiState,
+        onBackClick = onBackClick,
+        onTogetherClick = onTogetherClick,
+        modifier = modifier,
+    )
 }
