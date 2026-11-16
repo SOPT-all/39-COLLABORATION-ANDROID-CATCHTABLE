@@ -1,10 +1,12 @@
 package com.android.catchtable.presentation.store.section
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +34,7 @@ fun StoreInfoSection(
 ) {
     Column(
         modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
@@ -43,17 +46,18 @@ fun StoreInfoSection(
                 tint = Color.Unspecified,
             )
 
-            CatchTableBadgeLine9(
-                modifier = Modifier.padding(start = 8.dp),
-            )
+            Spacer(modifier = Modifier.width(8.dp))
 
-            CatchTableBadgeSBD(
-                modifier = Modifier.padding(start = 4.dp),
-            )
+            CatchTableBadgeLine9()
+
+            Spacer(modifier = Modifier.width(4.dp))
+
+            CatchTableBadgeSBD()
+
+            Spacer(modifier = Modifier.width(8.dp))
 
             Text(
                 text = "${station.name}에서 ${station.distanceMeters}m",
-                modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
             )
@@ -65,27 +69,26 @@ fun StoreInfoSection(
                 tint = CatchTableTheme.colors.gray400,
             )
 
+            Spacer(modifier = Modifier.width(4.dp))
+
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_map),
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 4.dp)
-                    .size(20.dp),
+                modifier = Modifier.size(20.dp),
                 tint = Color.Unspecified,
             )
 
+            Spacer(modifier = Modifier.width(1.dp))
+
             Text(
                 text = "위치",
-                modifier = Modifier.padding(start = 1.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.blue,
             )
         }
 
         Row(
-            modifier = Modifier
-                .padding(top = 6.dp)
-                .height(20.dp),
+            modifier = Modifier.height(20.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
@@ -95,27 +98,25 @@ fun StoreInfoSection(
                 tint = Color.Unspecified,
             )
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             Text(
                 text = priceRange,
-                modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
             )
 
+            Spacer(modifier = Modifier.width(4.dp))
+
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_question),
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 4.dp)
-                    .size(12.dp),
+                modifier = Modifier.size(12.dp),
                 tint = CatchTableTheme.colors.gray400,
             )
         }
 
         Row(
-            modifier = Modifier
-                .padding(top = 6.dp)
-                .height(20.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
@@ -125,9 +126,10 @@ fun StoreInfoSection(
                 tint = Color.Unspecified,
             )
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             Text(
                 text = businessHours,
-                modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
             )
@@ -141,7 +143,6 @@ fun StoreInfoSection(
         }
 
         Row(
-            modifier = Modifier.padding(top = 6.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Icon(
@@ -151,25 +152,27 @@ fun StoreInfoSection(
                 tint = CatchTableTheme.colors.gray900,
             )
 
+            Spacer(modifier = Modifier.width(8.dp))
+
             Text(
                 text = phone,
-                modifier = Modifier.padding(start = 8.dp),
                 style = CatchTableTheme.typography.bodyMD12,
                 color = CatchTableTheme.colors.gray900,
             )
 
+            Spacer(modifier = Modifier.width(2.dp))
+
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_info),
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 2.dp)
-                    .size(14.dp),
+                modifier = Modifier.size(14.dp),
                 tint = CatchTableTheme.colors.gray400,
             )
 
+            Spacer(modifier = Modifier.width(6.dp))
+
             Text(
                 text = "복사",
-                modifier = Modifier.padding(start = 6.dp),
                 style = CatchTableTheme.typography.captionMD10,
                 color = CatchTableTheme.colors.orangeBase,
             )

@@ -33,6 +33,7 @@ fun StoreMenuSection(
 ) {
     Column(
         modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(14.dp),
     ) {
         Row(
             modifier = Modifier
@@ -46,12 +47,12 @@ fun StoreMenuSection(
                 color = CatchTableTheme.colors.gray900,
             )
 
+            Spacer(modifier = Modifier.width(4.dp))
+
             Icon(
                 imageVector = ImageVector.vectorResource(id = R.drawable.ic_store_next),
                 contentDescription = null,
-                modifier = Modifier
-                    .padding(start = 4.dp)
-                    .size(12.dp),
+                modifier = Modifier.size(12.dp),
                 tint = CatchTableTheme.colors.gray400,
             )
 
@@ -65,7 +66,6 @@ fun StoreMenuSection(
         }
 
         LazyRow(
-            modifier = Modifier.padding(top = 14.dp),
             contentPadding = PaddingValues(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
