@@ -1,16 +1,15 @@
 package com.android.catchtable.presentation.store.section
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -65,11 +64,13 @@ fun StoreMenuSection(
             )
         }
 
-        LazyRow(
-            contentPadding = PaddingValues(horizontal = 20.dp),
+        Row(
+            modifier = Modifier
+                .horizontalScroll(rememberScrollState())
+                .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            items(menus) { menu ->
+            menus.forEach { menu ->
                 StoreCardMenu(
                     menu = menu,
                     modifier = Modifier.width(136.dp),
