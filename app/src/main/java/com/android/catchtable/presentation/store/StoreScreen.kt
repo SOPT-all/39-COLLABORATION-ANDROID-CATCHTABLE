@@ -100,7 +100,7 @@ fun StoreScreen(
                 StoreChipSection(
                     maxReservationCount = maxReservationCount,
                     facilities = store.amenities,
-                    modifier = Modifier.padding(top = 16.dp),
+                    modifier = Modifier.padding(top = 20.dp),
                 )
             }
 
@@ -112,7 +112,7 @@ fun StoreScreen(
                 )
             }
 
-            stickyHeader {
+            item {
                 StoreTabBar(
                     selectedTab = selectedTab,
                     onTabClick = { tab -> selectedTab = tab },
