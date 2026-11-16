@@ -58,7 +58,7 @@ fun VoteCompleteScreen(
         Spacer(modifier = Modifier.height(28.dp))
 
         Text(
-            text = "가고싶은 매장\n 투표 완료",
+            text = "가고싶은 매장\n투표 완료",
             style = CatchTableTheme.typography.displayB20,
             color = CatchTableTheme.colors.gray800,
             textAlign = TextAlign.Center,
@@ -67,7 +67,7 @@ fun VoteCompleteScreen(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "아래 버튼을 눌러\n 투표 현황을 확인해보세요",
+            text = "아래 버튼을 눌러\n투표 현황을 확인해보세요",
             style = CatchTableTheme.typography.bodySB12,
             color = CatchTableTheme.colors.gray500,
             textAlign = TextAlign.Center,
