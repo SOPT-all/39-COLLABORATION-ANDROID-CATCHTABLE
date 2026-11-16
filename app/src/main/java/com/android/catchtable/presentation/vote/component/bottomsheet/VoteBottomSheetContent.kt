@@ -39,7 +39,6 @@ fun VoteBottomSheetContent(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 20.dp, end = 20.dp, top = 28.dp, bottom = 58.dp)
-
     ) {
         Text(
             text = "어떤 방식으로 투표할까요?",
