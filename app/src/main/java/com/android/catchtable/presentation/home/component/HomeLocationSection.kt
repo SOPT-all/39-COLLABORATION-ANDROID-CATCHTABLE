@@ -27,10 +27,10 @@ import com.android.catchtable.presentation.home.model.HomeLocationUiModel
 
 @Composable
 fun HomeLocationSection(
-
+    modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(CatchTableTheme.colors.gray200)
             .background(
