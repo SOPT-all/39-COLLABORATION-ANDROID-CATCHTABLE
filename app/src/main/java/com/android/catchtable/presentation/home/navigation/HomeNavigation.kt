@@ -9,6 +9,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.android.catchtable.presentation.home.HomeRoute
 import com.android.catchtable.presentation.navigation.MainTabRoute.Home
+import com.android.catchtable.presentation.store.navigation.navigateToStore
+import com.android.catchtable.presentation.vote.navigation.navigateToVote
 
 fun NavController.navigateToHome(
     navOptions: NavOptions? = null,
@@ -22,6 +24,8 @@ fun NavGraphBuilder.homeNavGraph(
 ) {
     composable<Home> {
         HomeRoute(
+            navigateToStore = { storeId -> navController.navigateToStore(storeId.toLong()) },
+            navigateToVote = { navController.navigateToVote() },
             modifier = Modifier.padding(innerPadding),
         )
     }
