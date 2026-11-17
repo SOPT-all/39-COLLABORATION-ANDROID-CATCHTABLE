@@ -3,23 +3,35 @@ package com.android.catchtable.presentation.vote
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.vote.model.VoteRole
-import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.presentation.vote.model.VoteButtonType
+import com.android.catchtable.presentation.vote.component.VoteBottomSheet
 import com.android.catchtable.presentation.common.component.CatchTableButton
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.component.VoteHeader
 import com.android.catchtable.presentation.vote.component.VoteInfo
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
+
+private const val MAX_VISIBLE_STORE_COUNT = 2
 
 @Composable
 fun VoteScreen(
@@ -28,9 +40,10 @@ fun VoteScreen(
     onShareClick: () -> Unit,
     onVoteEndClick: () -> Unit,
     onStoreClick: (Long) -> Unit,
-    onBottomButtonClick: () -> Unit,
+    onCreateVoteClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isVoteBottomSheetVisible by rememberSaveable { mutableStateOf(false) }
     val candidates = uiState.voteDetail?.candidates.orEmpty()
     val voterRowCount = candidates.maxOfOrNull { it.voters.size } ?: 0
 
@@ -76,12 +89,12 @@ fun VoteScreen(
                     status = uiState.status,
                     isSelected = when (uiState.status) {
                         VoteStatus.CREATE -> true
-                        VoteStatus.OPEN -> store.storeId == uiState.selectedStoreId
+                        VoteStatus.OPEN -> candidate.candidateId == uiState.selectedCandidateId
                     },
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
                     modifier = Modifier.weight(1f),
-                    onCheckClick = { onStoreClick(store.storeId) }
+                    onCheckClick = { onStoreClick(candidate.candidateId) }
                 )
             }
         }
@@ -90,7 +103,13 @@ fun VoteScreen(
             CatchTableButton(
                 text = buttonText,
                 type = uiState.buttonType,
-                onClick = onBottomButtonClick,
+                onClick = {
+                    when (uiState.voteButtonType) {
+                        VoteButtonType.CREATE_VOTE -> onCreateVoteClick()
+                        VoteButtonType.CONFIRM_VOTE -> isVoteBottomSheetVisible = true
+                        null -> Unit
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(CatchTableTheme.colors.white)
@@ -98,56 +117,41 @@ fun VoteScreen(
             )
         }
     }
+
+    if (isVoteBottomSheetVisible) {
+        VoteBottomSheet(onDismissRequest = { isVoteBottomSheetVisible = false }) {
+            Spacer(modifier = Modifier.height(120.dp))
+        }
+    }
 }
 
-@Preview(showBackground = true, showSystemUi = true, name = "CREATE")
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
-private fun VoteCreateHostPreview() = VoteScreenPreviewContent(
-    status = VoteStatus.CREATE,
-    role = VoteRole.HOST
-)
-
-@Preview(showBackground = true, showSystemUi = true, name = "OPEN · HOST")
-@Composable
-private fun VoteOpenHostPreview() = VoteScreenPreviewContent(
-    status = VoteStatus.OPEN,
-    role = VoteRole.HOST
-)
-
-@Preview(showBackground = true, showSystemUi = true, name = "OPEN · GUEST · 미투표")
-@Composable
-private fun VoteOpenGuestPreview() = VoteScreenPreviewContent(
-    status = VoteStatus.OPEN,
-    role = VoteRole.GUEST
-)
-
-@Preview(showBackground = true, showSystemUi = true, name = "OPEN · GUEST · 투표완료")
-@Composable
-private fun VoteOpenGuestVotedPreview() = VoteScreenPreviewContent(
-    status = VoteStatus.OPEN,
-    role = VoteRole.GUEST,
-    hasVoted = true
-)
-
-@Composable
-private fun VoteScreenPreviewContent(
-    status: VoteStatus,
-    role: VoteRole,
-    hasVoted: Boolean = false
+private fun VoteScreenPreview(
+    @PreviewParameter(VoteUiStatePreviewProvider::class) uiState: VoteUiState
 ) {
     CatchTableTheme {
-        Scaffold {innerPadding ->
+        Scaffold { innerPadding ->
             VoteScreen(
-                uiState = previewVoteState(status, role, hasVoted),
+                uiState = uiState,
                 onBackClick = {},
                 onShareClick = {},
                 onVoteEndClick = {},
                 onStoreClick = {},
-                onBottomButtonClick = {},
+                onCreateVoteClick = {},
                 modifier = Modifier.fillMaxSize().padding(innerPadding)
             )
         }
     }
+}
+
+private class VoteUiStatePreviewProvider : PreviewParameterProvider<VoteUiState> {
+    override val values = sequenceOf(
+        previewVoteState(VoteStatus.CREATE, VoteRole.HOST, hasVoted = false),
+        previewVoteState(VoteStatus.OPEN, VoteRole.HOST, hasVoted = false),
+        previewVoteState(VoteStatus.OPEN, VoteRole.GUEST, hasVoted = false),
+        previewVoteState(VoteStatus.OPEN, VoteRole.GUEST, hasVoted = true)
+    )
 }
 
 private fun previewVoteState(
@@ -157,10 +161,6 @@ private fun previewVoteState(
 ): VoteUiState {
     val voteDetail = createDummyVoteDetailResponseModel()
     val firstCandidate = voteDetail.candidates.first()
-    val selectedStoreId = when {
-        hasVoted -> firstCandidate.store.storeId
-        else -> null
-    }
     val viewer = voteDetail.viewer.copy(
         isHost = role == VoteRole.HOST,
         hasVoted = hasVoted,
@@ -176,8 +176,6 @@ private fun previewVoteState(
             status = status,
             viewer = viewer
         ),
-        selectedStoreId = selectedStoreId
+        selectedCandidateId = if (hasVoted) firstCandidate.candidateId else null
     )
 }
-
-private const val MAX_VISIBLE_STORE_COUNT = 2
