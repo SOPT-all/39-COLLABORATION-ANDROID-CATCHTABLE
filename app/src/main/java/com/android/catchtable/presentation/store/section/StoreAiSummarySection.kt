@@ -25,6 +25,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
+import com.android.catchtable.presentation.common.component.CatchTableAI
 import com.android.catchtable.presentation.common.extension.elevation1
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.store.model.StoreAiSummaryUiModel
@@ -44,36 +45,14 @@ fun StoreAiSummarySection(
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.ic_store_sparkle),
-                contentDescription = null,
-                modifier = Modifier.size(16.dp),
-                tint = Color.Unspecified,
-            )
-
-            Spacer(modifier = Modifier.width(4.dp))
-
-            Text(
-                text = buildAnnotatedString {
-                    withStyle(
-                        style = SpanStyle(
-                            brush = CatchTableTheme.colors.pinkGradient,
-                        ),
-                    ) {
-                        append("AI")
-                    }
-                    append("가 요약했어요")
-                },
-                style = CatchTableTheme.typography.displayB18,
-                color = CatchTableTheme.colors.gray900,
-            )
+            CatchTableAI()
 
             Spacer(modifier = Modifier.width(2.dp))
 
             Icon(
                 painter = painterResource(id = R.drawable.ic_store_help),
                 contentDescription = null,
-                modifier = Modifier.size(16.dp),
+                modifier = Modifier.size(20.dp),
                 tint = CatchTableTheme.colors.gray900,
             )
         }
