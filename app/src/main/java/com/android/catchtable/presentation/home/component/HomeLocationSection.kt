@@ -27,6 +27,7 @@ import com.android.catchtable.presentation.home.model.HomeLocationUiModel
 
 @Composable
 fun HomeLocationSection(
+    locations: List<HomeLocationUiModel>,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -50,7 +51,7 @@ fun HomeLocationSection(
                 .padding(horizontal = 20.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            locationList.forEach { location ->
+            locations.forEach { location ->
                 HomeLocationItem(
                     name = location.name, imageRes = location.imageRes, badge = location.badge
                 )
@@ -94,16 +95,3 @@ private fun HomeLocationItem(
         )
     }
 }
-
-private val locationList = listOf(
-    HomeLocationUiModel(
-        name = "청담", imageRes = R.drawable.img_area_cheongdam, badge = HomeBadgeType.TOP
-    ),
-    HomeLocationUiModel(name = "부산", imageRes = R.drawable.img_area_busan, badge = null),
-    HomeLocationUiModel(
-        name = "강남·역삼", imageRes = R.drawable.img_area_gangnam_yeoksam, badge = HomeBadgeType.TOP
-    ),
-    HomeLocationUiModel(
-        name = "용산·삼각지", imageRes = R.drawable.img_area_yongsan, badge = HomeBadgeType.HOT
-    ),
-)
