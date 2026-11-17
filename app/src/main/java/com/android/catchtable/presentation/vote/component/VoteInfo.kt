@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
@@ -111,7 +112,7 @@ fun VoteInfo(
             content = {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -145,12 +146,16 @@ fun VoteInfo(
         VoteInfoSection(
             title = { VoteInfoSectionTitle(text = "주류 및 콜키지") },
             content = {
-                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Column(
+                    modifier = Modifier.heightIn(min = 40.dp),
+                    verticalArrangement = Arrangement.spacedBy(2.dp),
+                ) {
                     store.amenities.forEach { amenity ->
                         VoteInfoSectionContent(text = amenity.content)
                     }
                 }
-            }
+            },
+            spaceBy = 6.dp
         )
     }
 }
