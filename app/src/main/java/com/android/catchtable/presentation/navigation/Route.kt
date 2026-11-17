@@ -1,3 +1,14 @@
 package com.android.catchtable.presentation.navigation
 
-interface Route
+import kotlinx.serialization.Serializable
+
+interface Route {
+    @Serializable
+    data class Store(val storeId: Long) : Route
+
+    @Serializable
+    data object Vote : Route
+
+    @Serializable
+    data object VoteComplete : Route
+}
