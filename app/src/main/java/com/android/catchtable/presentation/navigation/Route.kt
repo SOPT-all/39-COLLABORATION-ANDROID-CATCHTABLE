@@ -7,7 +7,7 @@ interface Route {
     data class Store(val storeId: Long) : Route
 
     @Serializable
-    data object Vote : Route
+    data class Vote(val voteId: Long?) : Route
 
     @Serializable
     data object VoteComplete : Route
