@@ -10,8 +10,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun StoreRoute(
     storeId: Long,
-    onBackClick: () -> Unit,
-    onTogetherClick: () -> Unit,
+    navigateUp: () -> Unit,
+    navigateToVote: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: StoreViewModel = hiltViewModel(),
 ) {
@@ -23,8 +23,8 @@ fun StoreRoute(
 
     StoreScreen(
         uiState = uiState,
-        onBackClick = onBackClick,
-        onTogetherClick = onTogetherClick,
+        onBackClick = navigateUp,
+        onTogetherClick = navigateToVote,
         modifier = modifier,
     )
 }
