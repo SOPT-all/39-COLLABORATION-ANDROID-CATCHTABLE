@@ -13,6 +13,7 @@ import com.android.catchtable.presentation.home.navigation.navigateToHome
 import com.android.catchtable.presentation.navigation.Route.Vote
 import com.android.catchtable.presentation.navigation.MainTabRoute
 import com.android.catchtable.presentation.vote.VoteRoute
+import com.android.catchtable.presentation.votecomplete.navigation.navigateToVoteComplete
 
 fun NavController.navigateToVote(
     voteId: Long?,
@@ -37,6 +38,14 @@ fun NavGraphBuilder.voteNavGraph(
                         popUpTo<MainTabRoute.Home> { inclusive = false }
                         launchSingleTop = true
                     }
+                )
+            },
+            navigateToVoteComplete = { voteId ->
+                navController.navigateToVoteComplete(
+                    voteId = voteId,
+                    navOptions = navOptions {
+                        popUpTo<Vote> { inclusive = true }
+                    },
                 )
             },
             modifier = Modifier.padding(innerPadding),
