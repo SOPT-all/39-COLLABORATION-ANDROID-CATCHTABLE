@@ -25,11 +25,13 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.vote.model.VoteRole
 import com.android.catchtable.presentation.vote.model.VoteButtonType
-import com.android.catchtable.presentation.vote.component.VoteBottomSheet
+import com.android.catchtable.presentation.vote.model.VoteMethod
 import com.android.catchtable.presentation.common.component.CatchTableButton
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.component.VoteHeader
 import com.android.catchtable.presentation.vote.component.VoteInfo
+import com.android.catchtable.presentation.vote.component.bottomsheet.VoteBottomSheet
+import com.android.catchtable.presentation.vote.component.bottomsheet.VoteBottomSheetContent
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 
 private const val MAX_VISIBLE_STORE_COUNT = 2
@@ -43,11 +45,18 @@ fun VoteScreen(
     onVoteEndClick: () -> Unit,
     onStoreClick: (Long) -> Unit,
     onCreateVoteClick: () -> Unit,
+    onSubmitVoteClick: (nickname: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var isVoteBottomSheetVisible by rememberSaveable { mutableStateOf(false) }
+    var selectedMethod by rememberSaveable { mutableStateOf<VoteMethod?>(null) }
+    var nickname by rememberSaveable("우수한 셀럽_12128") { mutableStateOf("우수한 셀럽_12128") }
     val candidates = uiState.voteDetail?.candidates.orEmpty()
-    val voterRowCount = candidates.maxOfOrNull { it.voters.size } ?: 0
+
+    // voter가 있는 후보는 익명1 줄이 하나 더 보이므로 +1
+    val voterRowCount = candidates.maxOfOrNull { candidate ->
+        if (candidate.voters.isNotEmpty()) candidate.voters.size + 1 else 0
+    } ?: 0
 
     Column(
         modifier = modifier
@@ -122,8 +131,21 @@ fun VoteScreen(
     }
 
     if (isVoteBottomSheetVisible) {
-        VoteBottomSheet(onDismissRequest = { isVoteBottomSheetVisible = false }) {
-            Spacer(modifier = Modifier.height(120.dp))
+        VoteBottomSheet(
+            onDismissRequest = { isVoteBottomSheetVisible = false },
+        ) {
+            VoteBottomSheetContent(
+                nickname = nickname,
+                selectedMethod = selectedMethod,
+                onMethodClick = { selectedMethod = it },
+                onValueChange = { nickname = it },
+                onButtonClick = {
+                    isVoteBottomSheetVisible = false
+                    onSubmitVoteClick(
+                        if (selectedMethod == VoteMethod.ANONYMOUS) "익명1" else nickname
+                    )
+                },
+            )
         }
     }
 }
@@ -142,6 +164,7 @@ private fun VoteScreenPreview(
                 onVoteEndClick = {},
                 onStoreClick = {},
                 onCreateVoteClick = {},
+                onSubmitVoteClick = {},
                 modifier = Modifier.fillMaxSize().padding(innerPadding)
             )
         }

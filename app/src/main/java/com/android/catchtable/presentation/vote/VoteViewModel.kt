@@ -47,4 +47,22 @@ class VoteViewModel @Inject constructor(
             state.copy(selectedCandidateId = selectedCandidateId)
         }
     }
+
+    fun submitVote(
+        nickname: String,
+        onSuccess: (voteId: Long) -> Unit,
+    ) {
+        val state = _uiState.value
+        val voteId = state.voteDetail?.voteId ?: return
+        val candidateId = state.selectedCandidateId ?: return
+        if (!state.canSubmitVote) return
+
+        viewModelScope.launch {
+            // 투표 제출 API 연동
+            Timber.d("투표 제출 voteId=$voteId, candidateId=$candidateId, nickname=$nickname")
+
+            // 임시: API 연동 전까지 바로 투표 완료 화면으로 이동
+            onSuccess(voteId)
+        }
+    }
 }

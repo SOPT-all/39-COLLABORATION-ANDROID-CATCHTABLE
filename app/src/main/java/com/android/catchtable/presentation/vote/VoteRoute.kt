@@ -15,6 +15,7 @@ fun VoteRoute(
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     navigateToHome: () -> Unit = {},
+    navigateToVoteComplete: (Long) -> Unit,
     viewModel: VoteViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -36,6 +37,12 @@ fun VoteRoute(
         onCreateVoteClick = {
             Toast.makeText(context, "투표가 생성됩니다.", Toast.LENGTH_SHORT).show()
             onBackClick()
-        }
+        },
+        onSubmitVoteClick = { nickname ->
+            viewModel.submitVote(
+                nickname = nickname,
+                onSuccess = navigateToVoteComplete, // 제출 성공 시 투표 완료 화면으로 이동
+            )
+        },
     )
 }
