@@ -3,6 +3,7 @@ package com.android.catchtable.presentation.home
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -47,72 +48,72 @@ fun HomeScreen(
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
 
-    Box(
+    Column(
         modifier = modifier
             .fillMaxSize()
             .background(CatchTableTheme.colors.white),
     ) {
-        LazyColumn(
-            state = listState, modifier = Modifier.fillMaxSize()
-        ) {
-            item {
-                HomeTopBar()
+        HomeTopBar()
+        Box(modifier = Modifier.weight(1f)) {
+            LazyColumn(
+                state = listState, modifier = Modifier.fillMaxSize()
+            ) {
+                item {
+                    Image(
+                        painter = painterResource(id = R.drawable.img_home_banner),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .padding(
+                                horizontal = 20.dp, vertical = 16.dp
+                            )
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                    )
+                }
+
+                item {
+                    HomeCategorySection(
+                        selectedTab = uiState.selectedTab,
+                        categories = uiState.categories,
+                        onTabClick = onTabClick,
+                    )
+                }
+                item {
+                    HorizontalDivider(
+                        thickness = 20.dp, color = CatchTableTheme.colors.gray200
+                    )
+                }
+                item {
+                    HomeLocationSection(locations = uiState.locations)
+                }
+                item {
+                    HomeStoreSection(
+                        recentStores = uiState.recentStores,
+                        similarStores = uiState.similarStores,
+                        recommendStores = uiState.recommendStores,
+                        onStoreClick = onStoreClick,
+                    )
+                }
+
             }
-            item {
-                Image(
-                    painter = painterResource(id = R.drawable.img_home_banner),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
+            if (uiState.isVoting) {
+                HomeVoteStatusButton(
+                    onClick = onVoteClick,
                     modifier = Modifier
-                        .padding(
-                            horizontal = 20.dp, vertical = 16.dp
-                        )
+                        .align(Alignment.BottomCenter)
+                        .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
                         .fillMaxWidth()
-                        .clip(RoundedCornerShape(8.dp))
                 )
             }
 
-            item {
-                HomeCategorySection(
-                    selectedTab = uiState.selectedTab,
-                    categories = uiState.categories,
-                    onTabClick = onTabClick,
-                )
-            }
-            item {
-                HorizontalDivider(
-                    thickness = 20.dp, color = CatchTableTheme.colors.gray200
-                )
-            }
-            item {
-                HomeLocationSection(locations = uiState.locations)
-            }
-            item {
-                HomeStoreSection(
-                    recentStores = uiState.recentStores,
-                    similarStores = uiState.similarStores,
-                    recommendStores = uiState.recommendStores,
-                    onStoreClick = onStoreClick,
-                )
-            }
-
-        }
-        if (uiState.isVoting) {
-            HomeVoteStatusButton(
-                onClick = onVoteClick,
+            HomeScrollUpButton(
+                onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
-                    .fillMaxWidth()
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
             )
         }
-
-        HomeScrollUpButton(
-            onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
-            modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
-        )
     }
 }
 
