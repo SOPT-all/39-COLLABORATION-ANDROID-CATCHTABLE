@@ -1,5 +1,8 @@
 package com.android.catchtable.presentation.home.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -14,9 +17,11 @@ fun NavController.navigateToHome(
 }
 
 fun NavGraphBuilder.homeNavGraph(
-    navController: NavController,
+    innerPadding: PaddingValues,
 ) {
     composable<Home> {
-        HomeRoute()
+        HomeRoute(
+            modifier = Modifier.padding(innerPadding),
+        )
     }
 }

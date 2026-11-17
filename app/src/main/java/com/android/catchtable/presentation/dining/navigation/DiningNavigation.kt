@@ -1,5 +1,8 @@
 package com.android.catchtable.presentation.dining.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -14,9 +17,11 @@ fun NavController.navigateToDining(
 }
 
 fun NavGraphBuilder.diningNavGraph(
-    navController: NavController,
+    innerPadding: PaddingValues,
 ) {
     composable<Dining> {
-        DiningRoute()
+        DiningRoute(
+            modifier = Modifier.padding(innerPadding),
+        )
     }
 }

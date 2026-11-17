@@ -1,5 +1,8 @@
 package com.android.catchtable.presentation.my.navigation
 
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -14,9 +17,11 @@ fun NavController.navigateToMy(
 }
 
 fun NavGraphBuilder.myNavGraph(
-    navController: NavController,
+    innerPadding: PaddingValues,
 ) {
     composable<My> {
-        MyRoute()
+        MyRoute(
+            modifier = Modifier.padding(innerPadding),
+        )
     }
 }
