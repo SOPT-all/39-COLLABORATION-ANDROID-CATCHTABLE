@@ -1,17 +1,36 @@
 package com.android.catchtable.presentation.home
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import com.android.catchtable.R
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.home.component.HomeContent
+import com.android.catchtable.presentation.home.component.HomeCategorySection
+import com.android.catchtable.presentation.home.component.HomeLocationSection
+import com.android.catchtable.presentation.home.component.HomeScrollUpButton
+import com.android.catchtable.presentation.home.component.HomeStoreSection
 import com.android.catchtable.presentation.home.component.HomeTopBar
+import com.android.catchtable.presentation.home.component.HomeVoteStatusButton
 import com.android.catchtable.presentation.home.model.HomeRecentUiModel
 import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
 import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
@@ -21,23 +40,72 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     isVoting: Boolean = false,
 ) {
-    Column(
+    val listState = rememberLazyListState()
+    val coroutineScope = rememberCoroutineScope()
+
+    Box(
         modifier = modifier
             .fillMaxSize()
             .background(CatchTableTheme.colors.white),
     ) {
-        HomeTopBar()
+        LazyColumn(
+            state = listState, modifier = Modifier.fillMaxSize()
+        ) {
+            item {
+                HomeTopBar()
+            }
+            item {
+                Image(
+                    painter = painterResource(id = R.drawable.img_home_banner),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .padding(
+                            horizontal = 20.dp, vertical = 16.dp
+                        )
+                        .fillMaxWidth()
+                        .clip(RoundedCornerShape(8.dp))
+                )
+            }
 
-        HomeContent(
-            recentStores = recentStores,
-            similarStores = similarStores,
-            recommendStores = recommendStores,
-            isVoting = isVoting,
-            modifier = Modifier.weight(1f)
+            item {
+                HomeCategorySection()
+            }
+            item {
+                HorizontalDivider(
+                    thickness = 20.dp, color = CatchTableTheme.colors.gray200
+                )
+            }
+            item {
+                HomeLocationSection()
+            }
+            item {
+                HomeStoreSection(
+                    recentStores = recentStores,
+                    similarStores = similarStores,
+                    recommendStores = recommendStores
+                )
+            }
+
+        }
+        if (isVoting) {
+            HomeVoteStatusButton(
+                onClick = {},
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+                    .fillMaxWidth()
+            )
+        }
+
+        HomeScrollUpButton(
+            onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .padding(end = 20.dp, bottom = if (isVoting) 76.dp else 17.dp)
         )
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
