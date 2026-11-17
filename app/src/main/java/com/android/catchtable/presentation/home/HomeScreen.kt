@@ -40,6 +40,8 @@ import kotlinx.coroutines.launch
 fun HomeScreen(
     uiState: HomeUiState,
     onTabClick: (HomeTab) -> Unit,
+    onStoreClick: (Int) -> Unit,
+    onVoteClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberLazyListState()
@@ -89,14 +91,15 @@ fun HomeScreen(
                 HomeStoreSection(
                     recentStores = uiState.recentStores,
                     similarStores = uiState.similarStores,
-                    recommendStores = uiState.recommendStores
+                    recommendStores = uiState.recommendStores,
+                    onStoreClick = onStoreClick,
                 )
             }
 
         }
         if (uiState.isVoting) {
             HomeVoteStatusButton(
-                onClick = {},
+                onClick = onVoteClick,
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
@@ -168,7 +171,11 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                         category = "중식"
                     ),
                     HomeRecentUiModel(
-                        id = 2, imageRes = R.drawable.img_home_recent_02, name = "와아", region = "성수", category = "와인"
+                        id = 2,
+                        imageRes = R.drawable.img_home_recent_02,
+                        name = "와아",
+                        region = "성수",
+                        category = "와인"
                     ),
                 ),
                 similarStores = listOf(
@@ -221,6 +228,8 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                 isVoting = isVoting,
             ),
             onTabClick = {},
+            onStoreClick = {},
+            onVoteClick = {},
         )
     }
 }
