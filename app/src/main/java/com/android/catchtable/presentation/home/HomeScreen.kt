@@ -27,18 +27,20 @@ import com.android.catchtable.presentation.home.component.HomeScrollUpButton
 import com.android.catchtable.presentation.home.component.HomeStoreSection
 import com.android.catchtable.presentation.home.component.HomeTopBar
 import com.android.catchtable.presentation.home.component.HomeVoteStatusButton
+import com.android.catchtable.presentation.home.model.HomeBadgeType
+import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
+import com.android.catchtable.presentation.home.model.HomeLocationUiModel
 import com.android.catchtable.presentation.home.model.HomeRecentUiModel
+import com.android.catchtable.presentation.home.model.HomeTab
 import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
 import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen(
-    recentStores: List<HomeRecentUiModel>,
-    similarStores: List<SimilarStoreUiModel>,
-    recommendStores: List<RecommendStoreUiModel>,
+    uiState: HomeUiState,
+    onTabClick: (HomeTab) -> Unit,
     modifier: Modifier = Modifier,
-    isVoting: Boolean = false,
 ) {
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
@@ -69,7 +71,11 @@ fun HomeScreen(
             }
 
             item {
-                HomeCategorySection()
+                HomeCategorySection(
+                    selectedTab = uiState.selectedTab,
+                    categories = uiState.categories,
+                    onTabClick = onTabClick,
+                )
             }
             item {
                 HorizontalDivider(
@@ -77,18 +83,18 @@ fun HomeScreen(
                 )
             }
             item {
-                HomeLocationSection()
+                HomeLocationSection(locations = uiState.locations)
             }
             item {
                 HomeStoreSection(
-                    recentStores = recentStores,
-                    similarStores = similarStores,
-                    recommendStores = recommendStores
+                    recentStores = uiState.recentStores,
+                    similarStores = uiState.similarStores,
+                    recommendStores = uiState.recommendStores
                 )
             }
 
         }
-        if (isVoting) {
+        if (uiState.isVoting) {
             HomeVoteStatusButton(
                 onClick = {},
                 modifier = Modifier
@@ -102,7 +108,7 @@ fun HomeScreen(
             onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
             modifier = Modifier
                 .align(Alignment.BottomEnd)
-                .padding(end = 20.dp, bottom = if (isVoting) 76.dp else 17.dp)
+                .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
         )
     }
 }
@@ -123,62 +129,98 @@ private fun HomeScreenVotingPreview() {
 private fun HomeScreenPreviewContent(isVoting: Boolean) {
     CatchTableTheme {
         HomeScreen(
-            recentStores = listOf(
-                HomeRecentUiModel(
-                    id = 1, thumbnailUrl = null, name = "하이디라오 서초점", region = "강남", category = "중식"
+            uiState = HomeUiState(
+                selectedTab = HomeTab.RANKING,
+                categories = listOf(
+                    HomeCategoryUiModel(name = "줄서기예약", imageRes = R.drawable.img_category_01),
+                    HomeCategoryUiModel(name = "2026미쉐린", imageRes = R.drawable.img_category_02),
+                    HomeCategoryUiModel(name = "블루리본", imageRes = R.drawable.img_category_05),
+                    HomeCategoryUiModel(name = "웨이팅TOP", imageRes = R.drawable.img_category_14),
+                    HomeCategoryUiModel(name = "예약핫플", imageRes = R.drawable.img_category_03),
                 ),
-                HomeRecentUiModel(
-                    id = 2, thumbnailUrl = null, name = "와아", region = "성수", category = "와인"
+                locations = listOf(
+                    HomeLocationUiModel(
+                        name = "청담",
+                        imageRes = R.drawable.img_area_cheongdam,
+                        badge = HomeBadgeType.TOP
+                    ),
+                    HomeLocationUiModel(
+                        name = "부산", imageRes = R.drawable.img_area_busan, badge = null
+                    ),
+                    HomeLocationUiModel(
+                        name = "강남·역삼",
+                        imageRes = R.drawable.img_area_gangnam_yeoksam,
+                        badge = HomeBadgeType.TOP
+                    ),
+                    HomeLocationUiModel(
+                        name = "용산·삼각지",
+                        imageRes = R.drawable.img_area_yongsan,
+                        badge = HomeBadgeType.HOT
+                    ),
                 ),
+
+                recentStores = listOf(
+                    HomeRecentUiModel(
+                        id = 1,
+                        thumbnailUrl = null,
+                        name = "하이디라오 서초점",
+                        region = "강남",
+                        category = "중식"
+                    ),
+                    HomeRecentUiModel(
+                        id = 2, thumbnailUrl = null, name = "와아", region = "성수", category = "와인"
+                    ),
+                ),
+                similarStores = listOf(
+                    SimilarStoreUiModel(
+                        id = 1,
+                        thumbnailUrl = null,
+                        name = "하이디라오 서초점",
+                        category = "중식",
+                        region = "강남",
+                        rating = "4.7",
+                        reviewCount = "6,139"
+                    ),
+                    SimilarStoreUiModel(
+                        id = 3,
+                        thumbnailUrl = null,
+                        name = "하이디라오 가산점",
+                        category = "중식",
+                        region = "가산디지털단지",
+                        rating = "4.7",
+                        reviewCount = "6,139"
+                    ),
+                    SimilarStoreUiModel(
+                        id = 4,
+                        thumbnailUrl = null,
+                        name = "징관청훠궈 가로수길",
+                        category = "중식",
+                        region = "가로수길",
+                        rating = "4.6",
+                        reviewCount = "18"
+                    ),
+                ),
+                recommendStores = listOf(
+                    RecommendStoreUiModel(
+                        id = 5,
+                        thumbnailUrl = null,
+                        name = "만가타",
+                        category = "유러피안음식",
+                        region = "삼청",
+                        rating = "4.8"
+                    ),
+                    RecommendStoreUiModel(
+                        id = 6,
+                        thumbnailUrl = null,
+                        name = "만가타",
+                        category = "유러피안음식",
+                        region = "삼청",
+                        rating = "4.8"
+                    ),
+                ),
+                isVoting = isVoting,
             ),
-            similarStores = listOf(
-                SimilarStoreUiModel(
-                    id = 1,
-                    thumbnailUrl = null,
-                    name = "하이디라오 서초점",
-                    category = "중식",
-                    region = "강남",
-                    rating = "4.7",
-                    reviewCount = "6,139"
-                ),
-                SimilarStoreUiModel(
-                    id = 3,
-                    thumbnailUrl = null,
-                    name = "하이디라오 가산점",
-                    category = "중식",
-                    region = "가산디지털단지",
-                    rating = "4.7",
-                    reviewCount = "6,139"
-                ),
-                SimilarStoreUiModel(
-                    id = 4,
-                    thumbnailUrl = null,
-                    name = "징관청훠궈 가로수길",
-                    category = "중식",
-                    region = "가로수길",
-                    rating = "4.6",
-                    reviewCount = "18"
-                ),
-            ),
-            recommendStores = listOf(
-                RecommendStoreUiModel(
-                    id = 5,
-                    thumbnailUrl = null,
-                    name = "만가타",
-                    category = "유러피안음식",
-                    region = "삼청",
-                    rating = "4.8"
-                ),
-                RecommendStoreUiModel(
-                    id = 6,
-                    thumbnailUrl = null,
-                    name = "만가타",
-                    category = "유러피안음식",
-                    region = "삼청",
-                    rating = "4.8"
-                ),
-            ),
-            isVoting = isVoting,
+            onTabClick = {},
         )
     }
 }
