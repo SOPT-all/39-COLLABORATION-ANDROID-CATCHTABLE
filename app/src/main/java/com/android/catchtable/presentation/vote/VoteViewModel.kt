@@ -53,12 +53,6 @@ class VoteViewModel @Inject constructor(
         }
     }
 
-    /**
-     * 투표 제출 (POST /api/v1/votes/{voteId}/ballots/me)
-     *
-     * @param nickname 바텀시트에서 확정한 닉네임 (익명 선택 시 viewer.defaultNickname)
-     * @param onSuccess 제출 성공 시 호출, 투표 완료 화면으로 이동할 때 사용
-     */
     fun submitVote(
         nickname: String,
         onSuccess: (voteId: Long) -> Unit,
@@ -69,11 +63,7 @@ class VoteViewModel @Inject constructor(
         if (!state.canSubmitVote) return
 
         viewModelScope.launch {
-            // TODO: 투표 제출 API 연동
-            //  1. SubmitBallotUseCase(voteId, candidateId, nickname.trim()) 호출
-            //  2. 성공 시 응답으로 오는 최신 투표 상세로 uiState 갱신 후 onSuccess(voteId) 호출
-            //  3. 실패 시 ApiException.code로 분기
-            //     - ALREADY_VOTED: 이미 투표함 / VOTE_CLOSED: 마감된 투표 / INVALID_NICKNAME: 닉네임 형식 오류
+            // 투표 제출 API 연동
             Timber.d("투표 제출 voteId=$voteId, candidateId=$candidateId, nickname=$nickname")
 
             // 임시: API 연동 전까지 바로 투표 완료 화면으로 이동
