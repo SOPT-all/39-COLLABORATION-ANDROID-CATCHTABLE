@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import com.android.catchtable.presentation.navigation.Route.Store
 import com.android.catchtable.presentation.store.StoreRoute
+import com.android.catchtable.presentation.vote.navigation.navigateToVote
 
 fun NavController.navigateToStore(
     storeId: Long,
@@ -22,11 +23,13 @@ fun NavGraphBuilder.storeNavGraph(
     navController: NavController,
     innerPadding: PaddingValues,
 ) {
-    composable<Store> {
+    composable<Store> { backStackEntry ->
+        val store = backStackEntry.toRoute<Store>()
+
         StoreRoute(
-            storeId = 1,
-            onBackClick = {},
-            onTogetherClick = {},
+            storeId = store.storeId,
+            navigateUp = { navController.navigateUp() },
+            navigateToVote = { navController.navigateToVote(voteId = null) },
             modifier = Modifier.padding(innerPadding),
         )
     }
