@@ -36,6 +36,7 @@ fun HomeStoreSection(
     recentStores: List<HomeRecentUiModel>,
     similarStores: List<SimilarStoreUiModel>,
     recommendStores: List<RecommendStoreUiModel>,
+    onStoreClick: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var selectedRecentId by remember {
@@ -74,13 +75,12 @@ fun HomeStoreSection(
                     items(similarStores) { store ->
                         HomeCardSimilar(
                             store = store,
-                            onCardClick = {},
+                            onCardClick = onStoreClick,
                             modifier = Modifier.width(128.dp),
                         )
                     }
                 }
             }
-
         }
         Column(
             modifier = Modifier
