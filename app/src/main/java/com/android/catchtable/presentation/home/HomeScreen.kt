@@ -12,8 +12,6 @@ import com.android.catchtable.presentation.home.component.HomeTopBar
 import com.android.catchtable.presentation.home.model.HomeRecentUiModel
 import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
 import com.android.catchtable.presentation.home.model.SimilarStoreUiModel
-import com.android.catchtable.presentation.main.component.BottomNavigationBar
-import com.android.catchtable.presentation.main.model.BottomNavItem
 
 @Composable
 fun HomeScreen(
@@ -36,11 +34,6 @@ fun HomeScreen(
             recommendStores = recommendStores,
             isVoting = isVoting,
             modifier = Modifier.weight(1f)
-        )
-
-        BottomNavigationBar(
-            selectedItem = BottomNavItem.HOME,
-            onItemClick = {},
         )
     }
 }
