@@ -19,7 +19,12 @@ class VoteViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(VoteUiState())
     val uiState = _uiState.asStateFlow()
 
-    fun initVote(voteId: Long) {
+    fun initVote(voteId: Long?) {
+        if (voteId == null) {
+            _uiState.value = VoteUiState()
+            return
+        }
+
         _uiState.update { it.copy(isLoading = true, errorMessage = null) }
         viewModelScope.launch {
             getVoteDetailUseCase(voteId)

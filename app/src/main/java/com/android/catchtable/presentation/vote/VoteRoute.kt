@@ -11,7 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun VoteRoute(
-    voteId: Long,
+    voteId: Long?,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
     navigateToHome: () -> Unit = {},
