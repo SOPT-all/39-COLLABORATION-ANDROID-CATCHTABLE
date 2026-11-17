@@ -1,5 +1,10 @@
 package com.android.catchtable.presentation.main.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideIn
+import androidx.compose.animation.slideOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -16,42 +21,54 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.main.model.BottomNavItem
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toPersistentList
+import kotlinx.collections.immutable.toPersistentSet
 
 
 @Composable
 fun BottomNavigationBar(
-    selectedItem: BottomNavItem,
+    visible: Boolean,
+    items: ImmutableList<BottomNavItem>,
+    selectedItem: BottomNavItem?,
     onItemClick: (BottomNavItem) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    Column(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(CatchTableTheme.colors.white)
+    AnimatedVisibility(
+        visible = visible,
+        enter = fadeIn() + slideIn { IntOffset(0, it.height) },
+        exit = fadeOut() + slideOut { IntOffset(0, it.height) },
     ) {
-        HorizontalDivider(
-            thickness = 1.dp, color = CatchTableTheme.colors.gray200
-        )
-
-        Row(
-            modifier = Modifier
+        Column(
+            modifier = modifier
                 .fillMaxWidth()
-                .padding(
-                    start = 22.dp, end = 22.dp, top = 8.dp, bottom = 24.dp
-                ),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically,
+                .background(CatchTableTheme.colors.white)
         ) {
-            BottomNavItem.entries.forEach { item ->
-                BottomNavTab(
-                    item = item,
-                    isSelected = item == selectedItem,
-                    onClick = { onItemClick(item) },
-                )
+            HorizontalDivider(
+                thickness = 1.dp, color = CatchTableTheme.colors.gray200
+            )
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = 22.dp, end = 22.dp, top = 8.dp, bottom = 24.dp
+                    ),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                items.forEach { item ->
+                    BottomNavTab(
+                        item = item,
+                        isSelected = item == selectedItem,
+                        onClick = { onItemClick(item) },
+                    )
+                }
             }
         }
     }
@@ -99,6 +116,8 @@ private fun BottomNavigationBarPreview() {
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             BottomNavItem.entries.forEach { item ->
                 BottomNavigationBar(
+                    visible = true,
+                    items = BottomNavItem.entries.toPersistentList(),
                     selectedItem = item,
                     onItemClick = {},
                 )
