@@ -1,6 +1,8 @@
 package com.android.catchtable.di
 
 import com.android.catchtable.BuildConfig
+import com.android.catchtable.data.remote.interceptor.UserIdInterceptor
+import com.android.catchtable.data.util.catchTableJson
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,9 +21,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideJson(): Json = Json {
-        ignoreUnknownKeys = true
-    }
+    fun provideJson(): Json = catchTableJson
 
     @Provides
     @Singleton
@@ -37,7 +37,9 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        userIdInterceptor: UserIdInterceptor,
     ): OkHttpClient = OkHttpClient.Builder()
+        .addInterceptor(userIdInterceptor)
         .addInterceptor(loggingInterceptor)
         .build()
 
