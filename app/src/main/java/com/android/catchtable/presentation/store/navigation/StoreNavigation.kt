@@ -28,8 +28,8 @@ fun NavGraphBuilder.storeNavGraph(
 
         StoreRoute(
             storeId = store.storeId,
-            onBackClick = { navController.popBackStack() },
-            onTogetherClick = { navController.navigateToVote() },
+            navigateUp = { navController.navigateUp() },
+            navigateToVote = { navController.navigateToVote() },
             modifier = Modifier.padding(innerPadding),
         )
     }
