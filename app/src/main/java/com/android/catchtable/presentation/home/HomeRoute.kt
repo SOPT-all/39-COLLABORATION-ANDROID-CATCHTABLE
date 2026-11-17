@@ -8,6 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun HomeRoute(
+    navigateToStore: (Int) -> Unit,
+    navigateToVote: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -16,6 +18,8 @@ fun HomeRoute(
     HomeScreen(
         uiState = uiState,
         onTabClick = viewModel::onTabClick,
+        onStoreClick = navigateToStore,
+        onVoteClick = navigateToVote,
         modifier = modifier,
     )
 }
