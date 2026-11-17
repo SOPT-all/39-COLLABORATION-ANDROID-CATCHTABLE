@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.HorizontalDivider
@@ -41,13 +42,15 @@ fun BottomNavigationBar(
 ) {
     AnimatedVisibility(
         visible = visible,
+        modifier = modifier,
         enter = fadeIn() + slideIn { IntOffset(0, it.height) },
         exit = fadeOut() + slideOut { IntOffset(0, it.height) },
     ) {
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .background(CatchTableTheme.colors.white)
+                .navigationBarsPadding(),
         ) {
             HorizontalDivider(
                 thickness = 1.dp, color = CatchTableTheme.colors.gray200

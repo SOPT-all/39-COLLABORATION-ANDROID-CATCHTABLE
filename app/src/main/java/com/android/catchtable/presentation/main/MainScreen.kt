@@ -28,7 +28,6 @@ fun MainScreen(
                 items = BottomNavItem.entries.toPersistentList(),
                 selectedItem = currentTab,
                 onItemClick = appState::navigate,
-                modifier = Modifier.navigationBarsPadding()
             )
         },
     ) { innerPadding ->
