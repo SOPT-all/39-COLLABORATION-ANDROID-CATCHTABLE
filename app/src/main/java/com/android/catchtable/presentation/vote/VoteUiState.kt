@@ -35,8 +35,7 @@ data class VoteUiState(
 
     val voteButtonType: VoteButtonType?
         get() = when {
-            voteDetail == null -> null
-            status == VoteStatus.CREATE && role == VoteRole.HOST -> VoteButtonType.CREATE_VOTE
+            status == VoteStatus.CREATE -> VoteButtonType.CREATE_VOTE
             canSubmitVote -> VoteButtonType.CONFIRM_VOTE
             else -> null
         }
@@ -46,9 +45,8 @@ data class VoteUiState(
         else CatchTableButtonType.PRIMARY_DISABLED_PRIMARY
 
     val buttonText: String?
-        get() = voteDetail?.let { detail ->
-            when (status) {
-            VoteStatus.CREATE -> "${detail.candidates.size}개 · 투표 생성하기"
+        get() = when (status) {
+            VoteStatus.CREATE -> voteDetail?.let { "${it.candidates.size}개 · 투표 생성하기" }
             VoteStatus.OPEN -> when {
                 hasVoted && role == VoteRole.GUEST -> null
                 !hasVoted && selectedCandidateId != null -> "매장 선택 완료"
