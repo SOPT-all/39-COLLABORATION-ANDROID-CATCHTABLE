@@ -2,12 +2,13 @@ package com.android.catchtable.presentation.vote
 
 import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
 import com.android.catchtable.presentation.vote.model.VoteRole
-import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.common.model.CatchTableButtonType
+import com.android.catchtable.presentation.vote.model.VoteButtonType
 
 data class VoteUiState(
     val voteDetail: VoteDetailResponseModel? = null,
-    val selectedStoreId: Long? = null,
+    val selectedCandidateId: Long? = null,
     val isLoading: Boolean = false,
     val errorMessage: String? = null
 ) {
@@ -24,22 +25,35 @@ data class VoteUiState(
         get() = status == VoteStatus.OPEN &&
             role == VoteRole.GUEST &&
             !hasVoted &&
-            selectedStoreId != null
+            selectedCandidateId != null
 
-    val buttonType: CatchTableButtonType
-        get() = when {
-            (status == VoteStatus.CREATE && role == VoteRole.HOST) || canSubmitVote ->
-                CatchTableButtonType.PRIMARY_ENABLED
-            else -> CatchTableButtonType.PRIMARY_DISABLED_PRIMARY
+    val canSelectStore: Boolean
+        get() = when (status) {
+            VoteStatus.CREATE -> role == VoteRole.HOST
+            VoteStatus.OPEN -> role == VoteRole.GUEST && !hasVoted
         }
 
+    val voteButtonType: VoteButtonType?
+        get() = when {
+            voteDetail == null -> null
+            status == VoteStatus.CREATE && role == VoteRole.HOST -> VoteButtonType.CREATE_VOTE
+            canSubmitVote -> VoteButtonType.CONFIRM_VOTE
+            else -> null
+        }
+
+    val buttonType: CatchTableButtonType
+        get() = if (voteButtonType != null) CatchTableButtonType.PRIMARY_ENABLED
+        else CatchTableButtonType.PRIMARY_DISABLED_PRIMARY
+
     val buttonText: String?
-        get() = when (status) {
-            VoteStatus.CREATE -> "${voteDetail?.candidates?.size ?: 0}개 · 투표 생성하기"
+        get() = voteDetail?.let { detail ->
+            when (status) {
+            VoteStatus.CREATE -> "${detail.candidates.size}개 · 투표 생성하기"
             VoteStatus.OPEN -> when {
                 hasVoted && role == VoteRole.GUEST -> null
-                !hasVoted && selectedStoreId != null -> "매장 선택 완료"
+                !hasVoted && selectedCandidateId != null -> "매장 선택 완료"
                 else -> "가고 싶은 매장을 투표해주세요"
+            }
             }
         }
 }
