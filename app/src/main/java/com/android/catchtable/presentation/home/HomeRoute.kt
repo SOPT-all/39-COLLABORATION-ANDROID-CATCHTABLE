@@ -14,10 +14,8 @@ fun HomeRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     HomeScreen(
-        recentStores = emptyList(),
-        similarStores = emptyList(),
-        recommendStores = emptyList(),
+        uiState = uiState,
+        onTabClick = viewModel::onTabClick,
         modifier = modifier,
-        isVoting = uiState.isVoting,
     )
 }
