@@ -182,6 +182,6 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun getActiveVote() {
-        _uiState.update { it.copy(isVoting = true, voteId = 1L) }
+        _uiState.update { it.copy(voteId = 1L) }
     }
 }

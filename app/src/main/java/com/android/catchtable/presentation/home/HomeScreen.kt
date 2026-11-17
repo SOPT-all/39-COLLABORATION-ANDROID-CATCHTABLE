@@ -226,7 +226,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                         rating = "4.8"
                     ),
                 ),
-                isVoting = isVoting,
+                voteId = if (isVoting) 1L else null,
             ),
             onTabClick = {},
             onStoreClick = {},
