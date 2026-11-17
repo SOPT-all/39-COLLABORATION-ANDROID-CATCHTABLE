@@ -17,9 +17,10 @@ import androidx.compose.ui.unit.dp
 import com.android.catchtable.domain.model.vote.VoteStoreModel
 import com.android.catchtable.domain.model.vote.VoteVoterModel
 import com.android.catchtable.presentation.common.component.CatchTableAI
-import com.android.catchtable.presentation.common.component.CatchTableSubwayBadge
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.domain.model.vote.VoteStatus
+import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
+import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
 import com.android.catchtable.presentation.vote.model.VoteTagType
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 
@@ -73,9 +74,8 @@ fun VoteInfo(
             Row(
                 horizontalArrangement = Arrangement.spacedBy(4.dp)
             ){
-                store.station.lines.forEach { line ->
-                    CatchTableSubwayBadge(line)
-                }
+                CatchTableBadgeLine9()
+                CatchTableBadgeSBD()
             }
             Text(
                 text = "${store.station.name}에서 ${store.station.distanceMeters}m",
