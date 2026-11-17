@@ -49,13 +49,14 @@ fun VoteScreen(
     modifier: Modifier = Modifier
 ) {
     var isVoteBottomSheetVisible by rememberSaveable { mutableStateOf(false) }
-
-    // 바텀시트 입력 상태 (투표 방식, 닉네임)
     var selectedMethod by rememberSaveable { mutableStateOf<VoteMethod?>(null) }
     var nickname by rememberSaveable("우수한 셀럽_12128") { mutableStateOf("우수한 셀럽_12128") }
-
     val candidates = uiState.voteDetail?.candidates.orEmpty()
-    val voterRowCount = candidates.maxOfOrNull { it.voters.size } ?: 0
+
+    // voter가 있는 후보는 익명1 줄이 하나 더 보이므로 +1
+    val voterRowCount = candidates.maxOfOrNull { candidate ->
+        if (candidate.voters.isNotEmpty()) candidate.voters.size + 1 else 0
+    } ?: 0
 
     Column(
         modifier = modifier

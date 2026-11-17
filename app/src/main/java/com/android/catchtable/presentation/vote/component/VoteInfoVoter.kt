@@ -28,9 +28,11 @@ fun VoteInfoVoter(
     rowCount: Int = voters.size
 ){
     val votersCount = voters.size
-    val visibleRowCount = maxOf(votersCount, rowCount)
+    // voter가 있으면 익명1 줄이 하나 추가로 보임
+    val anonymousRowCount = if (voters.isNotEmpty()) 1 else 0
+    val visibleRowCount = maxOf(votersCount + anonymousRowCount, rowCount)
     VoteInfoSection(
-        title = { VoteInfoSectionTitle(text = "${votersCount}명 투표") },
+        title = { VoteInfoSectionTitle(text = "${votersCount + anonymousRowCount}명 투표") },
         content = {
             Column(
                 modifier = modifier.height(
@@ -38,7 +40,30 @@ fun VoteInfoVoter(
                 ),
                 verticalArrangement = Arrangement.spacedBy(VOTER_ROW_SPACING_DP.dp)
             ){
-                repeat(visibleRowCount) { index ->
+                if (voters.isNotEmpty()) {
+                    Row(
+                        modifier = Modifier.height(VOTER_ROW_HEIGHT_DP.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.ic_profile),
+                            contentDescription = null,
+                            modifier = Modifier.size(14.dp),
+                            tint = Color.Unspecified
+                        )
+                        Text(
+                            text = "익명1",
+                            style = CatchTableTheme.typography.bodyRG12,
+                            color = CatchTableTheme.colors.gray600,
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
+                }
+
+                // 익명1 줄을 제외한 나머지 줄 (빈 줄은 양쪽 후보 높이 맞추기용)
+                repeat(visibleRowCount - anonymousRowCount) { index ->
                     val voter = voters.getOrNull(index)
                     Row(
                         modifier = Modifier.height(VOTER_ROW_HEIGHT_DP.dp),
