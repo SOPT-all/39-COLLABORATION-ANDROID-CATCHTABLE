@@ -14,8 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
@@ -39,7 +38,7 @@ fun HomeSearchTextField(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_home_search),
+            painter = painterResource(id = R.drawable.ic_home_search),
             contentDescription = null,
             modifier = Modifier.size(14.dp),
             tint = colors.gray400,

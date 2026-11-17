@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.em
 import androidx.compose.ui.unit.sp
 import com.android.catchtable.R.font.*
 
-val Pretendard = FontFamily(
+private val pretendard = FontFamily(
     Font(pretendard_bold, FontWeight.Bold),
     Font(pretendard_semibold, FontWeight.SemiBold),
     Font(pretendard_medium, FontWeight.Medium),
@@ -28,6 +28,7 @@ val Pretendard = FontFamily(
 @Immutable
 data class CatchTableTypography(
 
+    val displayB22: TextStyle,
     val displayB20: TextStyle,
     val displayB18: TextStyle,
     val displaySB18: TextStyle,
@@ -57,6 +58,7 @@ data class CatchTableTypography(
     val groupedTypography: List<Pair<String, List<Pair<String, TextStyle>>>>
         get() = listOf(
             "Display" to listOf(
+                "displayB22" to displayB22,
                 "displayB20" to displayB20,
                 "displayB18" to displayB18,
                 "displaySB18" to displaySB18,
@@ -92,9 +94,10 @@ data class CatchTableTypography(
 val defaultCatchTableTypography: CatchTableTypography
     @Composable
     get() {
-        val baseStyle = TextStyle(fontFamily = Pretendard, color = defaultCatchTableColors.black)
+        val baseStyle = TextStyle(fontFamily = pretendard, color = defaultCatchTableColors.black)
 
         return CatchTableTypography(
+            displayB22 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 22.sp, lineHeight = 1.5.em),
             displayB20 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 20.sp, lineHeight = 1.5.em),
             displayB18 = baseStyle.copy(fontWeight = FontWeight.Bold, fontSize = 18.sp, lineHeight = 1.5.em),
             displaySB18 = baseStyle.copy(fontWeight = FontWeight.SemiBold, fontSize = 18.sp, lineHeight = 1.5.em),
