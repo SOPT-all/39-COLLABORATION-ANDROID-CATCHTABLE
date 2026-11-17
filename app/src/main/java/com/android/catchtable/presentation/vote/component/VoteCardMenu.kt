@@ -16,16 +16,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
+import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuModel
 import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
 fun VoteCardMenu(
-    menu: VoteRepresentativeMenuResponseModel,
+    menu: VoteRepresentativeMenuModel,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -66,7 +66,7 @@ fun VoteCardMenu(
 @Preview(showBackground = true, widthDp = 375)
 @Composable
 private fun VoteCardMenuPreview() {
-    val dummyMenus = createDummyVoteDetailResponseModel().candidates
+    val dummyMenus = createDummyVoteDetailModel().candidates
         .flatMap { it.store.representativeMenus }
         .take(2)
 

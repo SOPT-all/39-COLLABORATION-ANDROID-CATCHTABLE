@@ -1,13 +1,13 @@
 package com.android.catchtable.presentation.vote
 
-import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
+import com.android.catchtable.domain.model.vote.VoteDetailModel
 import com.android.catchtable.presentation.vote.model.VoteRole
 import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.common.model.CatchTableButtonType
 import com.android.catchtable.presentation.vote.model.VoteButtonType
 
 data class VoteUiState(
-    val voteDetail: VoteDetailResponseModel? = null,
+    val voteDetail: VoteDetailModel? = null,
     val selectedCandidateId: Long? = null,
     val isLoading: Boolean = false,
     val errorMessage: String? = null

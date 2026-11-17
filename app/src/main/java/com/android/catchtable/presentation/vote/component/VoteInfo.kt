@@ -14,20 +14,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
-import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
+import com.android.catchtable.domain.model.vote.VoteStoreModel
+import com.android.catchtable.domain.model.vote.VoteVoterModel
 import com.android.catchtable.presentation.common.component.CatchTableAI
 import com.android.catchtable.presentation.common.component.CatchTableSubwayBadge
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.vote.model.VoteTagType
-import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 
 //고민! 이걸 component로 부르기엔 좀 그렇다. 네이밍을 screen으로 바꿔야할지 말지
 @Composable
 fun VoteInfo(
-    store: VoteStoreResponseModel,
-    voters: List<VoteVoterResponseModel>,
+    store: VoteStoreModel,
+    voters: List<VoteVoterModel>,
     status: VoteStatus,
     isSelected: Boolean,
     backgroundColor: Color,
@@ -169,7 +169,7 @@ private fun VoteInfoDivider(
 @Composable
 private fun VoteInfoPreview(){
     CatchTableTheme {
-        val candidate = createDummyVoteDetailResponseModel().candidates.first()
+        val candidate = createDummyVoteDetailModel().candidates.first()
         VoteInfo(
             store = candidate.store,
             voters = candidate.voters,

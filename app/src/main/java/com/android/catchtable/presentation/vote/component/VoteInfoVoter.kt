@@ -16,14 +16,14 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
+import com.android.catchtable.domain.model.vote.VoteVoterModel
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import kotlin.collections.getOrNull
 
 //높이를 직접 주입하는 방식. 올바르지 않지만 VoteInfo를 Column으로 넣어서 Row로 수정하기엔 리소스가 너무 많이 들어감
 @Composable
 fun VoteInfoVoter(
-    voters: List<VoteVoterResponseModel>,
+    voters: List<VoteVoterModel>,
     modifier: Modifier = Modifier,
     rowCount: Int = voters.size
 ){
@@ -76,12 +76,12 @@ private fun VoteInfoVoterPreview(){
     CatchTableTheme {
         VoteInfoVoter(
             voters = listOf(
-                VoteVoterResponseModel("김승혁"),
-                VoteVoterResponseModel("김승현"),
-                VoteVoterResponseModel("김승호"),
-                VoteVoterResponseModel("김승희"),
-                VoteVoterResponseModel("김승훈"),
-                VoteVoterResponseModel("김승열")
+                VoteVoterModel("김승혁"),
+                VoteVoterModel("김승현"),
+                VoteVoterModel("김승호"),
+                VoteVoterModel("김승희"),
+                VoteVoterModel("김승훈"),
+                VoteVoterModel("김승열")
             )
         )
     }

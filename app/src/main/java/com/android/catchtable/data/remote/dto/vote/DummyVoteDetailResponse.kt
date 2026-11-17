@@ -2,14 +2,14 @@ package com.android.catchtable.data.remote.dto.vote
 
 import com.android.catchtable.data.remote.dto.base.BaseResponse
 import com.android.catchtable.domain.model.vote.VoteAiSummaryModel
-import com.android.catchtable.domain.model.vote.VoteAmenityResponseModel
-import com.android.catchtable.domain.model.vote.VoteCandidateResponseModel
-import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
-import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
-import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
-import com.android.catchtable.domain.model.vote.VoteStationResponseModel
-import com.android.catchtable.domain.model.vote.VoteViewerResponseModel
-import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
+import com.android.catchtable.domain.model.vote.VoteAmenityModel
+import com.android.catchtable.domain.model.vote.VoteCandidateModel
+import com.android.catchtable.domain.model.vote.VoteDetailModel
+import com.android.catchtable.domain.model.vote.VoteStoreModel
+import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuModel
+import com.android.catchtable.domain.model.vote.VoteStationModel
+import com.android.catchtable.domain.model.vote.VoteViewerModel
+import com.android.catchtable.domain.model.vote.VoteVoterModel
 import com.android.catchtable.domain.model.vote.VoteStatus
 
 //실제 환경 더미 데이터
@@ -17,12 +17,12 @@ internal object DummyVoteDetailResponse {
     fun create(voteId: Long) = BaseResponse(
         code = 200,
         message = "투표 상세 조회 성공",
-        data = VoteDetailResponseModel(
+        data = VoteDetailModel(
             voteId = voteId,
             status = VoteStatus.CREATE,
             participantCount = 2,
             candidates = listOf(createFirstCandidate(), createSecondCandidate()),
-            viewer = VoteViewerResponseModel(
+            viewer = VoteViewerModel(
                 userId = 2L,
                 isHost = false,
                 hasVoted = false,
@@ -36,14 +36,14 @@ internal object DummyVoteDetailResponse {
     )
 }
 
-private fun createFirstCandidate() = VoteCandidateResponseModel(
+private fun createFirstCandidate() = VoteCandidateModel(
     candidateId = 21L,
     displayOrder = 1,
     voteCount = 2,
     voters = listOf(
-        VoteVoterResponseModel(displayName = "김승혁"),
+        VoteVoterModel(displayName = "김승혁"),
     ),
-    store = VoteStoreResponseModel(
+    store = VoteStoreModel(
         storeId = 1L,
         name = "하이디라오 서초점",
         rating = 4.7f,
@@ -51,7 +51,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
         imageUrls = listOf(
             "https://ugc-images.catchtable.co.kr/catchtable/shopinfo/sQ6OMNo_LTW0nT53hnpp1jA/m/fa6bea1a059747e39581799d71970bca"
         ),
-        station = VoteStationResponseModel(
+        station = VoteStationModel(
             name = "신논현역",
             lines = listOf("9", "신분당"),
             distanceMeters = 221
@@ -65,7 +65,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
         ),
         priceRange = "점심 저녁 동일가 3 - 5만원",
         representativeMenus = listOf(
-            VoteRepresentativeMenuResponseModel(
+            VoteRepresentativeMenuModel(
                 menuId = 2101L,
                 name = "소기름훠궈",
                 price = 9000,
@@ -73,7 +73,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
                 imageUrl = "https://ugc-images.catchtable.co.kr/shop/manager/images/970f5beef34446de95eb7757c2e0a2d5",
                 displayOrder = 1
             ),
-            VoteRepresentativeMenuResponseModel(
+            VoteRepresentativeMenuModel(
                 menuId = 2102L,
                 name = "청유마라훠궈",
                 price = 9000,
@@ -83,7 +83,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
             )
         ),
         amenities = listOf(
-            VoteAmenityResponseModel(
+            VoteAmenityModel(
                 category = "LIQUOR_CORKAGE",
                 content = "- 와인: 병당 5만원\n- 위스키: 병당 5만원\n- 사케: 병당 5만원"
             )
@@ -91,12 +91,12 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
     )
 )
 
-private fun createSecondCandidate() = VoteCandidateResponseModel(
+private fun createSecondCandidate() = VoteCandidateModel(
     candidateId = 22L,
     displayOrder = 2,
     voteCount = 0,
     voters = emptyList(),
-    store = VoteStoreResponseModel(
+    store = VoteStoreModel(
         storeId = 2L,
         name = "소보키 강남점",
         rating = 4.5f,
@@ -104,7 +104,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
         imageUrls = listOf(
             "https://ugc-images.catchtable.co.kr/shop/manager/images/567e2166ccdb49aab7b0fc19adc8aeec"
         ),
-        station = VoteStationResponseModel(
+        station = VoteStationModel(
             name = "신논현역",
             lines = listOf("9", "신분당"),
             distanceMeters = 396
@@ -118,7 +118,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
         ),
         priceRange = "점심 1 - 2만원 / 저녁 1 - 3만원",
         representativeMenus = listOf(
-            VoteRepresentativeMenuResponseModel(
+            VoteRepresentativeMenuModel(
                 menuId = 2201L,
                 name = "2인 SET",
                 price = 55000,
@@ -126,7 +126,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
                 imageUrl = "https://ugc-images.catchtable.co.kr/shop/manager/images/648a10d47da446f1af339243db711aeb",
                 displayOrder = 1
             ),
-            VoteRepresentativeMenuResponseModel(
+            VoteRepresentativeMenuModel(
                 menuId = 2202L,
                 name = "3인 SET",
                 price = 69000,
@@ -136,7 +136,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
             )
         ),
         amenities = listOf(
-            VoteAmenityResponseModel(
+            VoteAmenityModel(
                 category = "LIQUOR_CORKAGE",
                 content = "- 와인 외 가능: 병당 5만원"
             )

@@ -20,7 +20,7 @@ data class VoteViewerResponseDto(
     @SerialName("isHost") val isHost: Boolean,
     @SerialName("hasVoted") val hasVoted: Boolean,
     @SerialName("selectedCandidateId") val selectedCandidateId: Long?,
-    @SerialName("displayName") val displayName: String,
+    @SerialName("displayName") val displayName: String?,
     @SerialName("defaultNickname") val defaultNickname: String
 )
 

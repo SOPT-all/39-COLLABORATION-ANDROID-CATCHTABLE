@@ -9,48 +9,48 @@ import com.android.catchtable.data.remote.dto.vote.response.VoteRepresentativeMe
 import com.android.catchtable.data.remote.dto.vote.response.VoteStationResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteViewerResponseDto
 import com.android.catchtable.domain.model.vote.VoteAiSummaryModel
-import com.android.catchtable.domain.model.vote.VoteAmenityResponseModel
-import com.android.catchtable.domain.model.vote.VoteCandidateResponseModel
-import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
-import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
-import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
-import com.android.catchtable.domain.model.vote.VoteStationResponseModel
+import com.android.catchtable.domain.model.vote.VoteAmenityModel
+import com.android.catchtable.domain.model.vote.VoteCandidateModel
+import com.android.catchtable.domain.model.vote.VoteDetailModel
+import com.android.catchtable.domain.model.vote.VoteStoreModel
+import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuModel
+import com.android.catchtable.domain.model.vote.VoteStationModel
 import com.android.catchtable.domain.model.vote.VoteStatus
-import com.android.catchtable.domain.model.vote.VoteViewerResponseModel
-import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
+import com.android.catchtable.domain.model.vote.VoteViewerModel
+import com.android.catchtable.domain.model.vote.VoteVoterModel
 
-fun VoteDetailResponseDto.toResponseModel() = VoteDetailResponseModel(
+fun VoteDetailResponseDto.toModel() = VoteDetailModel(
     voteId = voteId,
     status = VoteStatus.find(status),
     participantCount = participantCount,
-    candidates = candidates.map { it.toResponseModel() },
-    viewer = viewer.toResponseModel(),
+    candidates = candidates.map { it.toModel() },
+    viewer = viewer.toModel(),
     createdAt = createdAt,
     closedAt = closedAt
 )
 
-private fun VoteCandidateResponseDto.toResponseModel() = VoteCandidateResponseModel(
+private fun VoteCandidateResponseDto.toModel() = VoteCandidateModel(
     candidateId = candidateId,
     displayOrder = displayOrder,
     voteCount = voteCount,
-    voters = voters.map { VoteVoterResponseModel(displayName = it.displayName) },
-    store = store.toResponseModel()
+    voters = voters.map { VoteVoterModel(displayName = it.displayName) },
+    store = store.toModel()
 )
 
-private fun VoteStoreResponseDto.toResponseModel() = VoteStoreResponseModel(
+private fun VoteStoreResponseDto.toModel() = VoteStoreModel(
     storeId = storeId,
     name = name,
     rating = rating,
     reviewCount = reviewCount,
     imageUrls = imageUrls,
-    station = station.toResponseModel(),
+    station = station.toModel(),
     aiSummary = aiSummary.toModel(),
     priceRange = priceRange,
-    representativeMenus = representativeMenus.map { it.toResponseModel() },
-    amenities = amenities.map { it.toResponseModel() }
+    representativeMenus = representativeMenus.map { it.toModel() },
+    amenities = amenities.map { it.toModel() }
 )
 
-private fun VoteStationResponseDto.toResponseModel() = VoteStationResponseModel(
+private fun VoteStationResponseDto.toModel() = VoteStationModel(
     name = name,
     lines = lines,
     distanceMeters = distanceMeters
@@ -61,7 +61,7 @@ private fun VoteAiSummaryResponseDto.toModel() = VoteAiSummaryModel(
     lines = lines
 )
 
-private fun VoteRepresentativeMenuResponseDto.toResponseModel() = VoteRepresentativeMenuResponseModel(
+private fun VoteRepresentativeMenuResponseDto.toModel() = VoteRepresentativeMenuModel(
     menuId = menuId,
     name = name,
     price = price,
@@ -70,12 +70,12 @@ private fun VoteRepresentativeMenuResponseDto.toResponseModel() = VoteRepresenta
     displayOrder = displayOrder
 )
 
-private fun VoteAmenityResponseDto.toResponseModel() = VoteAmenityResponseModel(
+private fun VoteAmenityResponseDto.toModel() = VoteAmenityModel(
     category = category,
     content = content
 )
 
-private fun VoteViewerResponseDto.toResponseModel() = VoteViewerResponseModel(
+private fun VoteViewerResponseDto.toModel() = VoteViewerModel(
     userId = userId,
     isHost = isHost,
     hasVoted = hasVoted,

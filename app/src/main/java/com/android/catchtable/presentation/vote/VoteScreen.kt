@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -29,10 +30,11 @@ import com.android.catchtable.presentation.common.component.CatchTableButton
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.component.VoteHeader
 import com.android.catchtable.presentation.vote.component.VoteInfo
-import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
+import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 
 private const val MAX_VISIBLE_STORE_COUNT = 2
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VoteScreen(
     uiState: VoteUiState,
@@ -159,7 +161,7 @@ private fun previewVoteState(
     role: VoteRole,
     hasVoted: Boolean
 ): VoteUiState {
-    val voteDetail = createDummyVoteDetailResponseModel()
+    val voteDetail = createDummyVoteDetailModel()
     val firstCandidate = voteDetail.candidates.first()
     val viewer = voteDetail.viewer.copy(
         isHost = role == VoteRole.HOST,

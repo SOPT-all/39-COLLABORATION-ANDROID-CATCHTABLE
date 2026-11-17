@@ -1,19 +1,19 @@
 package com.android.catchtable.domain.model.vote
 
-data class VoteStoreResponseModel(
+data class VoteStoreModel(
     val storeId: Long,
     val name: String,
     val rating: Float,
     val reviewCount: Int,
     val imageUrls: List<String>,
-    val station: VoteStationResponseModel,
+    val station: VoteStationModel,
     val aiSummary: VoteAiSummaryModel,
     val priceRange: String,
-    val representativeMenus: List<VoteRepresentativeMenuResponseModel>,
-    val amenities: List<VoteAmenityResponseModel>
+    val representativeMenus: List<VoteRepresentativeMenuModel>,
+    val amenities: List<VoteAmenityModel>
 )
 
-data class VoteStationResponseModel(
+data class VoteStationModel(
     val name: String,
     val lines: List<String>,
     val distanceMeters: Int
@@ -24,7 +24,7 @@ data class VoteAiSummaryModel(
     val lines: List<String>
 )
 
-data class VoteRepresentativeMenuResponseModel(
+data class VoteRepresentativeMenuModel(
     val menuId: Long,
     val name: String,
     val price: Int,
@@ -33,7 +33,7 @@ data class VoteRepresentativeMenuResponseModel(
     val displayOrder: Int
 )
 
-data class VoteAmenityResponseModel(
+data class VoteAmenityModel(
     val category: String,
     val content: String
 )
