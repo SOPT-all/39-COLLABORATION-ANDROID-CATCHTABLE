@@ -1,5 +1,6 @@
 package com.android.catchtable.presentation.vote.component
 
+import android.R.attr.minLines
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
@@ -39,12 +40,10 @@ fun VoteInfoSectionTitle(
 
 @Composable
 fun VoteInfoSectionContent(
-    text: String,
-    minLines: Int = 1
+    text: String
 ){
     Text(
         text = text,
-        minLines = minLines,
         style = CatchTableTheme.typography.bodyRG12,
         color = CatchTableTheme.colors.gray600
     )

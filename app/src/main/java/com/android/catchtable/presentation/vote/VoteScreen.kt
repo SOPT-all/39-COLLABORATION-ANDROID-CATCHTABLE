@@ -117,6 +117,7 @@ fun VoteScreen(
                     .background(CatchTableTheme.colors.white)
                     .padding(vertical = 12.dp, horizontal = 20.dp)
             )
+            Spacer(modifier = Modifier.height(30.dp))
         }
     }
 
