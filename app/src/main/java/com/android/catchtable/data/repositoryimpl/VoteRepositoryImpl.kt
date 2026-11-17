@@ -7,9 +7,14 @@ import com.android.catchtable.data.util.suspendRunCatching
 import javax.inject.Inject
 
 class VoteRepositoryImpl @Inject constructor() : VoteRepository {
-    override suspend fun getVoteDetail(voteId: Long): Result<VoteDetailModel> =
+    override suspend fun getVoteDetail(voteId: Long?): Result<VoteDetailModel> =
         suspendRunCatching {
-            // API 연동 후 수정 예정
-            requireNotNull(DummyVoteDetailResponse.create(voteId).data)
+            if (voteId == null) {
+                // Store 진입: voteId가 없으므로 기존 더미 데이터를 사용
+                requireNotNull(DummyVoteDetailResponse.create(1L).data)
+            } else {
+                // Home 진입: voteId를 사용해 API 연동 예정. 연동 전까지는 기존 더미 데이터를 사용
+                requireNotNull(DummyVoteDetailResponse.create(voteId).data)
+            }
         }
 }

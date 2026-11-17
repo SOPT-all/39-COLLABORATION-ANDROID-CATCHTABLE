@@ -20,11 +20,6 @@ class VoteViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     fun initVote(voteId: Long?) {
-        if (voteId == null) {
-            _uiState.value = VoteUiState()
-            return
-        }
-
         viewModelScope.launch {
             getVoteDetailUseCase(voteId)
                 .onSuccess { voteDetail ->
