@@ -1,5 +1,6 @@
 package com.android.catchtable.presentation.home.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,12 +19,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.model.RecommendStoreUiModel
@@ -34,17 +35,17 @@ fun HomeCardRecommended(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        modifier = modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        CatchTableAsyncImage(
-            imgUrl = store.thumbnailUrl,
+        Image(
+            painter = painterResource(id = store.imageRes),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .clip(shape = RoundedCornerShape(8.dp)),
         )
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
@@ -69,8 +70,7 @@ fun HomeCardRecommended(
                         painter = painterResource(id = R.drawable.ic_star),
                         contentDescription = null,
                         tint = CatchTableTheme.colors.yellow,
-                        modifier = Modifier
-                            .size(20.dp)
+                        modifier = Modifier.size(20.dp)
                     )
 
                     Spacer(modifier = Modifier.width(2.dp))
@@ -112,8 +112,7 @@ fun HomeCardRecommended(
                 tint = CatchTableTheme.colors.white,
                 modifier = Modifier
                     .background(
-                        color = CatchTableTheme.colors.gray300,
-                        shape = CircleShape
+                        color = CatchTableTheme.colors.gray300, shape = CircleShape
                     )
                     .padding(all = 5.dp)
                     .size(20.dp)
@@ -127,7 +126,7 @@ fun HomeCardRecommended(
 private fun HomeCardRecommendedPreview() {
     val dummyStore = RecommendStoreUiModel(
         id = 5,
-        thumbnailUrl = null,
+        imageRes = R.drawable.img_home_recommend_01,
         name = "만가타",
         category = "유러피안음식",
         region = "삼청",
@@ -142,13 +141,11 @@ private fun HomeCardRecommendedPreview() {
             horizontalArrangement = Arrangement.spacedBy(15.dp)
         ) {
             HomeCardRecommended(
-                store = dummyStore,
-                modifier = Modifier.weight(1f)
+                store = dummyStore, modifier = Modifier.weight(1f)
             )
 
             HomeCardRecommended(
-                store = dummyStore,
-                modifier = Modifier.weight(1f)
+                store = dummyStore, modifier = Modifier.weight(1f)
             )
         }
     }
