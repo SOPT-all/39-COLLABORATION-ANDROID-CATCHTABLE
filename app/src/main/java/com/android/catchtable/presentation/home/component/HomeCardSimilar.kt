@@ -1,5 +1,6 @@
 package com.android.catchtable.presentation.home.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,12 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.R
-import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.component.CatchTableDot
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
@@ -38,14 +39,15 @@ fun HomeCardSimilar(
             .fillMaxWidth()
             .noRippleClickable(onClick = { onCardClick(store.id) })
     ) {
-        CatchTableAsyncImage(
-            imgUrl = store.thumbnailUrl,
+        Image(
+            painter = painterResource(id = store.imageRes),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
                 .clip(RoundedCornerShape(6.dp)),
         )
-
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
@@ -96,8 +98,7 @@ fun HomeCardSimilar(
                 painter = painterResource(id = R.drawable.ic_star),
                 contentDescription = null,
                 tint = CatchTableTheme.colors.yellow,
-                modifier = Modifier
-                    .size(16.dp),
+                modifier = Modifier.size(16.dp),
             )
 
             Text(
@@ -123,7 +124,7 @@ private fun HomeCardSimilarPreview() {
     val dummyStores = listOf(
         SimilarStoreUiModel(
             id = 1,
-            thumbnailUrl = null,
+            imageRes = R.drawable.img_home_similar_01,
             name = "하이디라오 서초점",
             category = "중식",
             region = "강남",
@@ -132,7 +133,7 @@ private fun HomeCardSimilarPreview() {
         ),
         SimilarStoreUiModel(
             id = 3,
-            thumbnailUrl = null,
+            imageRes = R.drawable.img_home_similar_02,
             name = "소보키 강남점",
             category = "한식",
             region = "강남",
@@ -141,7 +142,7 @@ private fun HomeCardSimilarPreview() {
         ),
         SimilarStoreUiModel(
             id = 4,
-            thumbnailUrl = null,
+            imageRes = R.drawable.img_home_similar_01,
             name = "징관청훠궈 가로수길본점",
             category = "중식",
             region = "가로수길",
@@ -159,9 +160,7 @@ private fun HomeCardSimilarPreview() {
         ) {
             dummyStores.forEach { store ->
                 HomeCardSimilar(
-                    store = store,
-                    onCardClick = {},
-                    modifier = Modifier.weight(1f)
+                    store = store, onCardClick = {}, modifier = Modifier.weight(1f)
                 )
             }
         }

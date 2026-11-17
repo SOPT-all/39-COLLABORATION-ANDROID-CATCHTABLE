@@ -1,5 +1,6 @@
 package com.android.catchtable.presentation.home.component
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -21,8 +22,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.home.model.HomeRecentUiModel
@@ -42,7 +44,6 @@ fun HomeStoreSection(
     Column(
         modifier = modifier
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -81,8 +82,6 @@ fun HomeStoreSection(
             }
 
         }
-
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -111,7 +110,6 @@ fun HomeStoreSection(
     }
 }
 
-
 @Composable
 private fun HomeStoreItem(
     recent: HomeRecentUiModel,
@@ -126,19 +124,19 @@ private fun HomeStoreItem(
                 width = 1.dp,
                 color = if (isSelected) CatchTableTheme.colors.gray500 else CatchTableTheme.colors.gray100,
                 shape = RoundedCornerShape(12.dp)
-
             )
             .noRippleClickable(onClick = onClick)
             .padding(horizontal = 9.dp, vertical = 8.dp),
-
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        CatchTableAsyncImage(
-            imgUrl = recent.thumbnailUrl,
+        Image(
+            painter = painterResource(id = recent.imageRes),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .size(48.dp)
-                .clip(RoundedCornerShape(8.dp))
+                .clip(RoundedCornerShape(8.dp)),
         )
         Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
             Text(

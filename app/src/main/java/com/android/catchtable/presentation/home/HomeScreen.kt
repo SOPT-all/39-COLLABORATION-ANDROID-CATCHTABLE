@@ -162,19 +162,19 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                 recentStores = listOf(
                     HomeRecentUiModel(
                         id = 1,
-                        thumbnailUrl = null,
+                        imageRes = R.drawable.img_home_recent_01,
                         name = "하이디라오 서초점",
                         region = "강남",
                         category = "중식"
                     ),
                     HomeRecentUiModel(
-                        id = 2, thumbnailUrl = null, name = "와아", region = "성수", category = "와인"
+                        id = 2, imageRes = R.drawable.img_home_recent_02, name = "와아", region = "성수", category = "와인"
                     ),
                 ),
                 similarStores = listOf(
                     SimilarStoreUiModel(
                         id = 1,
-                        thumbnailUrl = null,
+                        imageRes = R.drawable.img_home_similar_01,
                         name = "하이디라오 서초점",
                         category = "중식",
                         region = "강남",
@@ -183,7 +183,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                     ),
                     SimilarStoreUiModel(
                         id = 3,
-                        thumbnailUrl = null,
+                        imageRes = R.drawable.img_home_similar_02,
                         name = "하이디라오 가산점",
                         category = "중식",
                         region = "가산디지털단지",
@@ -192,7 +192,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                     ),
                     SimilarStoreUiModel(
                         id = 4,
-                        thumbnailUrl = null,
+                        imageRes = R.drawable.img_home_similar_01,
                         name = "징관청훠궈 가로수길",
                         category = "중식",
                         region = "가로수길",
@@ -203,7 +203,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                 recommendStores = listOf(
                     RecommendStoreUiModel(
                         id = 5,
-                        thumbnailUrl = null,
+                        imageRes = R.drawable.img_home_recommend_01,
                         name = "만가타",
                         category = "유러피안음식",
                         region = "삼청",
@@ -211,7 +211,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                     ),
                     RecommendStoreUiModel(
                         id = 6,
-                        thumbnailUrl = null,
+                        imageRes = R.drawable.img_home_recommend_02,
                         name = "만가타",
                         category = "유러피안음식",
                         region = "삼청",
