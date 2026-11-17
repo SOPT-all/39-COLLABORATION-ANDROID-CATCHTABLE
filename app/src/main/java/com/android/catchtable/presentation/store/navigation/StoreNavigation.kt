@@ -19,6 +19,7 @@ fun NavController.navigateToStore(
 }
 
 fun NavGraphBuilder.storeNavGraph(
+    navController: NavController,
     innerPadding: PaddingValues,
 ) {
     composable<Store> {

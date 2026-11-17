@@ -17,6 +17,7 @@ fun NavController.navigateToVote(
 }
 
 fun NavGraphBuilder.voteNavGraph(
+    navController: NavController,
     innerPadding: PaddingValues,
 ) {
     composable<Vote> {

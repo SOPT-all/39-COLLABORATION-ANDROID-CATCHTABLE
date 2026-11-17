@@ -17,6 +17,7 @@ fun NavController.navigateToHome(
 }
 
 fun NavGraphBuilder.homeNavGraph(
+    navController: NavController,
     innerPadding: PaddingValues,
 ) {
     composable<Home> {

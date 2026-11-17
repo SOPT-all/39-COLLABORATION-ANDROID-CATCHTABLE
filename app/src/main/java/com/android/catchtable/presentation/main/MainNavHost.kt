@@ -24,6 +24,7 @@ fun MainNavHost(
         startDestination = appState.startDestination,
     ) {
         homeNavGraph(
+            navController = navController,
             innerPadding = innerPadding,
         )
         savedNavGraph(
@@ -39,12 +40,15 @@ fun MainNavHost(
             innerPadding = innerPadding,
         )
         storeNavGraph(
+            navController = navController,
             innerPadding = innerPadding,
         )
         voteNavGraph(
+            navController = navController,
             innerPadding = innerPadding,
         )
         voteCompleteNavGraph(
+            navController = navController,
             innerPadding = innerPadding,
         )
     }
