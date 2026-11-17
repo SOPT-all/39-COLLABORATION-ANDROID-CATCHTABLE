@@ -1,6 +1,5 @@
 package com.android.catchtable.presentation.vote.component.bottomsheet
 
-import android.R.attr.onClick
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -35,6 +34,12 @@ fun VoteBottomSheetContent(
     onButtonClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val isSubmitEnabled = when (selectedMethod) {
+        VoteMethod.ANONYMOUS -> true
+        VoteMethod.NICKNAME -> nickname.isNotBlank() && nickname.trim().length <= 12
+        null -> false
+    }
+
     Column(
         modifier = modifier
             .fillMaxWidth()
@@ -94,7 +99,7 @@ fun VoteBottomSheetContent(
 
         CatchTableButton(
             text = "이 이름으로 투표하기",
-            type = if (nickname.length <= 12) CatchTableButtonType.PRIMARY_ENABLED else CatchTableButtonType.PRIMARY_DISABLED_PRIMARY,
+            type = if (isSubmitEnabled) CatchTableButtonType.PRIMARY_ENABLED else CatchTableButtonType.PRIMARY_DISABLED_PRIMARY,
             onClick = onButtonClick,
         )
     }
