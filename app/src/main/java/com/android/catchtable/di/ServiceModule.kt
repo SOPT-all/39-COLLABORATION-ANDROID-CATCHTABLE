@@ -1,6 +1,5 @@
 package com.android.catchtable.di
 
-import com.android.catchtable.data.remote.service.HomeService
 import com.android.catchtable.data.remote.service.StoreService
 import com.android.catchtable.data.remote.service.VoteService
 import dagger.Module
@@ -13,11 +12,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object ServiceModule {
-
-    @Provides
-    @Singleton
-    fun provideHomeService(retrofit: Retrofit): HomeService =
-        retrofit.create(HomeService::class.java)
 
     @Provides
     @Singleton
