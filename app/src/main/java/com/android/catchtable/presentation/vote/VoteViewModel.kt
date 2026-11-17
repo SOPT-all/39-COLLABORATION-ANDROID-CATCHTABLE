@@ -25,7 +25,6 @@ class VoteViewModel @Inject constructor(
             return
         }
 
-        _uiState.update { it.copy(isLoading = true, errorMessage = null) }
         viewModelScope.launch {
             getVoteDetailUseCase(voteId)
                 .onSuccess { voteDetail ->
@@ -36,9 +35,6 @@ class VoteViewModel @Inject constructor(
                 }
                 .onFailure { throwable ->
                     Timber.e(throwable, "투표 상세 조회 실패")
-                    _uiState.update {
-                        it.copy(isLoading = false, errorMessage = throwable.message)
-                    }
                 }
             }
     }

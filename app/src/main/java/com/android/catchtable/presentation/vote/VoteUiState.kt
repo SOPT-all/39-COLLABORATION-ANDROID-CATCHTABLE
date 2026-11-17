@@ -8,9 +8,7 @@ import com.android.catchtable.presentation.vote.model.VoteButtonType
 
 data class VoteUiState(
     val voteDetail: VoteDetailModel? = null,
-    val selectedCandidateId: Long? = null,
-    val isLoading: Boolean = false,
-    val errorMessage: String? = null
+    val selectedCandidateId: Long? = null
 ) {
     val status: VoteStatus
         get() = voteDetail?.status ?: VoteStatus.CREATE
