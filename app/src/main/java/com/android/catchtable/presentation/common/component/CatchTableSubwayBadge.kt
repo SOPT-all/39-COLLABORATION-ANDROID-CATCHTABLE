@@ -3,7 +3,6 @@ package com.android.catchtable.presentation.common.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
@@ -25,15 +24,6 @@ fun CatchTableSubwayBadge(
         "신분당" -> CatchTableTheme.colors.lineSBD
         else -> CatchTableTheme.colors.white
     }
-
-
-/* 이건 코드리뷰 확인해볼게요. 3.dp, 5.dp로 해야 딱 정가운데이긴한데 피그마 그대로 사용한다면 padding(padding)으로 코드 수정하면 됩니다!
-    val padding = when (line) {
-        "9" -> PaddingValues(top = 3.dp, end = 5.dp, bottom = 4.dp, start = 6.dp)
-        "신분당" -> PaddingValues(vertical = 3.dp, horizontal = 6.dp)
-        else -> PaddingValues(0.dp)
-    }*/
-
     Text(
         text = line,
         color = CatchTableTheme.colors.white,

@@ -4,9 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.HorizontalDivider
@@ -16,33 +14,33 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
 import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
 import com.android.catchtable.presentation.common.component.CatchTableAI
 import com.android.catchtable.presentation.common.component.CatchTableSubwayBadge
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.vote.model.VoteTagType
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
 
 //고민! 이걸 component로 부르기엔 좀 그렇다. 네이밍을 screen으로 바꿔야할지 말지
 @Composable
 fun VoteInfo(
-    store: VoteDetailStoreResponseModel,
+    store: VoteStoreResponseModel,
     voters: List<VoteVoterResponseModel>,
-    voterRowCount: Int = voters.size,
     status: VoteStatus,
     isSelected: Boolean,
     backgroundColor: Color,
     strokeColor: Color,
     modifier: Modifier = Modifier,
-    onCheckClick: (Long) -> Unit = {}
+    onCheckClick: (Long) -> Unit = {},
+    voterRowCount: Int = voters.size
 ){
     Column(
         modifier = modifier
             .fillMaxWidth()
             .background(backgroundColor)
-            .padding(top = 12.dp, bottom = 16.dp),
+            .padding(top = 12.dp, bottom = 20.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ){
         Column(
@@ -113,7 +111,7 @@ fun VoteInfo(
             content = {
                 Column(
                     modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                    verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -140,22 +138,20 @@ fun VoteInfo(
                     )
                 }
             },
-            spaceBy = 8.dp
+            spaceBy = 6.dp
         )
         VoteInfoDivider(strokeColor)
 
         VoteInfoSection(
             title = { VoteInfoSectionTitle(text = "주류 및 콜키지") },
             content = {
-                VoteInfoSectionContent(
-                    text = store.amenities.joinToString("\n") { it.content },
-                    minLines = 3
-                )
+                Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                    store.amenities.forEach { amenity ->
+                        VoteInfoSectionContent(text = amenity.content)
+                    }
+                }
             }
         )
-
-        Spacer(modifier = Modifier.height(0.dp))
-
     }
 }
 

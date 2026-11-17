@@ -47,8 +47,8 @@ fun CatchTableAI(
                 withStyle(
                     style = SpanStyle(
                         brush = CatchTableTheme.colors.pinkGradient
-                        ),
-                    ){
+                    ),
+                ) {
                     append("AI")
                 }
                 append(title)

@@ -4,18 +4,18 @@ import com.android.catchtable.data.remote.dto.vote.response.VoteAiSummaryRespons
 import com.android.catchtable.data.remote.dto.vote.response.VoteAmenityResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteCandidateResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteDetailResponseDto
-import com.android.catchtable.data.remote.dto.vote.response.VoteDetailStoreResponseDto
+import com.android.catchtable.data.remote.dto.vote.response.VoteStoreResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteRepresentativeMenuResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteStationResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteViewerResponseDto
-import com.android.catchtable.domain.model.vote.VoteAiSummaryResponseModel
+import com.android.catchtable.domain.model.vote.VoteAiSummaryModel
 import com.android.catchtable.domain.model.vote.VoteAmenityResponseModel
 import com.android.catchtable.domain.model.vote.VoteCandidateResponseModel
 import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
-import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
 import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
 import com.android.catchtable.domain.model.vote.VoteStationResponseModel
-import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.domain.model.vote.VoteViewerResponseModel
 import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
 
@@ -37,14 +37,14 @@ private fun VoteCandidateResponseDto.toResponseModel() = VoteCandidateResponseMo
     store = store.toResponseModel()
 )
 
-private fun VoteDetailStoreResponseDto.toResponseModel() = VoteDetailStoreResponseModel(
+private fun VoteStoreResponseDto.toResponseModel() = VoteStoreResponseModel(
     storeId = storeId,
     name = name,
     rating = rating,
     reviewCount = reviewCount,
     imageUrls = imageUrls,
     station = station.toResponseModel(),
-    aiSummary = aiSummary.toResponseModel(),
+    aiSummary = aiSummary.toModel(),
     priceRange = priceRange,
     representativeMenus = representativeMenus.map { it.toResponseModel() },
     amenities = amenities.map { it.toResponseModel() }
@@ -56,7 +56,7 @@ private fun VoteStationResponseDto.toResponseModel() = VoteStationResponseModel(
     distanceMeters = distanceMeters
 )
 
-private fun VoteAiSummaryResponseDto.toResponseModel() = VoteAiSummaryResponseModel(
+private fun VoteAiSummaryResponseDto.toModel() = VoteAiSummaryModel(
     title = title,
     lines = lines
 )

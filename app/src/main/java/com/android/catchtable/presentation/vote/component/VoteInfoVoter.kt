@@ -24,8 +24,8 @@ import kotlin.collections.getOrNull
 @Composable
 fun VoteInfoVoter(
     voters: List<VoteVoterResponseModel>,
-    rowCount: Int = voters.size,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    rowCount: Int = voters.size
 ){
     val votersCount = voters.size
     val visibleRowCount = maxOf(votersCount, rowCount)

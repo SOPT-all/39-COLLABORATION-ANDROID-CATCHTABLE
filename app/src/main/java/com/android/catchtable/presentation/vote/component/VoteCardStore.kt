@@ -27,14 +27,14 @@ import com.android.catchtable.R
 import com.android.catchtable.presentation.common.component.CatchTableAsyncImage
 import com.android.catchtable.presentation.common.extension.noRippleClickable
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailResponseModel
 import java.text.NumberFormat
 import java.util.Locale
 
 @Composable
 fun VoteCardStore(
-    store: VoteDetailStoreResponseModel,
+    store: VoteStoreResponseModel,
     onCheckClick: (Long) -> Unit,
     modifier: Modifier = Modifier,
     isSelected: Boolean? = null,

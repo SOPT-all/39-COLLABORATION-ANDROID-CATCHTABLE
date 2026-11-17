@@ -1,21 +1,20 @@
 package com.android.catchtable.data.remote.dto.vote
 
 import com.android.catchtable.data.remote.dto.base.BaseResponse
-import com.android.catchtable.domain.model.vote.VoteAiSummaryResponseModel
+import com.android.catchtable.domain.model.vote.VoteAiSummaryModel
 import com.android.catchtable.domain.model.vote.VoteAmenityResponseModel
 import com.android.catchtable.domain.model.vote.VoteCandidateResponseModel
 import com.android.catchtable.domain.model.vote.VoteDetailResponseModel
-import com.android.catchtable.domain.model.vote.VoteDetailStoreResponseModel
+import com.android.catchtable.domain.model.vote.VoteStoreResponseModel
 import com.android.catchtable.domain.model.vote.VoteRepresentativeMenuResponseModel
 import com.android.catchtable.domain.model.vote.VoteStationResponseModel
 import com.android.catchtable.domain.model.vote.VoteViewerResponseModel
 import com.android.catchtable.domain.model.vote.VoteVoterResponseModel
-import com.android.catchtable.presentation.vote.model.VoteRole
-import com.android.catchtable.presentation.vote.model.VoteStatus
+import com.android.catchtable.domain.model.vote.VoteStatus
 
 //실제 환경 더미 데이터
 internal object DummyVoteDetailResponse {
-    fun create(voteId: Long, role: VoteRole) = BaseResponse(
+    fun create(voteId: Long) = BaseResponse(
         code = 200,
         message = "투표 상세 조회 성공",
         data = VoteDetailResponseModel(
@@ -25,7 +24,7 @@ internal object DummyVoteDetailResponse {
             candidates = listOf(createFirstCandidate(), createSecondCandidate()),
             viewer = VoteViewerResponseModel(
                 userId = 2L,
-                isHost = role == VoteRole.HOST,
+                isHost = false,
                 hasVoted = false,
                 selectedCandidateId = null,
                 displayName = "테스트1",
@@ -44,7 +43,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
     voters = listOf(
         VoteVoterResponseModel(displayName = "김승혁"),
     ),
-    store = VoteDetailStoreResponseModel(
+    store = VoteStoreResponseModel(
         storeId = 1L,
         name = "하이디라오 서초점",
         rating = 4.7f,
@@ -57,7 +56,7 @@ private fun createFirstCandidate() = VoteCandidateResponseModel(
             lines = listOf("9", "신분당"),
             distanceMeters = 221
         ),
-        aiSummary = VoteAiSummaryResponseModel(
+        aiSummary = VoteAiSummaryModel(
             title = "중국 본토의 맛 그대로, 차원이 다른 훠궈 전문점",
             lines = listOf(
                 "소스바에서 취향에 맞는 소스를 만들 수 있어요.",
@@ -97,7 +96,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
     displayOrder = 2,
     voteCount = 0,
     voters = emptyList(),
-    store = VoteDetailStoreResponseModel(
+    store = VoteStoreResponseModel(
         storeId = 2L,
         name = "소보키 강남점",
         rating = 4.5f,
@@ -110,7 +109,7 @@ private fun createSecondCandidate() = VoteCandidateResponseModel(
             lines = listOf("9", "신분당"),
             distanceMeters = 396
         ),
-        aiSummary = VoteAiSummaryResponseModel(
+        aiSummary = VoteAiSummaryModel(
             title = "트렌디한 퓨전 한식과 전통주가 어우러진 주점",
             lines = listOf(
                 "다채로운 전통주와 퓨전 한식을 즐길 수 있어요.",
