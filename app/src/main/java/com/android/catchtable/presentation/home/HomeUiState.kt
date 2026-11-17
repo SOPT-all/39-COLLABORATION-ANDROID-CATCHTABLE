@@ -15,4 +15,5 @@ data class HomeUiState(
     val similarStores: List<SimilarStoreUiModel> = emptyList(),
     val recommendStores: List<RecommendStoreUiModel> = emptyList(),
     val isVoting: Boolean = false,
+    val voteId: Long? = null,
 )

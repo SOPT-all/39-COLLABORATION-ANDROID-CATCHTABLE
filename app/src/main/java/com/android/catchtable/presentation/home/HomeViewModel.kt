@@ -41,8 +41,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                     HomeTab.RANKING -> listOf(
                         HomeCategoryUiModel(name = "줄서기예약", imageRes = R.drawable.img_category_01),
                         HomeCategoryUiModel(
-                            name = "2026미쉐린",
-                            imageRes = R.drawable.img_category_02
+                            name = "2026미쉐린", imageRes = R.drawable.img_category_02
                         ),
                         HomeCategoryUiModel(name = "블루리본", imageRes = R.drawable.img_category_05),
                         HomeCategoryUiModel(name = "웨이팅TOP", imageRes = R.drawable.img_category_14),
@@ -62,8 +61,7 @@ class HomeViewModel @Inject constructor() : ViewModel() {
                         HomeCategoryUiModel(name = "케이크픽업", imageRes = R.drawable.img_category_10),
                         HomeCategoryUiModel(name = "꽃주문", imageRes = R.drawable.img_category_06),
                         HomeCategoryUiModel(
-                            name = "선착순 1만원",
-                            imageRes = R.drawable.img_category_08
+                            name = "선착순 1만원", imageRes = R.drawable.img_category_08
                         ),
                         HomeCategoryUiModel(name = "브랜드혜택존", imageRes = R.drawable.img_category_13),
                     )
@@ -182,7 +180,8 @@ class HomeViewModel @Inject constructor() : ViewModel() {
             )
         }
     }
+
     private fun getActiveVote() {
-        _uiState.update { it.copy(isVoting = true) }
+        _uiState.update { it.copy(isVoting = true, voteId = 1L) }
     }
 }

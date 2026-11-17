@@ -8,8 +8,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun HomeRoute(
-    navigateToStore: (Int) -> Unit,
-    navigateToVote: () -> Unit,
+    navigateToStore: (Long) -> Unit,
+    navigateToVote: (Long?) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -18,8 +18,8 @@ fun HomeRoute(
     HomeScreen(
         uiState = uiState,
         onTabClick = viewModel::onTabClick,
-        onStoreClick = navigateToStore,
-        onVoteClick = navigateToVote,
+        onStoreClick = { storeId -> navigateToStore(storeId.toLong()) },
+        onVoteClick = { navigateToVote(uiState.voteId) },
         modifier = modifier,
     )
 }
