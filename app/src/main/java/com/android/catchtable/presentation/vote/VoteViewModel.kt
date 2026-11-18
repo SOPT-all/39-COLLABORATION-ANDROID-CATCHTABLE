@@ -32,10 +32,7 @@ class VoteViewModel @Inject constructor(
                     } ?: voteDetail
                     _uiState.value = VoteUiState(
                         voteDetail = displayedVoteDetail,
-                        selectedCandidateId = displayedVoteDetail.viewer.selectedCandidateId,
-                        selectedStoreIds = if (displayedVoteDetail.status == VoteStatus.CREATE) {
-                            displayedVoteDetail.candidates.map { it.store.storeId }.toSet()
-                        } else emptySet()
+                        selectedCandidateId = displayedVoteDetail.viewer.selectedCandidateId
                     )
                 }
                 .onFailure { Timber.e(it, "투표 상세 조회 실패") }
@@ -43,29 +40,33 @@ class VoteViewModel @Inject constructor(
     }
 
     fun updateVoteSelection(id: Long) {
-        _uiState.update { state ->
-            if (!state.canSelectStore) return@update state
-
-            if (state.status == VoteStatus.CREATE) {
-                val exists = state.voteDetail?.candidates?.any { it.store.storeId == id } == true
-                if (!exists) return@update state
-                val selected = state.selectedStoreIds.toMutableSet()
-                if (!selected.add(id)) selected.remove(id)
-                state.copy(selectedStoreIds = selected)
+        _uiState.update { currentState ->
+            if (currentState.status != VoteStatus.OPEN || !currentState.canSelectStore) {
+                currentState
             } else {
-                val exists = state.voteDetail?.candidates?.any { it.candidateId == id } == true
-                if (!exists) return@update state
-                state.copy(selectedCandidateId = if (state.selectedCandidateId == id) null else id)
+                val candidateExists = currentState.voteDetail
+                    ?.candidates
+                    ?.any { candidate -> candidate.candidateId == id } == true
+
+                if (!candidateExists) {
+                    currentState
+                } else {
+                    val updatedCandidateId =
+                        if (currentState.selectedCandidateId == id) null else id
+                    currentState.copy(selectedCandidateId = updatedCandidateId)
+                }
             }
         }
     }
 
     fun createVote(onSuccess: (Long) -> Unit) {
         val state = _uiState.value
-        if (state.status != VoteStatus.CREATE || !state.canSelectStore || state.selectedStoreIds.isEmpty()) return
+        if (state.status != VoteStatus.CREATE || !state.canSelectStore) return
+        val storeIds = state.voteDetail?.candidates?.map { it.store.storeId }.orEmpty()
+        if (storeIds.isEmpty()) return
 
         viewModelScope.launch {
-            postCreateVoteUseCase(1, CreateVoteRequestModel(state.selectedStoreIds.toList()))
+            postCreateVoteUseCase(1, CreateVoteRequestModel(storeIds))
                 .onSuccess {
                     Timber.d("투표 생성 성공 (voteId=${it.voteId})")
                     onSuccess(it.voteId)

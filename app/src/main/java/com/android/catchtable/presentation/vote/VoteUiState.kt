@@ -8,8 +8,7 @@ import com.android.catchtable.presentation.vote.model.VoteButtonType
 
 data class VoteUiState(
     val voteDetail: VoteDetailModel? = null,
-    val selectedCandidateId: Long? = null,
-    val selectedStoreIds: Set<Long> = emptySet()
+    val selectedCandidateId: Long? = null
 ) {
     val status: VoteStatus
         get() = voteDetail?.status ?: VoteStatus.CREATE
@@ -34,7 +33,7 @@ data class VoteUiState(
 
     val voteButtonType: VoteButtonType?
         get() = when {
-            status == VoteStatus.CREATE && selectedStoreIds.isNotEmpty() -> VoteButtonType.CREATE_VOTE
+            status == VoteStatus.CREATE -> VoteButtonType.CREATE_VOTE
             canSubmitVote -> VoteButtonType.CONFIRM_VOTE
             else -> null
         }
@@ -45,7 +44,7 @@ data class VoteUiState(
 
     val buttonText: String?
         get() = when (status) {
-            VoteStatus.CREATE -> voteDetail?.let { "${selectedStoreIds.size}개 · 투표 생성하기" }
+            VoteStatus.CREATE -> voteDetail?.let { "${it.candidates.size}개 · 투표 생성하기" }
             VoteStatus.OPEN -> when {
                 hasVoted && role == VoteRole.GUEST -> null
                 !hasVoted && selectedCandidateId != null -> "매장 선택 완료"
