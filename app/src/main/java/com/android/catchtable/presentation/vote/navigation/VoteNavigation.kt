@@ -40,6 +40,14 @@ fun NavGraphBuilder.voteNavGraph(
                     }
                 )
             },
+            navigateToCreatedVote = { createdVoteId ->
+                navController.navigateToVote(
+                    voteId = createdVoteId,
+                    navOptions = navOptions {
+                        popUpTo<Vote> { inclusive = true }
+                    }
+                )
+            },
             navigateToVoteComplete = { voteId ->
                 navController.navigateToVoteComplete(
                     voteId = voteId,

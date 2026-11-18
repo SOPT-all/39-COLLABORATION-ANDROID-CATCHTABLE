@@ -1,12 +1,15 @@
 package com.android.catchtable.data.repositoryimpl
 
 import com.android.catchtable.data.mapper.toModel
+import com.android.catchtable.data.mapper.toDto
 import com.android.catchtable.data.remote.dto.vote.DummyVoteDetailResponse
 import com.android.catchtable.data.remote.service.VoteService
 import com.android.catchtable.data.util.getDataOrThrow
 import com.android.catchtable.domain.model.vote.VoteDetailModel
 import com.android.catchtable.domain.repository.VoteRepository
 import com.android.catchtable.data.util.suspendRunCatching
+import com.android.catchtable.domain.model.vote.CreateVoteModel
+import com.android.catchtable.domain.model.vote.CreateVoteRequestModel
 import com.android.catchtable.domain.model.vote.VoteStatus
 import javax.inject.Inject
 
@@ -22,5 +25,10 @@ class VoteRepositoryImpl @Inject constructor(
                 // Home 진입: voteId를 사용해 API 연결
                 voteService.getVoteDetail(xUserId,voteId).getDataOrThrow().toModel()
             }
+        }
+
+    override suspend fun postCreateVote(xUserId: Int, request: CreateVoteRequestModel): Result<CreateVoteModel> =
+        suspendRunCatching {
+            voteService.postCreateVote(xUserId, request.toDto()).getDataOrThrow().toModel()
         }
 }

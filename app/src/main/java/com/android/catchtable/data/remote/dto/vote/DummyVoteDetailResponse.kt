@@ -25,7 +25,7 @@ internal object DummyVoteDetailResponse {
             candidates = listOf(createFirstCandidate(), createSecondCandidate()),
             viewer = VoteViewerModel(
                 userId = 2L,
-                isHost = false,
+                isHost = status == "CREATE",
                 hasVoted = false,
                 selectedCandidateId = null,
                 displayName = "테스트1",

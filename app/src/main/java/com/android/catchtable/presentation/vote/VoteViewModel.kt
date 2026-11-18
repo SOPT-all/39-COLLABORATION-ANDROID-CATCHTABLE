@@ -2,7 +2,10 @@ package com.android.catchtable.presentation.vote
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.catchtable.domain.model.vote.CreateVoteRequestModel
+import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.domain.usecase.vote.GetVoteDetailUseCase
+import com.android.catchtable.domain.usecase.vote.PostCreateVoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VoteViewModel @Inject constructor(
-    private val getVoteDetailUseCase: GetVoteDetailUseCase
+    private val getVoteDetailUseCase: GetVoteDetailUseCase,
+    private val postCreateVoteUseCase: PostCreateVoteUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(VoteUiState())
@@ -25,26 +29,42 @@ class VoteViewModel @Inject constructor(
                 .onSuccess { voteDetail ->
                     _uiState.value = VoteUiState(
                         voteDetail = voteDetail,
-                        selectedCandidateId = voteDetail.viewer.selectedCandidateId
+                        selectedCandidateId = voteDetail.viewer.selectedCandidateId,
+                        selectedStoreIds = if (voteDetail.status == VoteStatus.CREATE) {
+                            voteDetail.candidates.map { it.store.storeId }.toSet()
+                        } else emptySet()
                     )
                 }
-                .onFailure { throwable ->
-                    Timber.e(throwable, "투표 상세 조회 실패")
-                }
-            }
+                .onFailure { Timber.e(it, "투표 상세 조회 실패") }
+        }
     }
 
-    fun updateVoteSelection(candidateId: Long) {
+    fun updateVoteSelection(id: Long) {
         _uiState.update { state ->
-            val candidateExists = state.voteDetail?.candidates
-                ?.any { it.candidateId == candidateId } == true
-            if (!state.canSelectStore || !candidateExists) {
-                return@update state
-            }
+            if (!state.canSelectStore) return@update state
 
-            val selectedCandidateId =
-                if (state.selectedCandidateId == candidateId) null else candidateId
-            state.copy(selectedCandidateId = selectedCandidateId)
+            if (state.status == VoteStatus.CREATE) {
+                val exists = state.voteDetail?.candidates?.any { it.store.storeId == id } == true
+                if (!exists) return@update state
+                val selected = state.selectedStoreIds.toMutableSet()
+                if (!selected.add(id)) selected.remove(id)
+                state.copy(selectedStoreIds = selected)
+            } else {
+                val exists = state.voteDetail?.candidates?.any { it.candidateId == id } == true
+                if (!exists) return@update state
+                state.copy(selectedCandidateId = if (state.selectedCandidateId == id) null else id)
+            }
+        }
+    }
+
+    fun createVote(onSuccess: (Long) -> Unit) {
+        val state = _uiState.value
+        if (state.status != VoteStatus.CREATE || !state.canSelectStore || state.selectedStoreIds.isEmpty()) return
+
+        viewModelScope.launch {
+            postCreateVoteUseCase(1, CreateVoteRequestModel(state.selectedStoreIds.toList()))
+                .onSuccess { onSuccess(it.voteId) }
+                .onFailure { Timber.e(it, "투표 생성 실패") }
         }
     }
 
@@ -58,10 +78,7 @@ class VoteViewModel @Inject constructor(
         if (!state.canSubmitVote) return
 
         viewModelScope.launch {
-            // 투표 제출 API 연동
             Timber.d("투표 제출 voteId=$voteId, candidateId=$candidateId, nickname=$nickname")
-
-            // 임시: API 연동 전까지 바로 투표 완료 화면으로 이동
             onSuccess(voteId)
         }
     }

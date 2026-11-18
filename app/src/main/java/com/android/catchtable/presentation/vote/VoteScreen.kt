@@ -99,13 +99,13 @@ fun VoteScreen(
                     voterRowCount = voterRowCount,
                     status = uiState.status,
                     isSelected = when (uiState.status) {
-                        VoteStatus.CREATE -> true
+                        VoteStatus.CREATE -> store.storeId in uiState.selectedStoreIds
                         VoteStatus.OPEN -> candidate.candidateId == uiState.selectedCandidateId
                     },
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
                     modifier = Modifier.weight(1f),
-                    onCheckClick = { onStoreClick(candidate.candidateId) }
+                    onCheckClick = onStoreClick
                 )
             }
         }
