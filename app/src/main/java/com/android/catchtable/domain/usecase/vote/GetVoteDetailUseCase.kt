@@ -7,6 +7,6 @@ import javax.inject.Inject
 class GetVoteDetailUseCase @Inject constructor(
     private val voteRepository: VoteRepository
 ) {
-    suspend operator fun invoke(voteId: Long): Result<VoteDetailModel> =
+    suspend operator fun invoke(voteId: Long?): Result<VoteDetailModel> =
         voteRepository.getVoteDetail(voteId)
 }

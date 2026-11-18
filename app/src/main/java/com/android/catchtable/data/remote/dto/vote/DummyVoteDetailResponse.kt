@@ -14,13 +14,13 @@ import com.android.catchtable.domain.model.vote.VoteStatus
 
 //실제 환경 더미 데이터
 internal object DummyVoteDetailResponse {
-    fun create(voteId: Long) = BaseResponse(
+    fun create(voteId: Long, status: String) = BaseResponse(
         success = true,
         code = "SUCCESS",
         message = "투표 상세 조회 성공",
         data = VoteDetailModel(
             voteId = voteId,
-            status = VoteStatus.CREATE,
+            status = if(status=="CREATE") VoteStatus.CREATE else VoteStatus.OPEN,
             participantCount = 2,
             candidates = listOf(createFirstCandidate(), createSecondCandidate()),
             viewer = VoteViewerModel(

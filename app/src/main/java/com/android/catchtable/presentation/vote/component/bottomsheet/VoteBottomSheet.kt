@@ -1,4 +1,4 @@
-package com.android.catchtable.presentation.vote.component
+package com.android.catchtable.presentation.vote.component.bottomsheet
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -41,7 +41,6 @@ fun VoteBottomSheet(
         dragHandle = null,
     ) {
         VoteBottomSheetDragHandle(modifier = Modifier.align(Alignment.CenterHorizontally))
-
         content()
     }
 }
