@@ -21,7 +21,7 @@ class VoteViewModel @Inject constructor(
 
     fun initVote(voteId: Long?) {
         viewModelScope.launch {
-            getVoteDetailUseCase(voteId)
+            getVoteDetailUseCase(1, voteId)
                 .onSuccess { voteDetail ->
                     _uiState.value = VoteUiState(
                         voteDetail = voteDetail,

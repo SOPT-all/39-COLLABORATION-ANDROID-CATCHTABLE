@@ -15,19 +15,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.domain.model.vote.VoteStoreModel
 import com.android.catchtable.domain.model.vote.VoteVoterModel
 import com.android.catchtable.presentation.common.component.CatchTableAI
-import com.android.catchtable.presentation.common.theme.CatchTableTheme
-import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.presentation.common.component.CatchTableBadgeLine9
 import com.android.catchtable.presentation.common.component.CatchTableBadgeSBD
+import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.model.VoteTagType
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 
-//고민! 이걸 component로 부르기엔 좀 그렇다. 네이밍을 screen으로 바꿔야할지 말지
 @Composable
-fun VoteInfo(
+fun VoteInfoColumn(
     store: VoteStoreModel,
     voters: List<VoteVoterModel>,
     status: VoteStatus,
@@ -63,7 +62,7 @@ fun VoteInfo(
         }
         VoteInfoDivider(strokeColor)
 
-        if (status != VoteStatus.CREATE) {
+        if (status == VoteStatus.OPEN && voters.size > 0) {
             VoteInfoVoter(voters, rowCount = voterRowCount)
             VoteInfoDivider(strokeColor)
         }
@@ -87,18 +86,20 @@ fun VoteInfo(
 
         VoteInfoDivider(strokeColor)
 
-        VoteInfoSection(
-            title = {
-                CatchTableAI(
-                    iconSize = 12.dp,
-                    title = " 요약",
-                    style = CatchTableTheme.typography.h3B14
-                )
-            },
-            content = { VoteInfoSectionContent(text = store.aiSummary.lines.joinToString("\n")) }
-        )
+        store.aiSummary?.let {
+            VoteInfoSection(
+                title = {
+                    CatchTableAI(
+                        iconSize = 12.dp,
+                        title = " 요약",
+                        style = CatchTableTheme.typography.h3B14
+                    )
+                },
+                content = { VoteInfoSectionContent(text = store.aiSummary.title)}
+            )
 
-        VoteInfoDivider(strokeColor)
+            VoteInfoDivider(strokeColor)
+        }
 
         VoteInfoSection(
             title = { VoteInfoSectionTitle(text = "가격대") },
@@ -172,10 +173,10 @@ private fun VoteInfoDivider(
 
 @Preview(showBackground = true, heightDp = 1200)
 @Composable
-private fun VoteInfoPreview(){
+private fun VoteInfoColumnPreview(){
     CatchTableTheme {
         val candidate = createDummyVoteDetailModel().candidates.first()
-        VoteInfo(
+        VoteInfoColumn(
             store = candidate.store,
             voters = candidate.voters,
             status = VoteStatus.OPEN,

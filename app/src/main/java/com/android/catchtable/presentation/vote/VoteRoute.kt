@@ -21,7 +21,7 @@ fun VoteRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) {
+    LaunchedEffect(voteId) {
         viewModel.initVote(voteId)
     }
 
