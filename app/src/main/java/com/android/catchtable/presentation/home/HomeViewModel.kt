@@ -1,7 +1,9 @@
 package com.android.catchtable.presentation.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.android.catchtable.R
+import com.android.catchtable.domain.usecase.vote.GetActiveVoteUseCase
 import com.android.catchtable.presentation.home.model.HomeBadgeType
 import com.android.catchtable.presentation.home.model.HomeCategoryUiModel
 import com.android.catchtable.presentation.home.model.HomeLocationUiModel
@@ -13,10 +15,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : ViewModel() {
+class HomeViewModel @Inject constructor(
+    private val getActiveVoteUseCase: GetActiveVoteUseCase,
+) : ViewModel() {
     private val _uiState = MutableStateFlow(HomeUiState())
     val uiState = _uiState.asStateFlow()
 
@@ -182,6 +188,14 @@ class HomeViewModel @Inject constructor() : ViewModel() {
     }
 
     private fun getActiveVote() {
-        _uiState.update { it.copy(voteId = 1L) }
+        viewModelScope.launch {
+            getActiveVoteUseCase()
+                .onSuccess { activeVote ->
+                    _uiState.update { it.copy(voteId = activeVote?.voteId) }
+                }
+                .onFailure { throwable ->
+                    Timber.e(throwable, "진행 중인 투표 조회 실패")
+                }
+        }
     }
 }
