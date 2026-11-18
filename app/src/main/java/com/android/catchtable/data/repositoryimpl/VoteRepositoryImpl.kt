@@ -20,7 +20,7 @@ class VoteRepositoryImpl @Inject constructor(
         suspendRunCatching {
             if (voteId == null) {
                 // Store 진입: voteId가 없으므로 기존 더미 데이터를 사용
-                requireNotNull(DummyVoteDetailResponse.create(1L, "CREATE").data)
+                requireNotNull(DummyVoteDetailResponse.create(1L, "CREATE", true).data)
             } else {
                 // Home 진입: voteId를 사용해 API 연결
                 voteService.getVoteDetail(xUserId,voteId).getDataOrThrow().toModel()

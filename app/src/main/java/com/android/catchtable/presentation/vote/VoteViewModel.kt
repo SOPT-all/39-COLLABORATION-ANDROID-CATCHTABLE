@@ -23,15 +23,18 @@ class VoteViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(VoteUiState())
     val uiState = _uiState.asStateFlow()
 
-    fun initVote(voteId: Long?) {
+    fun initVote(voteId: Long?, isHost: Boolean? = null) {
         viewModelScope.launch {
             getVoteDetailUseCase(1, voteId)
                 .onSuccess { voteDetail ->
+                    val displayedVoteDetail = isHost?.let { host ->
+                        voteDetail.copy(viewer = voteDetail.viewer.copy(isHost = host))
+                    } ?: voteDetail
                     _uiState.value = VoteUiState(
-                        voteDetail = voteDetail,
-                        selectedCandidateId = voteDetail.viewer.selectedCandidateId,
-                        selectedStoreIds = if (voteDetail.status == VoteStatus.CREATE) {
-                            voteDetail.candidates.map { it.store.storeId }.toSet()
+                        voteDetail = displayedVoteDetail,
+                        selectedCandidateId = displayedVoteDetail.viewer.selectedCandidateId,
+                        selectedStoreIds = if (displayedVoteDetail.status == VoteStatus.CREATE) {
+                            displayedVoteDetail.candidates.map { it.store.storeId }.toSet()
                         } else emptySet()
                     )
                 }
@@ -63,7 +66,10 @@ class VoteViewModel @Inject constructor(
 
         viewModelScope.launch {
             postCreateVoteUseCase(1, CreateVoteRequestModel(state.selectedStoreIds.toList()))
-                .onSuccess { onSuccess(it.voteId) }
+                .onSuccess {
+                    Timber.d("투표 생성 성공 (voteId=${it.voteId})")
+                    onSuccess(it.voteId)
+                }
                 .onFailure { Timber.e(it, "투표 생성 실패") }
         }
     }

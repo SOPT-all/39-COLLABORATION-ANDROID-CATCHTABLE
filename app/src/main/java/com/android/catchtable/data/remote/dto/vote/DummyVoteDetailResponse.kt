@@ -14,7 +14,7 @@ import com.android.catchtable.domain.model.vote.VoteStatus
 
 //실제 환경 더미 데이터
 internal object DummyVoteDetailResponse {
-    fun create(voteId: Long, status: String) = BaseResponse(
+    fun create(voteId: Long, status: String, isHost: Boolean = false) = BaseResponse(
         success = true,
         code = "SUCCESS",
         message = "투표 상세 조회 성공",
@@ -25,7 +25,7 @@ internal object DummyVoteDetailResponse {
             candidates = listOf(createFirstCandidate(), createSecondCandidate()),
             viewer = VoteViewerModel(
                 userId = 2L,
-                isHost = status == "CREATE",
+                isHost = isHost,
                 hasVoted = false,
                 selectedCandidateId = null,
                 displayName = "테스트1",

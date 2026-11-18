@@ -105,7 +105,14 @@ fun VoteScreen(
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
                     modifier = Modifier.weight(1f),
-                    onCheckClick = onStoreClick
+                    onCheckClick = {
+                        onStoreClick(
+                            when (uiState.status) {
+                                VoteStatus.CREATE -> store.storeId
+                                VoteStatus.OPEN -> candidate.candidateId
+                            }
+                        )
+                    }
                 )
             }
         }

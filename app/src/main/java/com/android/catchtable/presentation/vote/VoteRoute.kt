@@ -14,6 +14,7 @@ fun VoteRoute(
     voteId: Long?,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
+    isHost: Boolean? = null,
     navigateToHome: () -> Unit = {},
     navigateToCreatedVote: (Long) -> Unit,
     navigateToVoteComplete: (Long) -> Unit,
@@ -22,8 +23,8 @@ fun VoteRoute(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
 
-    LaunchedEffect(Unit) {
-        viewModel.initVote(voteId)
+    LaunchedEffect(voteId, isHost) {
+        viewModel.initVote(voteId, isHost)
     }
 
     VoteScreen(
