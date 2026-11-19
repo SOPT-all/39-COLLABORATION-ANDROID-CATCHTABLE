@@ -21,8 +21,8 @@ fun StoreDetailModel.toUiModel() = StoreUiModel(
     imageUrls = imageUrls,
     menus = representativeMenus.map { menu ->
         StoreMenuUiModel(
-            id = menu.menuId.toInt(),
-            storeId = storeId.toInt(),
+            id = menu.menuId,
+            storeId = storeId,
             imgUrl = menu.imageUrl,
             name = menu.name,
             price = "%,d".format(menu.price),
