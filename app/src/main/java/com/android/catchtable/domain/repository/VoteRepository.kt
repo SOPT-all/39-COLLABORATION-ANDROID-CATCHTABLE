@@ -6,7 +6,7 @@ import com.android.catchtable.domain.model.vote.ActiveVoteModel
 import com.android.catchtable.domain.model.vote.VoteDetailModel
 
 interface VoteRepository {
-    suspend fun postCreateVote(xUserId: Int, request: CreateVoteRequestModel): Result<CreateVoteModel>
+    suspend fun postCreateVote(request: CreateVoteRequestModel): Result<CreateVoteModel>
     suspend fun getVoteDetail(voteId: Long?): Result<VoteDetailModel>
     suspend fun getActiveVote(): Result<ActiveVoteModel?>
 }

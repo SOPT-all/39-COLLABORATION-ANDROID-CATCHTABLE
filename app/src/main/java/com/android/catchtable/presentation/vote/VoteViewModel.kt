@@ -25,7 +25,7 @@ class VoteViewModel @Inject constructor(
 
     fun initVote(voteId: Long?, isHost: Boolean? = null) {
         viewModelScope.launch {
-            getVoteDetailUseCase(1, voteId)
+            getVoteDetailUseCase(voteId)
                 .onSuccess { voteDetail ->
                     val displayedVoteDetail = isHost?.let { host ->
                         voteDetail.copy(viewer = voteDetail.viewer.copy(isHost = host))
@@ -66,7 +66,7 @@ class VoteViewModel @Inject constructor(
         if (storeIds.isEmpty()) return
 
         viewModelScope.launch {
-            postCreateVoteUseCase(1, CreateVoteRequestModel(storeIds))
+            postCreateVoteUseCase(CreateVoteRequestModel(storeIds))
                 .onSuccess {
                     Timber.d("투표 생성 성공 (voteId=${it.voteId})")
                     onSuccess(it.voteId)

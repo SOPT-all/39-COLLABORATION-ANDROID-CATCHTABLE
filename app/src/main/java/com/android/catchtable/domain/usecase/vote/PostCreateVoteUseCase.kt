@@ -8,6 +8,6 @@ import javax.inject.Inject
 class PostCreateVoteUseCase @Inject constructor(
     private val voteRepository: VoteRepository
 ) {
-    suspend operator fun invoke(xUserId: Int, request: CreateVoteRequestModel): Result<CreateVoteModel> =
-        voteRepository.postCreateVote(xUserId, request)
+    suspend operator fun invoke(request: CreateVoteRequestModel): Result<CreateVoteModel> =
+        voteRepository.postCreateVote(request)
 }

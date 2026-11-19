@@ -15,15 +15,15 @@ interface VoteService {
 
     @GET("/api/v1/votes/{voteId}")
     suspend fun getVoteDetail(
-        @Header("X-User-Id") xUserId: Int,
         @Path("voteId") voteId: Long
     ): BaseResponse<VoteDetailResponseDto>
 
     @POST("/api/v1/votes")
     suspend fun postCreateVote(
-        @Header("X-User-Id") xUserId: Int,
         @Body request: CreateVoteRequestDto
     ): BaseResponse<CreateVoteResponseDto>
+
     @GET("api/v1/users/me/votes/active")
     suspend fun getActiveVote(): BaseResponse<ActiveVoteResponseDto>
+
 }
