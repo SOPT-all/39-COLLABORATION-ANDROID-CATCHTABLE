@@ -1,6 +1,7 @@
 package com.android.catchtable.presentation.store.model
 
 import com.android.catchtable.domain.model.store.StoreDetailModel
+import java.util.Locale
 
 fun StoreDetailModel.toUiModel() = StoreUiModel(
     storeId = storeId,
@@ -25,7 +26,7 @@ fun StoreDetailModel.toUiModel() = StoreUiModel(
             storeId = storeId,
             imgUrl = menu.imageUrl,
             name = menu.name,
-            price = "%,d".format(menu.price),
+            price = "%,d".format(Locale.KOREA, menu.price),
             isPriceFrom = menu.isPriceFrom,
         )
     },
