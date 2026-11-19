@@ -32,7 +32,6 @@ class HomeViewModel @Inject constructor(
         getRecentStores()
         getSimilarStores()
         getRecommendStores()
-        getActiveVote()
     }
 
     fun onTabClick(tab: HomeTab) {
@@ -187,15 +186,13 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    private fun getActiveVote() {
+    fun getActiveVote() {
         viewModelScope.launch {
-            getActiveVoteUseCase()
-                .onSuccess { activeVote ->
-                    _uiState.update { it.copy(voteId = activeVote?.voteId) }
-                }
-                .onFailure { throwable ->
-                    Timber.e(throwable, "진행 중인 투표 조회 실패")
-                }
+            getActiveVoteUseCase().onSuccess { activeVote ->
+                _uiState.update { it.copy(voteId = activeVote?.voteId) }
+            }.onFailure { throwable ->
+                Timber.e(throwable, "진행 중인 투표 조회 실패")
+            }
         }
     }
 }
