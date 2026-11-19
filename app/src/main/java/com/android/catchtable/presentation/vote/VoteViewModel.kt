@@ -2,7 +2,9 @@ package com.android.catchtable.presentation.vote
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.catchtable.domain.model.vote.SubmitBallotRequestModel
 import com.android.catchtable.domain.usecase.vote.GetVoteDetailUseCase
+import com.android.catchtable.domain.usecase.vote.PostSubmitBallotUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,7 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VoteViewModel @Inject constructor(
-    private val getVoteDetailUseCase: GetVoteDetailUseCase
+    private val getVoteDetailUseCase: GetVoteDetailUseCase,
+    private val postSubmitBallotUseCase: PostSubmitBallotUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(VoteUiState())
@@ -58,11 +61,15 @@ class VoteViewModel @Inject constructor(
         if (!state.canSubmitVote) return
 
         viewModelScope.launch {
-            // 투표 제출 API 연동
-            Timber.d("투표 제출 voteId=$voteId, candidateId=$candidateId, nickname=$nickname")
-
-            // 임시: API 연동 전까지 바로 투표 완료 화면으로 이동
-            onSuccess(voteId)
+            postSubmitBallotUseCase(
+                voteId = voteId,
+                request = SubmitBallotRequestModel(
+                    candidateId = candidateId,
+                    nickname = nickname.trim(),
+                ),
+            )
+                .onSuccess { onSuccess(voteId) }
+                .onFailure { Timber.e(it, "투표 제출 실패") }
         }
     }
 }
