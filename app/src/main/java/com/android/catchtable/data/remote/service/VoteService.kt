@@ -9,6 +9,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
+import com.android.catchtable.data.remote.dto.vote.response.ActiveVoteResponseDto
 
 interface VoteService {
 
@@ -23,5 +24,6 @@ interface VoteService {
         @Header("X-User-Id") xUserId: Int,
         @Body request: CreateVoteRequestDto
     ): BaseResponse<CreateVoteResponseDto>
+    @GET("api/v1/users/me/votes/active")
+    suspend fun getActiveVote(): BaseResponse<ActiveVoteResponseDto>
 }
-
