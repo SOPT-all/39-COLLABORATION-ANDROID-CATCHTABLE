@@ -24,7 +24,7 @@ fun StoreDetailResponseDto.toModel() = StoreDetailModel(
     businessHours = businessHours,
     phone = phone,
     imageUrls = imageUrls,
-    representativeMenus = representativeMenus.map { it.toModel() },
+    representativeMenus = representativeMenus.sortedBy { it.displayOrder }.map { it.toModel() },
     aiSummary = aiSummary?.toModel(),
     amenities = amenities.map { it.toModel() },
 )
