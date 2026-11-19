@@ -1,6 +1,7 @@
 package com.android.catchtable.presentation.store.model
 
 import com.android.catchtable.domain.model.store.StoreDetailModel
+import java.time.LocalTime
 import java.util.Locale
 
 fun StoreDetailModel.toUiModel() = StoreUiModel(
@@ -11,6 +12,7 @@ fun StoreDetailModel.toUiModel() = StoreUiModel(
     intro = intro,
     rating = rating,
     reviewCount = reviewCount,
+    isOpen = isOpenNow(businessHours),
     station = StoreStationUiModel(
         name = station.name,
         lines = station.lines,
@@ -43,3 +45,19 @@ fun StoreDetailModel.toUiModel() = StoreUiModel(
         )
     },
 )
+
+private fun isOpenNow(businessHours: String): Boolean {
+    val times =
+        Regex("\\d{2}:\\d{2}").findAll(businessHours).map { LocalTime.parse(it.value) }.toList()
+    if (times.size < 2) return false
+
+    val openTime = times[0]
+    val closeTime = times[1]
+    val now = LocalTime.now()
+
+    return if (openTime < closeTime) {
+        now >= openTime && now < closeTime
+    } else {
+        now >= openTime || now < closeTime
+    }
+}
