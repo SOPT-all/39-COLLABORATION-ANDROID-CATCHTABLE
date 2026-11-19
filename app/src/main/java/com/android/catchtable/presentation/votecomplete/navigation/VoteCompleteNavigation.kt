@@ -31,6 +31,7 @@ fun NavGraphBuilder.voteCompleteNavGraph(
             onButtonClick = {
                 navController.navigateToVote(
                     voteId = route.voteId,
+                    isHost = false,
                     navOptions = navOptions {
                         popUpTo<VoteComplete> { inclusive = true }
                     },

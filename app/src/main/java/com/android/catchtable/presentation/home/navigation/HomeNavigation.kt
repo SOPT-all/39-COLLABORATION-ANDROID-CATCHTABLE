@@ -25,7 +25,7 @@ fun NavGraphBuilder.homeNavGraph(
     composable<Home> {
         HomeRoute(
             navigateToStore = { storeId -> navController.navigateToStore(storeId) },
-            navigateToVote = { voteId -> navController.navigateToVote(voteId) },
+            navigateToVote = { voteId -> navController.navigateToVote(voteId, isHost = false) },
             modifier = Modifier.padding(innerPadding),
         )
     }

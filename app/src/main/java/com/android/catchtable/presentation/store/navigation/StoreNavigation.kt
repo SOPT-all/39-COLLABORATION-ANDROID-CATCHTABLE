@@ -29,7 +29,7 @@ fun NavGraphBuilder.storeNavGraph(
         StoreRoute(
             storeId = store.storeId,
             navigateUp = { navController.navigateUp() },
-            navigateToVote = { navController.navigateToVote(voteId = null) },
+            navigateToVote = { navController.navigateToVote(voteId = null, isHost = true) },
             modifier = Modifier.padding(innerPadding),
         )
     }
