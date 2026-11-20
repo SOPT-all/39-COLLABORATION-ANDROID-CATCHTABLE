@@ -11,7 +11,7 @@ data class VoteStoreResponseDto(
     @SerialName("reviewCount") val reviewCount: Int,
     @SerialName("imageUrls") val imageUrls: List<String>,
     @SerialName("station") val station: VoteStationResponseDto,
-    @SerialName("aiSummary") val aiSummary: VoteAiSummaryResponseDto,
+    @SerialName("aiSummary") val aiSummary: VoteAiSummaryResponseDto?,
     @SerialName("priceRange") val priceRange: String,
     @SerialName("representativeMenus") val representativeMenus: List<VoteRepresentativeMenuResponseDto>,
     @SerialName("amenities") val amenities: List<VoteAmenityResponseDto>

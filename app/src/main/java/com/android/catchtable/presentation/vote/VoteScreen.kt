@@ -23,15 +23,15 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import com.android.catchtable.domain.model.vote.VoteStatus
-import com.android.catchtable.presentation.vote.model.VoteRole
-import com.android.catchtable.presentation.vote.model.VoteButtonType
-import com.android.catchtable.presentation.vote.model.VoteMethod
 import com.android.catchtable.presentation.common.component.CatchTableButton
 import com.android.catchtable.presentation.common.theme.CatchTableTheme
 import com.android.catchtable.presentation.vote.component.VoteHeader
-import com.android.catchtable.presentation.vote.component.VoteInfo
+import com.android.catchtable.presentation.vote.component.VoteInfoColumn
 import com.android.catchtable.presentation.vote.component.bottomsheet.VoteBottomSheet
 import com.android.catchtable.presentation.vote.component.bottomsheet.VoteBottomSheetContent
+import com.android.catchtable.presentation.vote.model.VoteButtonType
+import com.android.catchtable.presentation.vote.model.VoteMethod
+import com.android.catchtable.presentation.vote.model.VoteRole
 import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 
 private const val MAX_VISIBLE_STORE_COUNT = 2
@@ -93,7 +93,7 @@ fun VoteScreen(
                     CatchTableTheme.colors.white
                 }
 
-                VoteInfo(
+                VoteInfoColumn(
                     store = store,
                     voters = voters,
                     voterRowCount = voterRowCount,
@@ -105,7 +105,11 @@ fun VoteScreen(
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
                     modifier = Modifier.weight(1f),
-                    onCheckClick = { onStoreClick(candidate.candidateId) }
+                    onCheckClick = {
+                        if (uiState.status == VoteStatus.OPEN) {
+                            onStoreClick(candidate.candidateId)
+                        }
+                    }
                 )
             }
         }
