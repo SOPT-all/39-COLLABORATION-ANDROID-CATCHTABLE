@@ -62,7 +62,7 @@ fun VoteInfoColumn(
         }
         VoteInfoDivider(strokeColor)
 
-        if (status == VoteStatus.OPEN && voters.size > 0) {
+        if (status == VoteStatus.OPEN && voters.isNotEmpty()) {
             VoteInfoVoter(voters, rowCount = voterRowCount)
             VoteInfoDivider(strokeColor)
         }
