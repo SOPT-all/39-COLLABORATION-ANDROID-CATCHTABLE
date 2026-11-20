@@ -19,25 +19,25 @@ data class VoteStoreResponseDto(
 
 @Serializable
 data class VoteStationResponseDto(
-    @SerialName("distanceMeters") val distanceMeters: Int,
     @SerialName("name") val name: String,
-    @SerialName("lines") val lines: List<String>
+    @SerialName("lines") val lines: List<String>,
+    @SerialName("distanceMeters") val distanceMeters: Int
 )
 
 @Serializable
 data class VoteAiSummaryResponseDto(
-    @SerialName("lines") val lines: List<String>,
-    @SerialName("title") val title: String
+    @SerialName("title") val title: String,
+    @SerialName("lines") val lines: List<String>
 )
 
 @Serializable
 data class VoteRepresentativeMenuResponseDto(
-    @SerialName("displayOrder") val displayOrder: Int,
-    @SerialName("imageUrl") val imageUrl: String,
-    @SerialName("isPriceFrom") val isPriceFrom: Boolean,
     @SerialName("menuId") val menuId: Long,
     @SerialName("name") val name: String,
-    @SerialName("price") val price: Int
+    @SerialName("price") val price: Int,
+    @SerialName("isPriceFrom") val isPriceFrom: Boolean,
+    @SerialName("imageUrl") val imageUrl: String,
+    @SerialName("displayOrder") val displayOrder: Int
 )
 
 @Serializable
