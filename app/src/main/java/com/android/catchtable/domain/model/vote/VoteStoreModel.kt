@@ -7,7 +7,7 @@ data class VoteStoreModel(
     val reviewCount: Int,
     val imageUrls: List<String>,
     val station: VoteStationModel,
-    val aiSummary: VoteAiSummaryModel,
+    val aiSummary: VoteAiSummaryModel?,
     val priceRange: String,
     val representativeMenus: List<VoteRepresentativeMenuModel>,
     val amenities: List<VoteAmenityModel>

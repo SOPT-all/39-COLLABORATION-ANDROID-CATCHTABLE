@@ -17,10 +17,11 @@ import com.android.catchtable.presentation.votecomplete.navigation.navigateToVot
 
 fun NavController.navigateToVote(
     voteId: Long?,
+    isHost: Boolean? = null,
     navOptions: NavOptions? = null,
 ) {
     // Store는 null, Home은 기존 voteId로 진입
-    navigate(Vote(voteId = voteId), navOptions)
+    navigate(Vote(voteId = voteId, isHost = isHost), navOptions)
 }
 
 fun NavGraphBuilder.voteNavGraph(
@@ -31,12 +32,22 @@ fun NavGraphBuilder.voteNavGraph(
         val route = backStackEntry.toRoute<Vote>()
         VoteRoute(
             voteId = route.voteId,
+            isHost = route.isHost,
             onBackClick = navController::popBackStack,
             navigateToHome = {
                 navController.navigateToHome(
                     navOptions = navOptions {
                         popUpTo<MainTabRoute.Home> { inclusive = false }
                         launchSingleTop = true
+                    }
+                )
+            },
+            navigateToCreatedVote = { createdVoteId ->
+                navController.navigateToVote(
+                    voteId = createdVoteId,
+                    isHost = false,
+                    navOptions = navOptions {
+                        popUpTo<Vote> { inclusive = true }
                     }
                 )
             },

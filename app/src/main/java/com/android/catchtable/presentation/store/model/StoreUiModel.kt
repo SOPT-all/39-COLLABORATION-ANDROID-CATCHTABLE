@@ -16,4 +16,5 @@ data class StoreUiModel(
     val menus: List<StoreMenuUiModel>,
     val aiSummary: StoreAiSummaryUiModel?,
     val amenities: List<StoreAmenityUiModel>,
+    val isOpen: Boolean,
 )
