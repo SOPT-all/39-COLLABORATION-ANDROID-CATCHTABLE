@@ -1,12 +1,15 @@
 package com.android.catchtable.presentation.store.section
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,6 +30,7 @@ fun StoreInfoSection(
     station: StoreStationUiModel,
     priceRange: String,
     businessHours: String,
+    isOpen: Boolean,
     phone: String?,
     modifier: Modifier = Modifier,
 ) {
@@ -126,6 +130,27 @@ fun StoreInfoSection(
 
             Spacer(modifier = Modifier.width(8.dp))
 
+            if (isOpen) {
+                Text(
+                    text = "영업 중",
+                    style = CatchTableTheme.typography.bodyMD12,
+                    color = CatchTableTheme.colors.gray900,
+                )
+
+                Spacer(modifier = Modifier.width(4.dp))
+
+                Box(
+                    modifier = Modifier
+                        .size(2.dp)
+                        .background(
+                            color = CatchTableTheme.colors.gray400,
+                            shape = CircleShape,
+                        ),
+                )
+
+                Spacer(modifier = Modifier.width(4.dp))
+            }
+
             Text(
                 text = businessHours,
                 style = CatchTableTheme.typography.bodyMD12,
@@ -188,6 +213,7 @@ private fun StoreInfoSectionPreview() {
             station = dummyStoreUiModel.station,
             priceRange = dummyStoreUiModel.priceRange,
             businessHours = dummyStoreUiModel.businessHours,
+            isOpen = dummyStoreUiModel.isOpen,
             phone = dummyStoreUiModel.phone,
         )
     }

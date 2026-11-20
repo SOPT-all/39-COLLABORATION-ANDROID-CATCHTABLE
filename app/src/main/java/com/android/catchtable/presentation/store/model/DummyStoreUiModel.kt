@@ -17,6 +17,7 @@ val dummyStoreUiModel = StoreUiModel(
     businessHours = "매일 10:00 - 07:00",
     phone = "0507-1350-8260",
     imageUrls = listOf("", ""),
+    isOpen = true,
     menus = listOf(
         StoreMenuUiModel(
             id = 1,

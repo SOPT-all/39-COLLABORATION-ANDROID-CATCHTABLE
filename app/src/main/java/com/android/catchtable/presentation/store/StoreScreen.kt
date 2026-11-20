@@ -87,6 +87,7 @@ fun StoreScreen(
                     station = store.station,
                     priceRange = store.priceRange,
                     businessHours = store.businessHours,
+                    isOpen = store.isOpen,
                     phone = store.phone,
                     modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 16.dp),
                 )
