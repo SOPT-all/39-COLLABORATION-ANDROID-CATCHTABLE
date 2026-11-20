@@ -46,7 +46,7 @@ data class VoteUiState(
         get() = when (status) {
             VoteStatus.CREATE -> voteDetail?.let { "${it.candidates.size}개 · 투표 생성하기" }
             VoteStatus.OPEN -> when {
-                hasVoted && role == VoteRole.GUEST -> null
+                hasVoted && role == VoteRole.HOST -> null
                 !hasVoted && selectedCandidateId != null -> "매장 선택 완료"
                 else -> "가고 싶은 매장을 투표해주세요"
             }

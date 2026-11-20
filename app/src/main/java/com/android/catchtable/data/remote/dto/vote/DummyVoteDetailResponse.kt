@@ -40,10 +40,8 @@ internal object DummyVoteDetailResponse {
 private fun createFirstCandidate() = VoteCandidateModel(
     candidateId = 21L,
     displayOrder = 1,
-    voteCount = 2,
-    voters = listOf(
-        VoteVoterModel(displayName = "김승혁"),
-    ),
+    voteCount = 0,
+    voters = emptyList(),
     store = VoteStoreModel(
         storeId = 1L,
         name = "하이디라오 서초점",

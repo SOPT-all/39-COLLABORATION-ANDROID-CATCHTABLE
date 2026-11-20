@@ -39,7 +39,7 @@ fun VoteRoute(
         onBackClick = backAction,
         onShareClick = {},
         onVoteEndClick = {
-            navigateToHome() // 홈 화면으로 이동
+            navigateToHome()
         },
         onStoreClick = viewModel::updateVoteSelection,
         onCreateVoteClick = {
@@ -48,7 +48,7 @@ fun VoteRoute(
         onSubmitVoteClick = { nickname ->
             viewModel.submitVote(
                 nickname = nickname,
-                onSuccess = navigateToVoteComplete, // 제출 성공 시 투표 완료 화면으로 이동
+                onSuccess = navigateToVoteComplete,
             )
         },
     )

@@ -28,6 +28,7 @@ import com.android.catchtable.presentation.vote.model.createDummyVoteDetailModel
 @Composable
 fun VoteInfoColumn(
     store: VoteStoreModel,
+    isVoterVisible: Boolean,
     voters: List<VoteVoterModel>,
     status: VoteStatus,
     isSelected: Boolean,
@@ -62,7 +63,7 @@ fun VoteInfoColumn(
         }
         VoteInfoDivider(strokeColor)
 
-        if (status == VoteStatus.OPEN && voters.isNotEmpty()) {
+        if (isVoterVisible) {
             VoteInfoVoter(voters, rowCount = voterRowCount)
             VoteInfoDivider(strokeColor)
         }
@@ -178,6 +179,7 @@ private fun VoteInfoColumnPreview(){
         val candidate = createDummyVoteDetailModel().candidates.first()
         VoteInfoColumn(
             store = candidate.store,
+            isVoterVisible = true,
             voters = candidate.voters,
             status = VoteStatus.OPEN,
             isSelected = true,

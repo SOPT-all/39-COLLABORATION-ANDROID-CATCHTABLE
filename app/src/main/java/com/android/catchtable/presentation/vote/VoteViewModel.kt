@@ -2,9 +2,11 @@ package com.android.catchtable.presentation.vote
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.catchtable.domain.model.vote.SubmitBallotRequestModel
 import com.android.catchtable.domain.model.vote.CreateVoteRequestModel
 import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.domain.usecase.vote.GetVoteDetailUseCase
+import com.android.catchtable.domain.usecase.vote.PostSubmitBallotUseCase
 import com.android.catchtable.domain.usecase.vote.PostCreateVoteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,6 +18,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VoteViewModel @Inject constructor(
+    private val postSubmitBallotUseCase: PostSubmitBallotUseCase,
     private val getVoteDetailUseCase: GetVoteDetailUseCase,
     private val postCreateVoteUseCase: PostCreateVoteUseCase,
 ) : ViewModel() {
@@ -85,8 +88,15 @@ class VoteViewModel @Inject constructor(
         if (!state.canSubmitVote) return
 
         viewModelScope.launch {
-            Timber.d("투표 제출 voteId=$voteId, candidateId=$candidateId, nickname=$nickname")
-            onSuccess(voteId)
+            postSubmitBallotUseCase(
+                voteId = voteId,
+                request = SubmitBallotRequestModel(
+                    candidateId = candidateId,
+                    nickname = nickname.trim(),
+                ),
+            )
+                .onSuccess { onSuccess(voteId) }
+                .onFailure { Timber.e(it, "투표 제출 실패") }
         }
     }
 }

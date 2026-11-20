@@ -2,16 +2,21 @@ package com.android.catchtable.data.remote.service
 
 import com.android.catchtable.data.remote.dto.base.BaseResponse
 import com.android.catchtable.data.remote.dto.vote.request.CreateVoteRequestDto
+import com.android.catchtable.data.remote.dto.vote.request.SubmitBallotRequestDto
+import com.android.catchtable.data.remote.dto.vote.response.ActiveVoteResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.CreateVoteResponseDto
 import com.android.catchtable.data.remote.dto.vote.response.VoteDetailResponseDto
 import retrofit2.http.Body
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
-import com.android.catchtable.data.remote.dto.vote.response.ActiveVoteResponseDto
 
 interface VoteService {
+    @POST("api/v1/votes/{voteId}/ballots/me")
+    suspend fun postSubmitBallot(
+        @Path("voteId") voteId: Long,
+        @Body request: SubmitBallotRequestDto,
+    ): BaseResponse<Unit>
 
     @GET("/api/v1/votes/{voteId}")
     suspend fun getVoteDetail(

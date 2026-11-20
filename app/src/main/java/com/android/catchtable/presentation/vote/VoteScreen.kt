@@ -58,6 +58,8 @@ fun VoteScreen(
         if (candidate.voters.isNotEmpty()) candidate.voters.size + 1 else 0
     } ?: 0
 
+    val isVoterVisible = candidates.any { candidate -> candidate.voters.isNotEmpty() }
+
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -95,12 +97,17 @@ fun VoteScreen(
 
                 VoteInfoColumn(
                     store = store,
+                    isVoterVisible = isVoterVisible,
                     voters = voters,
                     voterRowCount = voterRowCount,
                     status = uiState.status,
                     isSelected = when (uiState.status) {
                         VoteStatus.CREATE -> true
-                        VoteStatus.OPEN -> candidate.candidateId == uiState.selectedCandidateId
+                        VoteStatus.OPEN -> if (!isVoterVisible) {
+                            candidate.candidateId == uiState.selectedCandidateId
+                        } else {
+                            false
+                        }
                     },
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
