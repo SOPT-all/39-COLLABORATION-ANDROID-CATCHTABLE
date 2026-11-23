@@ -99,24 +99,20 @@ fun VoteScreen(
                     store = store,
                     isVoterVisible = isVoterVisible,
                     voters = voters,
-                    voterRowCount = voterRowCount,
-                    status = uiState.status,
-                    isSelected = when (uiState.status) {
-                        VoteStatus.CREATE -> true
-                        VoteStatus.OPEN -> if (!isVoterVisible) {
-                            candidate.candidateId == uiState.selectedCandidateId
-                        } else {
-                            false
-                        }
-                    },
                     backgroundColor = backgroundColor,
                     strokeColor = strokeColor,
                     modifier = Modifier.weight(1f),
+                    isSelected = when (uiState.status) {
+                        VoteStatus.CREATE -> true
+                        VoteStatus.OPEN if uiState.role == VoteRole.HOST -> null
+                        else -> !isVoterVisible && candidate.candidateId == uiState.selectedCandidateId
+                    },
                     onCheckClick = {
                         if (uiState.status == VoteStatus.OPEN) {
                             onStoreClick(candidate.candidateId)
                         }
-                    }
+                    },
+                    voterRowCount = voterRowCount
                 )
             }
         }
