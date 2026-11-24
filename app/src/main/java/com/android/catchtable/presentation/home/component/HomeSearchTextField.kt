@@ -33,7 +33,7 @@ fun HomeSearchTextField(
             .clip(CircleShape)
             .background(color = colors.gray100)
             .border(width = 1.dp, color = colors.gray200, shape = CircleShape)
-            .padding(horizontal = 14.dp, vertical = 8.dp),
+            .padding(horizontal = 14.dp, vertical = 9.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(10.dp),
     ) {

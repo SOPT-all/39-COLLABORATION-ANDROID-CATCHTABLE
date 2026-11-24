@@ -54,7 +54,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(CatchTableTheme.colors.white),
     ) {
-        HomeTopBar()
+        HomeTopBar(modifier = Modifier.padding(top = 4.dp))
         Box(modifier = Modifier.weight(1f)) {
             LazyColumn(
                 state = listState, modifier = Modifier.fillMaxSize()
