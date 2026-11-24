@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.android.catchtable.domain.model.vote.VoteStatus
 import com.android.catchtable.domain.model.vote.VoteStoreModel
 import com.android.catchtable.domain.model.vote.VoteVoterModel
 import com.android.catchtable.presentation.common.component.CatchTableAI
@@ -30,11 +29,10 @@ fun VoteInfoColumn(
     store: VoteStoreModel,
     isVoterVisible: Boolean,
     voters: List<VoteVoterModel>,
-    status: VoteStatus,
-    isSelected: Boolean,
     backgroundColor: Color,
     strokeColor: Color,
     modifier: Modifier = Modifier,
+    isSelected: Boolean? = null,
     onCheckClick: (Long) -> Unit = {},
     voterRowCount: Int = voters.size
 ){
@@ -181,11 +179,10 @@ private fun VoteInfoColumnPreview(){
             store = candidate.store,
             isVoterVisible = true,
             voters = candidate.voters,
-            status = VoteStatus.OPEN,
-            isSelected = true,
-            modifier = Modifier.width(300.dp),
             backgroundColor = CatchTableTheme.colors.white,
-            strokeColor = CatchTableTheme.colors.gray200
+            strokeColor = CatchTableTheme.colors.gray200,
+            modifier = Modifier.width(300.dp),
+            isSelected = true
         )
     }
 }
