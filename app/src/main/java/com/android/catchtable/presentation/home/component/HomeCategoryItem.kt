@@ -5,7 +5,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,9 +30,7 @@ fun HomeCategoryItem(
         Image(
             painter = painterResource(id = imageRes),
             contentDescription = null,
-            modifier = Modifier
-                .padding(horizontal = 8.dp)
-                .size(44.dp)
+            modifier = Modifier.size(44.dp)
         )
         Text(
             text = name,
