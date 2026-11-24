@@ -106,13 +106,14 @@ fun HomeScreen(
                         .fillMaxWidth()
                 )
             }
-
-            HomeScrollUpButton(
-                onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
-            )
+            if (listState.canScrollBackward) {
+                HomeScrollUpButton(
+                    onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
+                )
+            }
         }
     }
 }
