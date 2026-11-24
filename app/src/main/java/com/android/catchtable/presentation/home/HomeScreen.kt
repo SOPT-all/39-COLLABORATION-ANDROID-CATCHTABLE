@@ -142,7 +142,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                     HomeCategoryUiModel(name = "줄서기예약", imageRes = R.drawable.img_category_01),
                     HomeCategoryUiModel(name = "2026미쉐린", imageRes = R.drawable.img_category_02),
                     HomeCategoryUiModel(name = "블루리본", imageRes = R.drawable.img_category_05),
-                    HomeCategoryUiModel(name = "웨이팅TOP", imageRes = R.drawable.img_category_14),
+                    HomeCategoryUiModel(name = "웨이팅top", imageRes = R.drawable.img_category_14),
                     HomeCategoryUiModel(name = "예약핫플", imageRes = R.drawable.img_category_03),
                 ),
                 locations = listOf(
