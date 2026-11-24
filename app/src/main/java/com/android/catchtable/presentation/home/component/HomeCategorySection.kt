@@ -1,7 +1,6 @@
 package com.android.catchtable.presentation.home.component
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,11 +36,12 @@ fun HomeCategorySection(
                     RoundedCornerShape(bottomStart = 20.dp, bottomEnd = 20.dp)
                 )
                 .padding(start = 21.dp, top = 23.dp, end = 22.dp, bottom = 24.dp),
-            horizontalArrangement = Arrangement.SpaceBetween
         ) {
             categories.forEach { category ->
                 HomeCategoryItem(
-                    name = category.name, imageRes = category.imageRes
+                    name = category.name,
+                    imageRes = category.imageRes,
+                    modifier = Modifier.weight(1f)
                 )
             }
         }

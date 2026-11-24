@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -53,7 +54,7 @@ fun HomeScreen(
             .fillMaxSize()
             .background(CatchTableTheme.colors.white),
     ) {
-        HomeTopBar()
+        HomeTopBar(modifier = Modifier.padding(top = 4.dp))
         Box(modifier = Modifier.weight(1f)) {
             LazyColumn(
                 state = listState, modifier = Modifier.fillMaxSize()
@@ -68,6 +69,7 @@ fun HomeScreen(
                                 horizontal = 20.dp, vertical = 16.dp
                             )
                             .fillMaxWidth()
+                            .aspectRatio(335f / 140f)
                             .clip(RoundedCornerShape(8.dp))
                     )
                 }
@@ -106,13 +108,14 @@ fun HomeScreen(
                         .fillMaxWidth()
                 )
             }
-
-            HomeScrollUpButton(
-                onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
-            )
+            if (listState.canScrollBackward) {
+                HomeScrollUpButton(
+                    onClick = { coroutineScope.launch { listState.animateScrollToItem(0) } },
+                    modifier = Modifier
+                        .align(Alignment.BottomEnd)
+                        .padding(end = 20.dp, bottom = if (uiState.isVoting) 76.dp else 17.dp)
+                )
+            }
         }
     }
 }
@@ -139,7 +142,7 @@ private fun HomeScreenPreviewContent(isVoting: Boolean) {
                     HomeCategoryUiModel(name = "줄서기예약", imageRes = R.drawable.img_category_01),
                     HomeCategoryUiModel(name = "2026미쉐린", imageRes = R.drawable.img_category_02),
                     HomeCategoryUiModel(name = "블루리본", imageRes = R.drawable.img_category_05),
-                    HomeCategoryUiModel(name = "웨이팅TOP", imageRes = R.drawable.img_category_14),
+                    HomeCategoryUiModel(name = "웨이팅top", imageRes = R.drawable.img_category_14),
                     HomeCategoryUiModel(name = "예약핫플", imageRes = R.drawable.img_category_03),
                 ),
                 locations = listOf(

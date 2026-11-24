@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.android.catchtable.presentation.common.theme.CatchTableTheme
 
 @Composable
 fun HomeTopBar(
@@ -15,7 +17,7 @@ fun HomeTopBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = 6.dp)
+            .padding(vertical = 1.dp)
     ) {
         HomeHeader(
             modifier = Modifier
@@ -28,5 +30,13 @@ fun HomeTopBar(
                 .padding(start = 49.dp, end = 78.dp)
                 .fillMaxWidth()
         )
+    }
+}
+
+@Preview(showBackground = true, widthDp = 375)
+@Composable
+private fun HomeTopBarPreview() {
+    CatchTableTheme {
+        HomeTopBar()
     }
 }
