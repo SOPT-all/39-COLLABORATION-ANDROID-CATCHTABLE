@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -68,6 +69,7 @@ fun HomeScreen(
                                 horizontal = 20.dp, vertical = 16.dp
                             )
                             .fillMaxWidth()
+                            .aspectRatio(335f / 140f)
                             .clip(RoundedCornerShape(8.dp))
                     )
                 }
