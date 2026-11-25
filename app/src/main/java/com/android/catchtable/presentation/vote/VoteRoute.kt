@@ -27,20 +27,12 @@ fun VoteRoute(
         viewModel.initVote(voteId, isHost)
     }
 
-    val backAction = if (uiState.status == VoteStatus.OPEN && uiState.role == VoteRole.GUEST) {
-        navigateToHome
-    } else {
-        onBackClick
-    }
-
     VoteScreen(
         uiState = uiState,
         modifier = modifier,
-        onBackClick = backAction,
+        onBackClick = navigateToHome,
         onShareClick = {},
-        onVoteEndClick = {
-            navigateToHome()
-        },
+        onVoteEndClick = {},
         onStoreClick = viewModel::updateVoteSelection,
         onCreateVoteClick = {
             viewModel.createVote(onSuccess = navigateToCreatedVote)

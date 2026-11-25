@@ -9,6 +9,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +35,8 @@ fun VoteHeader(
     onShareClick: () -> Unit = {},
     onVoteEndClick: () -> Unit = {}
 ) {
+    var isVoteEndButtonVisible by rememberSaveable { mutableStateOf(true) }
+
     Row(
         modifier = modifier
             .padding(vertical = 5.dp, horizontal = 20.dp),
@@ -59,9 +65,15 @@ fun VoteHeader(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(6.dp)
             ) {
-                if (role == VoteRole.HOST) {
+                if (role == VoteRole.HOST && isVoteEndButtonVisible) {
                     //투표종료 component
-                    VoteTag(type = VoteTagType.VOTE_ENDED, onClick = { onVoteEndClick() })
+                    VoteTag(
+                        type = VoteTagType.VOTE_ENDED,
+                        onClick = {
+                            isVoteEndButtonVisible = false
+                            onVoteEndClick()
+                        }
+                    )
                 }
                 //공유하기
                 Icon(
